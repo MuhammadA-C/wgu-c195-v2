@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.muhammad.chambers.c195.pa.controller.MainController">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4caafc" height="646.0" layoutX="-10.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="240.0" />
+        <TableView fx:id="appointmentsTableView" layoutX="251.0" layoutY="149.0" onMouseClicked="#tableOnClicked" prefHeight="397.0" prefWidth="930.0">
+            <columns>
+                <TableColumn fx:id="appointmentIdCol" prefWidth="103.93489074707031" text="Appointment_ID" />
+                <TableColumn fx:id="titleCol" prefWidth="45.62890625" text="Title" />
+                <TableColumn fx:id="descriptionCol" prefWidth="104.76922607421875" text="Description" />
+                <TableColumn fx:id="locationCol" prefWidth="87.16107177734375" text="Location" />
+                <TableColumn fx:id="contactCol" prefWidth="68.18994140625" text="Contact" />
+                <TableColumn fx:id="typeCol" prefWidth="58.29083251953125" text="Type" />
+                <TableColumn fx:id="startCol" prefWidth="130.71875" text="Start Date and Time" />
+                <TableColumn fx:id="endCol" prefWidth="133.18994140625" text="End Date and Time" />
+                <TableColumn fx:id="customerIdCol" prefWidth="97.6466064453125" text="Customer_ID" />
+                <TableColumn fx:id="userIdCol" prefWidth="84.6971435546875" text="User_ID" />
+            </columns>
+        </TableView>
+        <Button layoutX="737.0" layoutY="566.0" mnemonicParsing="false" onAction="#onActionOpenAddAppointment" prefHeight="26.0" prefWidth="107.0" text="Add" />
+        <Button layoutX="908.0" layoutY="566.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Update" />
+        <Button layoutX="1070.0" layoutY="566.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Remove" />
+        <Text layoutX="262.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upcomming Appointment in 15 Minutes:" wrappingWidth="760.3321449130019">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Text>
+        <VBox layoutX="-1.0" layoutY="145.0" prefHeight="200.0" prefWidth="231.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#onClickCustomerRecordBtn" prefHeight="43.0" prefWidth="231.0" text="Customer Records">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#onClickReportBtn" prefHeight="43.0" prefWidth="231.0" text="Reports">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+        <RadioButton layoutX="251.0" layoutY="117.0" mnemonicParsing="false" text="Sort by Week" />
+        <RadioButton layoutX="384.0" layoutY="117.0" mnemonicParsing="false" text="Sort by Month" />
+        <RadioButton layoutX="526.0" layoutY="117.0" mnemonicParsing="false" selected="true" text="View All" />
+        <Text fill="WHITE" layoutX="-1.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Screen" textAlignment="CENTER" wrappingWidth="231.0">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Text>
+        <VBox layoutX="-1.0" layoutY="557.0" prefHeight="92.0" prefWidth="231.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#onLogOut" prefHeight="43.0" prefWidth="231.0" text="Log Out">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionExitApplication" prefHeight="43.0" prefWidth="231.0" text="Exit">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
