@@ -2,6 +2,8 @@ package com.example.muhammad.chambers.c195.pa.model;
 
 import com.example.muhammad.chambers.c195.pa.dao.ContactDAOImpl;
 import com.example.muhammad.chambers.c195.pa.helper.InputValidation;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;

@@ -42,23 +42,23 @@
                         <TextField disable="true" prefHeight="26.0" prefWidth="202.0" GridPane.columnIndex="1" />
                         <Label text="Title:" GridPane.rowIndex="1" />
                         <Label text="Description:" GridPane.rowIndex="2" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="descriptionTxtField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="titleTxtField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Location:" GridPane.rowIndex="3" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="locationTxtField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Contact:" GridPane.rowIndex="4" />
                         <Label text="Type:" GridPane.rowIndex="5" />
                         <Label text="Start Date:" GridPane.rowIndex="6" />
                         <Label text="End Date:" GridPane.rowIndex="8" />
                         <Label text="Customer_ID:" GridPane.rowIndex="10" />
                         <Label text="User_ID:" GridPane.rowIndex="11" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <TextField fx:id="customerIdTxtField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <TextField fx:id="userIdTxtField" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                        <TextField fx:id="typeTxtField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <Label text="Start Time:" GridPane.rowIndex="7" />
                         <Label text="End Time:" GridPane.rowIndex="9" />
-                        <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <DatePicker fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <DatePicker fx:id="endDate" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <ComboBox fx:id="contactComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <ComboBox fx:id="startTimeComboBox" prefHeight="26.0" prefWidth="211.0" promptText="Times are in your Time Zone" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <ComboBox fx:id="endTimeComboBox" prefHeight="26.0" prefWidth="209.0" promptText="Times are in your Time Zone" GridPane.columnIndex="1" GridPane.rowIndex="9" />
@@ -71,7 +71,7 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
-        <Button layoutX="294.0" layoutY="681.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="99.0" text="Save" />
+        <Button layoutX="294.0" layoutY="681.0" mnemonicParsing="false" onAction="#onActionSave" prefHeight="26.0" prefWidth="99.0" text="Save" />
         <Button layoutX="462.0" layoutY="681.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="26.0" prefWidth="99.0" text="Cancel" />
         <VBox layoutX="75.0" layoutY="611.0" prefHeight="37.0" prefWidth="487.0">
             <children>

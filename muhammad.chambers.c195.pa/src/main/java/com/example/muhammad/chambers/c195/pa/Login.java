@@ -39,6 +39,7 @@ public class Login extends Application {
         //Locale.setDefault(new Locale("fr")); //Changes the language for the software
         launch();
 
+
         JDBC.closeConnection();
     }
 }
