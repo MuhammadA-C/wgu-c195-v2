@@ -1,6 +1,7 @@
 package com.example.muhammad.chambers.c195.pa.dao;
 
 import com.example.muhammad.chambers.c195.pa.model.Appointment;
+import com.example.muhammad.chambers.c195.pa.model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -8,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class AppointmentDAOImpl {
     private static ObservableList<Appointment> appointments = FXCollections.observableArrayList();
@@ -76,6 +78,72 @@ public class AppointmentDAOImpl {
             }
         }
         return found;
+    }
+
+    //Checks if the customerID has any appointments
+    public static boolean doesCustomerIDHaveAnyAppointments(int customerID) throws SQLException {
+        ObservableList<Appointment> appointments = getAppointmentsList();
+
+        for(int i = 0; i < appointments.size(); i++) {
+            if(appointments.get(i).getCustomerID() == customerID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Check if dates are the same for the appointment
+    public static boolean areAppointmentDatesTheSame(int customerID, Timestamp startTime, Timestamp endTime) throws SQLException {
+        LocalDate startDate = startTime.toLocalDateTime().toLocalDate();
+        LocalDate endDate = endTime.toLocalDateTime().toLocalDate();
+        ObservableList<Appointment> appointments = AppointmentDAOImpl.getAppointmentsList();
+
+        for(int i = 0; i < appointments.size(); i++) {
+            LocalDate compareToStartDate = appointments.get(i).getStart().toLocalDateTime().toLocalDate();
+            LocalDate compareToEndDate = appointments.get(i).getEnd().toLocalDateTime().toLocalDate();
+
+            if(appointments.get(i).getCustomerID() == customerID && startDate.isEqual(compareToStartDate) && endDate.isEqual(compareToEndDate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Need a method to compare start and end times next
+
+    public static int insert(Appointment appointment) throws SQLException {
+        String sql = "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+
+        ps.setInt(1, appointment.getAppointmentID());
+        ps.setString(2, appointment.getTitle());
+        ps.setString(3, appointment.getDescription());
+        ps.setString(4, appointment.getLocation());
+        ps.setString(5, appointment.getType());
+        ps.setTimestamp(6, appointment.getStart());
+        ps.setTimestamp(7, appointment.getEnd());
+        ps.setTimestamp(8, appointment.getCreateDate());
+        ps.setString(9, appointment.getCreatedBy());
+        ps.setTimestamp(10, appointment.getLastUpdate());
+        ps.setString(11, appointment.getLastUpdatedBy());
+        ps.setInt(12, appointment.getCustomerID());
+        ps.setInt(13, appointment.getUserID());
+        ps.setInt(14, appointment.getContactID());
+
+        int rowsAffected = ps.executeUpdate();
+
+        return rowsAffected;
+    }
+
+    public static int delete(int appointmentID) throws SQLException {
+        String sql = "DELETE FROM appointments WHERE Appointment_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+
+        ps.setInt(1, appointmentID);
+
+        int rowsAffected = ps.executeUpdate();
+
+        return rowsAffected;
     }
 
 }

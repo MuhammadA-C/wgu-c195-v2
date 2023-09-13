@@ -35,7 +35,6 @@ public class CustomerDAOImpl {
         String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
 
-        //Sets the values that will be inserted for each column
         ps.setString(1, customer.getCustomerName());
         ps.setString(2, customer.getAddress());
         ps.setString(3, customer.getPostalCode());
@@ -46,7 +45,6 @@ public class CustomerDAOImpl {
         ps.setString(8, customer.getLastUpdatedBy());
         ps.setInt(9, customer.getStateID());
 
-        //Stores the number of rows affected with this insert statement; and insert the rows into the table
         int rowsAffected = ps.executeUpdate();
 
         return rowsAffected;
@@ -56,7 +54,6 @@ public class CustomerDAOImpl {
         String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
 
-        //Sets the values that will be inserted for each column
         ps.setString(1, customerName);
         ps.setString(2, address);
         ps.setString(3, postalCode);
@@ -67,7 +64,6 @@ public class CustomerDAOImpl {
         ps.setString(8, lastUpdatedBy);
         ps.setInt(9, stateID);
 
-        //Stores the number of rows affected with this insert statement; and insert the rows into the table
         int rowsAffected = ps.executeUpdate();
 
         return rowsAffected;
@@ -77,11 +73,9 @@ public class CustomerDAOImpl {
         String sql = String.format("UPDATE %s SET %s = ? WHERE %s = ?", TABLE_NAME, columnName, CUSTOMER_ID_COLUMN_NAME);
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
 
-        //Sets the values that will be inserted for each column
         ps.setString(1, valueToUpdate);
         ps.setInt(2, customerID);
 
-        //Stores the number of rows affected with this insert statement; and insert the rows into the table
         int rowsAffected = ps.executeUpdate();
 
         return rowsAffected;
@@ -91,11 +85,9 @@ public class CustomerDAOImpl {
         String sql = String.format("UPDATE %s SET %s = ? WHERE %s = ?", TABLE_NAME, columnName, CUSTOMER_ID_COLUMN_NAME);
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
 
-        //Sets the values that will be inserted for each column
         ps.setInt(1, valueToUpdate);
         ps.setInt(2, customerID);
 
-        //Stores the number of rows affected with this insert statement; and insert the rows into the table
         int rowsAffected = ps.executeUpdate();
 
         return rowsAffected;
@@ -105,11 +97,9 @@ public class CustomerDAOImpl {
         String sql = String.format("UPDATE %s SET %s = ? WHERE %s = ?", TABLE_NAME, columnName, CUSTOMER_ID_COLUMN_NAME);
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
 
-        //Sets the values that will be inserted for each column
         ps.setTimestamp(1, valueToUpdate);
         ps.setInt(2, customerID);
 
-        //Stores the number of rows affected with this insert statement; and insert the rows into the table
         int rowsAffected = ps.executeUpdate();
 
         return rowsAffected;
@@ -121,7 +111,6 @@ public class CustomerDAOImpl {
 
         ps.setInt(1, customerID);
 
-        //Stores the number of rows affected with this insert statement; and insert the rows into the table
         int rowsAffected = ps.executeUpdate();
 
         return rowsAffected;

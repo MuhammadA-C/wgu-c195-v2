@@ -1,5 +1,6 @@
 package com.example.muhammad.chambers.c195.pa.controller;
 
+import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.ContactDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.CustomerDAOImpl;
 import com.example.muhammad.chambers.c195.pa.helper.DateTimeConversion;
@@ -28,6 +29,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -117,11 +119,16 @@ public class AddAppointmentController implements Initializable {
     }
 
     @FXML
-    void onActionSave(ActionEvent event) {
+    void onActionSave(ActionEvent event) throws SQLException, IOException {
         if(!areAllInputFieldsFilledOut()) {
             System.out.println("You must fill in all input fields prior to clicking save");
             return;
         }
+
+        //Need a check to verify if the contact id is valid
+        //Need a check to verify if the customer id is valid
+        //Need a check to verify if the time range is correct, within business hours
+
 
         //Creating start and end date and time timestamp
         Timestamp startTimestamp = createTimestampForDateAndTime(startDate, startTimeComboBox);
@@ -142,6 +149,19 @@ public class AddAppointmentController implements Initializable {
             2. Verify that the start and end date times are within the specified work hours
             3. Prevent overlapping appointments
          */
+
+        //Note: I need a time check to ensure the added appointments are within range
+        if(!AppointmentDAOImpl.doesCustomerIDHaveAnyAppointments(appointment.getCustomerID())) {
+            AppointmentDAOImpl.insert(appointment);
+            System.out.println("Added appointment");
+            filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
+        } else if(!AppointmentDAOImpl.areAppointmentDatesTheSame(appointment.getCustomerID(), appointment.getStart(), appointment.getEnd())) {
+            AppointmentDAOImpl.insert(appointment);
+            System.out.println("Added appointment");
+            filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
+        } else {
+            System.out.println("Cannot add appointment");
+        }
     }
 
     @Override

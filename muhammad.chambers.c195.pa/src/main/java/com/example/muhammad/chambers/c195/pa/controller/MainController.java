@@ -82,6 +82,19 @@ public class MainController implements Initializable {
         SelectedItem.setSelectedAppointment(appointmentsTableView.getSelectionModel().getSelectedItem());
     }
 
+    @FXML
+    void onActionDelete(ActionEvent event) throws SQLException {
+        if(SelectedItem.getSelectedAppointment() == null) {
+            System.out.println("You need to select an appointment first prior to clicking the remove button");
+            return;
+        }
+
+        //Need to add a confirmation check to verify if they want to delete
+        AppointmentDAOImpl.delete(SelectedItem.getSelectedAppointment().getAppointmentID());
+        SelectedItem.clearSelectedAppointment();
+        appointmentsTableView.setItems(AppointmentDAOImpl.getAppointmentsList());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
