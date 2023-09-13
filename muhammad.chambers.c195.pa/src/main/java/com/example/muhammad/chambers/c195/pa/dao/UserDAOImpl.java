@@ -1,5 +1,6 @@
 package com.example.muhammad.chambers.c195.pa.dao;
 
+import com.example.muhammad.chambers.c195.pa.model.Contact;
 import com.example.muhammad.chambers.c195.pa.model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,5 +62,15 @@ public class UserDAOImpl {
             }
         }
         return found;
+    }
+
+    public static boolean isUserIDInList(int userID) throws SQLException {
+
+        for(User user: getUsersList()) {
+            if(user.getUserID() == userID) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -160,4 +160,14 @@ public class CustomerDAOImpl {
         }
         return false;
     }
+
+    public static boolean isCustomerIDInList(int customerID) throws SQLException {
+
+        for(Customer customer: getCustomersList()) {
+            if(customer.getCustomerID() == customerID) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -3,6 +3,7 @@ package com.example.muhammad.chambers.c195.pa.controller;
 import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.ContactDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.CustomerDAOImpl;
+import com.example.muhammad.chambers.c195.pa.dao.UserDAOImpl;
 import com.example.muhammad.chambers.c195.pa.helper.DateTimeConversion;
 import com.example.muhammad.chambers.c195.pa.helper.FilePath;
 import com.example.muhammad.chambers.c195.pa.helper.LoggedIn;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
@@ -112,6 +114,39 @@ public class AddAppointmentController implements Initializable {
         return true;
     }
 
+    private boolean isStartDateBeforeEndDateOrTheSame(DatePicker startDate, DatePicker endDate) {
+        LocalDate start =  startDate.getValue();
+        LocalDate end = endDate.getValue();
+
+        if(isStartDateAndEndDateTheSame(startDate, endDate)) {
+            return true;
+        } else if(start.isBefore(end)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isStartDateAndEndDateTheSame(DatePicker startDate, DatePicker endDate) {
+        LocalDate start =  startDate.getValue();
+        LocalDate end = endDate.getValue();
+
+        if(start.isEqual(end)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isStartTimeBeforeEndTime(Timestamp startTime, Timestamp endTime) {
+        LocalTime start = startTime.toLocalDateTime().toLocalTime();
+        LocalTime end = endTime.toLocalDateTime().toLocalTime();
+
+        if(start.isBefore(end)) {
+            return true;
+        }
+        System.out.println("Start time is before end time");
+        return false;
+    }
+
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
@@ -121,18 +156,35 @@ public class AddAppointmentController implements Initializable {
     @FXML
     void onActionSave(ActionEvent event) throws SQLException, IOException {
         if(!areAllInputFieldsFilledOut()) {
+            //Checks if all input fields are filled out
             System.out.println("You must fill in all input fields prior to clicking save");
             return;
+        } else if(!CustomerDAOImpl.isCustomerIDInList(Integer.valueOf(customerIdTxtField.getText()))) {
+            //Checks if the customer id is valid; is the customer id present in the database?
+            System.out.println("Error: You entered in an incorrect Customer ID. Enter another Customer ID.");
+            return;
+        } else if(!UserDAOImpl.isUserIDInList(Integer.valueOf(userIdTxtField.getText()))) {
+            //Checks if the user id is valid; is the user id present in the database?
+            System.out.println("Error: You entered in an incorrect User ID.");
+            return;
+        } else if(!isStartDateBeforeEndDateOrTheSame(startDate, endDate)) {
+            //Checks if the start date is before end date, or the same
+            System.out.println("Error: Start Date must either come before End Date or be the same as End Date.");
+            return;
         }
-
-        //Need a check to verify if the contact id is valid
-        //Need a check to verify if the customer id is valid
-        //Need a check to verify if the time range is correct, within business hours
-
 
         //Creating start and end date and time timestamp
         Timestamp startTimestamp = createTimestampForDateAndTime(startDate, startTimeComboBox);
         Timestamp endTimestamp = createTimestampForDateAndTime(endDate, endTimeComboBox);
+
+        if(isStartDateAndEndDateTheSame(startDate, endDate) && (!isStartTimeBeforeEndTime(startTimestamp, endTimestamp))) {
+            //Need a check to verify if start time is before end time
+            System.out.println("Error: Start Time must be before End Time.");
+            return;
+        }
+
+        //Need a check to verify if the time range is correct, within business hours
+        //Need to verify that the appointment does NOT overlap with any other appointments the customerID has
 
         Appointment appointment = createAppointmentObject(titleTxtField, descriptionTxtField, locationTxtField, contactComboBox, userIdTxtField, customerIdTxtField, typeTxtField, startTimestamp, endTimestamp);
 
@@ -143,14 +195,7 @@ public class AddAppointmentController implements Initializable {
         appointment.setCreatedBy(loggedInUsername);
         appointment.setLastUpdate(currentDateAndTime);
         appointment.setLastUpdatedBy(loggedInUsername);
-        /*
-            Need to add more code to:
-            1. Check if the object already exists prior to adding to the database
-            2. Verify that the start and end date times are within the specified work hours
-            3. Prevent overlapping appointments
-         */
 
-        //Note: I need a time check to ensure the added appointments are within range
         if(!AppointmentDAOImpl.doesCustomerIDHaveAnyAppointments(appointment.getCustomerID())) {
             AppointmentDAOImpl.insert(appointment);
             System.out.println("Added appointment");
