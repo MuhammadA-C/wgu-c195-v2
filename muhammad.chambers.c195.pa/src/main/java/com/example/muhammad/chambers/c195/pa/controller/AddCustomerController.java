@@ -57,6 +57,23 @@ public class AddCustomerController implements Initializable {
         stateComboBox.setItems(CountryAndState.getAllStatesForCountry(countryName));
     }
 
+    private boolean areAllInputFieldsFilledOut() {
+        if(customerNameTxtField.getText().isEmpty()) {
+            return false;
+        } else if(addressTxtField.getText().isEmpty()) {
+            return false;
+        } else if(postalCodeTxtField.getText().isEmpty()) {
+            return false;
+        } else if(phoneNumberTxtField.getText().isEmpty()) {
+            return false;
+        } else if(countryComboBox.getValue() == null) {
+            return false;
+        } else if(stateComboBox.getValue() == null) {
+            return false;
+        }
+        return true;
+    }
+
 
     @FXML
     void onCountryComboBoxSelected() throws SQLException {
@@ -75,17 +92,7 @@ public class AddCustomerController implements Initializable {
     @FXML
     void onActionSave(ActionEvent event) throws SQLException, IOException {
 
-        if(customerNameTxtField.getText().isEmpty()) {
-            return;
-        } else if(addressTxtField.getText().isEmpty()) {
-            return;
-        } else if(postalCodeTxtField.getText().isEmpty()) {
-            return;
-        } else if(phoneNumberTxtField.getText().isEmpty()) {
-            return;
-        } else if(countryComboBox.getValue() == null) {
-            return;
-        } else if(stateComboBox.getValue() == null) {
+        if(!areAllInputFieldsFilledOut()) {
             return;
         }
 
@@ -101,7 +108,6 @@ public class AddCustomerController implements Initializable {
         } else {
             System.out.println("Customer already exists");
         }
-
     }
 
     @FXML

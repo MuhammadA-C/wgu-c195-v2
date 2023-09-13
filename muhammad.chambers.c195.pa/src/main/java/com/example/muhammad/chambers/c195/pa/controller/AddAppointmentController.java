@@ -64,6 +64,52 @@ public class AddAppointmentController implements Initializable {
         contactComboBox.setItems(ContactDAOImpl.getContactsList());
     }
 
+    private Timestamp createTimestampForDateAndTime(DatePicker datePicker, ComboBox<String> timeComboBox) {
+        LocalTime endLocalTime = DateTimeConversion.convertFormattedAppointmentStrToLocalTime(timeComboBox.getValue());
+        String endDateTimeStr = datePicker.getValue().toString() + " " + endLocalTime + ":00";
+
+        return Timestamp.valueOf(endDateTimeStr);
+    }
+
+    public Appointment createAppointmentObject(TextField titleTxtField, TextField descriptionTxtField, TextField locationTxtField, ComboBox<Contact> contactComboBox, TextField userIdTxtField, TextField customerIdTxtField, TextField typeTxtField, Timestamp startTimestamp, Timestamp endTimestamp) {
+        String title = titleTxtField.getText();
+        String description = descriptionTxtField.getText();
+        String location = locationTxtField.getText();
+        int contactID = contactComboBox.getValue().getContactID();
+        int userID = Integer.valueOf(userIdTxtField.getText());
+        int customerID = Integer.valueOf(customerIdTxtField.getText());
+        String type = typeTxtField.getText();
+
+        return new Appointment(title, description, location, type, startTimestamp, endTimestamp, contactID, customerID, userID);
+    }
+
+    private boolean areAllInputFieldsFilledOut() {
+        if(titleTxtField.getText().isEmpty()) {
+            return false;
+        } else if(descriptionTxtField.getText().isEmpty()) {
+            return false;
+        } else if(locationTxtField.getText().isEmpty()) {
+            return false;
+        } else if(contactComboBox.getValue() == null) {
+            return false;
+        } else if(typeTxtField.getText().isEmpty()) {
+            return false;
+        } else if(startDate.getValue() == null) {
+            return false;
+        } else if(startTimeComboBox.getValue() == null) {
+            return false;
+        } else if(endDate.getValue() == null) {
+            return false;
+        } else if(endTimeComboBox.getValue() == null) {
+            return false;
+        } else if(customerIdTxtField.getText().isEmpty()) {
+            return false;
+        } else if(userIdTxtField.getText().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
@@ -72,27 +118,8 @@ public class AddAppointmentController implements Initializable {
 
     @FXML
     void onActionSave(ActionEvent event) {
-        if(titleTxtField.getText().isEmpty()) {
-            return;
-        } else if(descriptionTxtField.getText().isEmpty()) {
-            return;
-        } else if(locationTxtField.getText().isEmpty()) {
-            return;
-        } else if(contactComboBox.getValue() == null) {
-            return;
-        } else if(typeTxtField.getText().isEmpty()) {
-            return;
-        } else if(startDate.getValue() == null) {
-            return;
-        } else if(startTimeComboBox.getValue() == null) {
-            return;
-        } else if(endDate.getValue() == null) {
-            return;
-        } else if(endTimeComboBox.getValue() == null) {
-            return;
-        } else if(customerIdTxtField.getText().isEmpty()) {
-            return;
-        } else if(userIdTxtField.getText().isEmpty()) {
+        if(!areAllInputFieldsFilledOut()) {
+            System.out.println("You must fill in all input fields prior to clicking save");
             return;
         }
 
@@ -115,25 +142,6 @@ public class AddAppointmentController implements Initializable {
             2. Verify that the start and end date times are within the specified work hours
             3. Prevent overlapping appointments
          */
-    }
-
-    private Timestamp createTimestampForDateAndTime(DatePicker datePicker, ComboBox<String> timeComboBox) {
-        LocalTime endLocalTime = DateTimeConversion.convertFormattedAppointmentStrToLocalTime(timeComboBox.getValue());
-        String endDateTimeStr = datePicker.getValue().toString() + " " + endLocalTime + ":00";
-
-        return Timestamp.valueOf(endDateTimeStr);
-    }
-
-    public Appointment createAppointmentObject(TextField titleTxtField, TextField descriptionTxtField, TextField locationTxtField, ComboBox<Contact> contactComboBox, TextField userIdTxtField, TextField customerIdTxtField, TextField typeTxtField, Timestamp startTimestamp, Timestamp endTimestamp) {
-        String title = titleTxtField.getText();
-        String description = descriptionTxtField.getText();
-        String location = locationTxtField.getText();
-        int contactID = contactComboBox.getValue().getContactID();
-        int userID = Integer.valueOf(userIdTxtField.getText());
-        int customerID = Integer.valueOf(customerIdTxtField.getText());
-        String type = typeTxtField.getText();
-
-        return new Appointment(title, description, location, type, startTimestamp, endTimestamp, contactID, customerID, userID);
     }
 
     @Override
