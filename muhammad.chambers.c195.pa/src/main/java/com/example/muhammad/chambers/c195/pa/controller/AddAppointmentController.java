@@ -4,10 +4,7 @@ import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.ContactDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.CustomerDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.UserDAOImpl;
-import com.example.muhammad.chambers.c195.pa.helper.DateTimeConversion;
-import com.example.muhammad.chambers.c195.pa.helper.FilePath;
-import com.example.muhammad.chambers.c195.pa.helper.LoggedIn;
-import com.example.muhammad.chambers.c195.pa.helper.ScreenEnum;
+import com.example.muhammad.chambers.c195.pa.helper.*;
 import com.example.muhammad.chambers.c195.pa.model.Appointment;
 import com.example.muhammad.chambers.c195.pa.model.Contact;
 import com.example.muhammad.chambers.c195.pa.model.Customer;
@@ -62,6 +59,8 @@ public class AddAppointmentController implements Initializable {
     private DatePicker startDate;
     @FXML
     private DatePicker endDate;
+    @FXML
+    private Text businessHoursHint;
 
 
     private void setContactComboBox() throws SQLException {
@@ -177,19 +176,21 @@ public class AddAppointmentController implements Initializable {
         Timestamp startTimestamp = createTimestampForDateAndTime(startDate, startTimeComboBox);
         Timestamp endTimestamp = createTimestampForDateAndTime(endDate, endTimeComboBox);
 
+        //Check to verify if start time is before end time if the start and end dates are the same
         if(isStartDateAndEndDateTheSame(startDate, endDate) && (!isStartTimeBeforeEndTime(startTimestamp, endTimestamp))) {
-            //Need a check to verify if start time is before end time
             System.out.println("Error: Start Time must be before End Time.");
             return;
         }
 
-        //Need a check to verify if the time range is correct, within business hours
-        LocalTime businessStartTime = LocalTime.of(8, 00, 00);
-        LocalTime businessEndTime = LocalTime.of(22, 00, 00);
-
-
+        //Check to verify if the time range is correct, within business hours
+        if(!BusinessHour.isStartAndEndTimeWithBusinessHours(startTimestamp.toLocalDateTime().toLocalTime(), endTimestamp.toLocalDateTime().toLocalTime())) {
+            System.out.println("Start and end Times must be within business hours.");
+            return;
+        }
 
         //Need to verify that the appointment does NOT overlap with any other appointments the customerID has
+
+
 
         Appointment appointment = createAppointmentObject(titleTxtField, descriptionTxtField, locationTxtField, contactComboBox, userIdTxtField, customerIdTxtField, typeTxtField, startTimestamp, endTimestamp);
 
@@ -212,6 +213,8 @@ public class AddAppointmentController implements Initializable {
         } else {
             System.out.println("Cannot add appointment");
         }
+
+
     }
 
     @Override
@@ -223,6 +226,7 @@ public class AddAppointmentController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        //Sets the note text which converts the EST business hours to the users time zone
+        businessHoursHint.setText(BusinessHour.businessHoursHintTxt());
     }
-
 }

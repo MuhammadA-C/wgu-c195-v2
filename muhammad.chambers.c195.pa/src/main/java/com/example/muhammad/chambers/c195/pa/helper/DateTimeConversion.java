@@ -1,11 +1,8 @@
 package com.example.muhammad.chambers.c195.pa.helper;
 
-import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
-import com.example.muhammad.chambers.c195.pa.model.Appointment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -13,20 +10,6 @@ import java.time.format.DateTimeFormatter;
 public class DateTimeConversion {
     public final static DateTimeFormatter dateTimeFormatterPattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    /*
-        Code below converts LocalDateTime object to LocalDate, LocalDate to Date.
-        This ONLY grabs the date from the LocalDateTime object and not the time!!
-
-                ZoneId zoneId1 = ZoneId.of("America/Los_Angeles");
-                ZoneId zoneId2 = ZoneId.of("Europe/Paris");
-
-                LocalDateTime now = LocalDateTime.now();
-                ZonedDateTime zonedDateTime = now.atZone(zoneId1);
-                ZonedDateTime test = zonedDateTime.withZoneSameInstant(zoneId2);
-
-                LocalDateTime t2 = test.toLocalDateTime();
-                Date dt = Date.valueOf(t2.toLocalDate());
-     */
 
     public static LocalDateTime getCurrentDateTimeFormatted() {
         LocalDateTime now = LocalDateTime.now();
@@ -47,10 +30,17 @@ public class DateTimeConversion {
     }
 
     public static String convert24hrTo12hrTime(LocalTime time) {
+        final int time_10hour = 10;
         final int time_12hour = 12;
+        final int time_13hour = 13;
+        final int time_22hour = 22;
 
-        if(time.getSecond() <= time_12hour) {
-            return time.getHour() + ":" + time.getMinute() + " AM";
+        if(time.getHour() < time_10hour) {
+            return String.format("0%d:%d AM", time.getHour(), time.getMinute());
+        } else if(time.getHour() >= time_10hour && time.getHour() <= time_12hour) {
+            return String.format("%d:%d AM", time.getHour(), time.getMinute());
+        } else if (time.getHour() >= time_13hour && time.getHour() < time_22hour) {
+            return "0" + (time.getHour() - time_12hour) + ":" + time.getMinute() + " PM";
         }
         return (time.getHour() - time_12hour) + ":" + time.getMinute() + " PM";
     }

@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="labelTxt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.muhammad.chambers.c195.pa.controller.AddAppointmentController">
+<AnchorPane fx:id="labelTxt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.muhammad.chambers.c195.pa.controller.AddAppointmentController">
     <children>
         <VBox layoutX="74.0" layoutY="121.0" prefHeight="200.0" prefWidth="486.0">
             <children>
@@ -71,13 +71,14 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Text>
-        <Button layoutX="294.0" layoutY="681.0" mnemonicParsing="false" onAction="#onActionSave" prefHeight="26.0" prefWidth="99.0" text="Save" />
-        <Button layoutX="462.0" layoutY="681.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="26.0" prefWidth="99.0" text="Cancel" />
+        <Button layoutX="295.0" layoutY="728.0" mnemonicParsing="false" onAction="#onActionSave" prefHeight="26.0" prefWidth="99.0" text="Save" />
+        <Button layoutX="463.0" layoutY="728.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="26.0" prefWidth="99.0" text="Cancel" />
         <VBox layoutX="75.0" layoutY="611.0" prefHeight="37.0" prefWidth="487.0">
             <children>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Note: Business hours are Mon-Sun  from 8:00 AM to 10:00 PM EST. " />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments can ONLY be scheduled within that time frame." />
             </children>
         </VBox>
+      <Text fx:id="businessHoursHint" layoutX="76.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note: 8:00 AM to 10:00 PM EST converted to your time zone is: " wrappingWidth="486.0" />
     </children>
 </AnchorPane>

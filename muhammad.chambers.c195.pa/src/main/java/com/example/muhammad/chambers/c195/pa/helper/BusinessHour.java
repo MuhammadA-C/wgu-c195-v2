@@ -59,4 +59,43 @@ public class BusinessHour {
          */
         date = LocalDate.now();
     }
+
+
+    private static boolean isStartTimeWithinBusinessStartTime(LocalTime startTime) {
+        //Selected start time cannot be less than business hours start time
+        LocalTime businessStartTime = getBusinessStartTime();
+
+        if(startTime.equals(businessStartTime)) {
+            return true;
+        } else if(startTime.isAfter(businessStartTime)) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isEndTimeWithinBusinessEndTime(LocalTime endTime) {
+        //Selected end time cannot be greater than business hours end time
+        LocalTime businessEndTime = getBusinessEndTime();
+
+        if(endTime.equals(businessEndTime)) {
+            return true;
+        } else if(endTime.isBefore(businessEndTime)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isStartAndEndTimeWithBusinessHours(LocalTime startTime, LocalTime endTime) {
+        if(isStartTimeWithinBusinessStartTime(startTime) && isEndTimeWithinBusinessEndTime(endTime)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static String businessHoursHintTxt() {
+        String start = DateTimeConversion.convert24hrTo12hrTime(getBusinessStartTime());
+        String end =   DateTimeConversion.convert24hrTo12hrTime(getBusinessEndTime());
+
+        return String.format("Note: 8:00 AM to 10:00 PM EST converted to your time zone is %s to %s", start, end);
+    }
 }
