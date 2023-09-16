@@ -184,6 +184,11 @@ public class AddAppointmentController implements Initializable {
         }
 
         //Need a check to verify if the time range is correct, within business hours
+        LocalTime businessStartTime = LocalTime.of(8, 00, 00);
+        LocalTime businessEndTime = LocalTime.of(22, 00, 00);
+
+
+
         //Need to verify that the appointment does NOT overlap with any other appointments the customerID has
 
         Appointment appointment = createAppointmentObject(titleTxtField, descriptionTxtField, locationTxtField, contactComboBox, userIdTxtField, customerIdTxtField, typeTxtField, startTimestamp, endTimestamp);

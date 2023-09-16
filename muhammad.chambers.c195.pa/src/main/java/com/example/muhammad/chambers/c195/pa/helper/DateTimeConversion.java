@@ -42,6 +42,10 @@ public class DateTimeConversion {
         return ZoneId.of("UTC");
     }
 
+    public static ZoneId getESTZoneID() {
+        return ZoneId.of("US/Eastern");
+    }
+
     public static String convert24hrTo12hrTime(LocalTime time) {
         final int time_12hour = 12;
 

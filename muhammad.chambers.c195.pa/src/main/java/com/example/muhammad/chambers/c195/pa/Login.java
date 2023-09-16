@@ -1,6 +1,7 @@
 package com.example.muhammad.chambers.c195.pa;
 
 import com.example.muhammad.chambers.c195.pa.dao.*;
+import com.example.muhammad.chambers.c195.pa.helper.BusinessHour;
 import com.example.muhammad.chambers.c195.pa.helper.CountryAndState;
 import com.example.muhammad.chambers.c195.pa.helper.DateTimeConversion;
 import com.example.muhammad.chambers.c195.pa.helper.ScreenEnum;
@@ -34,7 +35,7 @@ public class Login extends Application {
     public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
         //Locale.setDefault(new Locale("fr")); //Changes the language for the software
-        launch();
+        //launch();
 
 
         JDBC.closeConnection();
