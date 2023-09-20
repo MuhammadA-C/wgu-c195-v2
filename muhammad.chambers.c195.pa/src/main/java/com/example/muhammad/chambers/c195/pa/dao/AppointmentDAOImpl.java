@@ -1,7 +1,6 @@
 package com.example.muhammad.chambers.c195.pa.dao;
 
 import com.example.muhammad.chambers.c195.pa.model.Appointment;
-import com.example.muhammad.chambers.c195.pa.model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+
 
 public class AppointmentDAOImpl {
     private static ObservableList<Appointment> appointments = FXCollections.observableArrayList();

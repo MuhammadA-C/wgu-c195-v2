@@ -1,12 +1,17 @@
 package com.example.muhammad.chambers.c195.pa.model;
 
+import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.ContactDAOImpl;
 import com.example.muhammad.chambers.c195.pa.helper.InputValidation;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Appointment {
     /*
@@ -215,6 +220,146 @@ public class Appointment {
     public void setEndStr() {
         String end = getEnd().toString();
         this.endStr = end.substring(0, (end.length() - 5));
+    }
+
+    private static ObservableList<Appointment> getAppointmentsInDatabaseForCustomerID(Appointment appointment) throws SQLException {
+        ObservableList<Appointment> appointmentsForCustomerID = FXCollections.observableArrayList();
+
+        for(Appointment appointmentInDatabase : AppointmentDAOImpl.getAppointmentsList()) {
+            if(appointmentInDatabase.getCustomerID() == appointment.getCustomerID()) {
+                appointmentsForCustomerID.add(appointmentInDatabase);
+            }
+        }
+        return appointmentsForCustomerID;
+    }
+
+    private static boolean isAppointmentDateBetweenOtherAppointments(Appointment appointment) throws SQLException {
+        //Appointment to add to database
+        LocalDate startDate = appointment.getStart().toLocalDateTime().toLocalDate();
+        LocalDate endDate = appointment.getEnd().toLocalDateTime().toLocalDate();
+
+        for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
+            //Compare appointment currently in database
+            LocalDate compareToStartDate = appointmentInDatabase.getStart().toLocalDateTime().toLocalDate();
+            LocalDate compareToEndDate = appointmentInDatabase.getEnd().toLocalDateTime().toLocalDate();
+
+            if(!startDate.isBefore(compareToStartDate) && !endDate.isAfter(compareToEndDate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isAppointmentDateNotBeforeOtherAppointments(Appointment appointment) throws SQLException {
+        //Appointment to add to database
+        LocalDate startDate = appointment.getStart().toLocalDateTime().toLocalDate();
+        LocalDate endDate = appointment.getEnd().toLocalDateTime().toLocalDate();
+
+        for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
+            //Compare appointment currently in database
+            LocalDate compareToStartDate = appointmentInDatabase.getStart().toLocalDateTime().toLocalDate();
+            LocalDate compareToEndDate = appointmentInDatabase.getEnd().toLocalDateTime().toLocalDate();
+
+            if(!startDate.isBefore(compareToStartDate) && !endDate.isBefore(compareToEndDate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isAppointmentDateNotAfterOtherAppointments(Appointment appointment) throws SQLException {
+        //Appointment to add to database
+        LocalDate startDate = appointment.getStart().toLocalDateTime().toLocalDate();
+        LocalDate endDate = appointment.getEnd().toLocalDateTime().toLocalDate();
+
+        for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
+            //Compare appointment currently in database
+            LocalDate compareToStartDate = appointmentInDatabase.getStart().toLocalDateTime().toLocalDate();
+            LocalDate compareToEndDate = appointmentInDatabase.getEnd().toLocalDateTime().toLocalDate();
+
+            if(!startDate.isAfter(compareToStartDate) && !endDate.isAfter(compareToEndDate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean areAppointmentDatesOverlapping(Appointment appointment) throws SQLException {
+        if(!isAppointmentDateBetweenOtherAppointments(appointment)) {
+            return false;
+        } else if(!isAppointmentDateNotBeforeOtherAppointments(appointment)) {
+            return false;
+        } else if(!isAppointmentDateNotBeforeOtherAppointments(appointment)) {
+            return false;
+        }
+        return true;
+    }
+
+    private static int numberOfAppointmentsAfter(Appointment appointment) throws SQLException {
+        //Appointment to add to database
+        LocalTime startTime = appointment.getStart().toLocalDateTime().toLocalTime();
+        LocalTime endTime = appointment.getEnd().toLocalDateTime().toLocalTime();
+
+        int count = 0;
+
+        for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
+            //Compare appointment currently in database
+            LocalTime compareToStartTime = appointmentInDatabase.getStart().toLocalDateTime().toLocalTime();
+            LocalTime compareToEndTime = appointmentInDatabase.getEnd().toLocalDateTime().toLocalTime();
+
+            if(startTime.isAfter(compareToStartTime) && startTime.isAfter(compareToEndTime) && endTime.isAfter(compareToStartTime) && endTime.isAfter(compareToEndTime)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static int numberOfAppointmentsBefore(Appointment appointment) throws SQLException {
+        //Appointment to add to database
+        LocalTime startTime = appointment.getStart().toLocalDateTime().toLocalTime();
+        LocalTime endTime = appointment.getEnd().toLocalDateTime().toLocalTime();
+
+        int count = 0;
+
+        for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
+            //Compare appointment currently in database
+            LocalTime compareToStartTime = appointmentInDatabase.getStart().toLocalDateTime().toLocalTime();
+            LocalTime compareToEndTime = appointmentInDatabase.getEnd().toLocalDateTime().toLocalTime();
+
+            if(startTime.isBefore(compareToStartTime) && startTime.isBefore(compareToEndTime) && endTime.isBefore(compareToStartTime) && endTime.isBefore(compareToEndTime)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static boolean areAppointmentTimesOverlapping(Appointment appointment) throws SQLException {
+        int appointmentsBefore = numberOfAppointmentsBefore(appointment);
+        int appointmentsAfter = numberOfAppointmentsAfter(appointment);
+        int totalAppointments = appointmentsBefore + appointmentsAfter;
+
+        if(totalAppointments == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean doesAppointmentHaveTheSameStartAndEndDate(Appointment appointment) throws SQLException {
+        //Appointment to add to database
+        LocalDate startDate = appointment.getStart().toLocalDateTime().toLocalDate();
+        LocalDate endDate = appointment.getEnd().toLocalDateTime().toLocalDate();
+
+        for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
+            //Compare appointment currently in database
+            LocalDate compareToStartDate = appointmentInDatabase.getStart().toLocalDateTime().toLocalDate();
+            LocalDate compareToEndDate = appointmentInDatabase.getEnd().toLocalDateTime().toLocalDate();
+
+            if(startDate.isEqual(compareToStartDate) && endDate.isEqual(compareToEndDate)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
