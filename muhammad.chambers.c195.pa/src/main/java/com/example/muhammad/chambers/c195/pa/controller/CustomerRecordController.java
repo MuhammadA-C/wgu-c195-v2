@@ -82,23 +82,23 @@ public class CustomerRecordController implements Initializable {
         System.out.println("Error: You must select a row from the Customer records table prior to selecting the Update button.");
     }
 
+    private boolean doesCustomerIDHaveAppointments(int customerID) throws SQLException {
+        for(Appointment appointment: AppointmentDAOImpl.getAppointmentsList()) {
+            if(appointment.getCustomerID() == customerID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
         if(SelectedItem.getSelectedCustomer() == null) {
             System.out.println("Error: You must select a row from the Customer records table prior to selecting the Remove button.");
-        } else if(AppointmentDAOImpl.getAppointmentsList().size() == 0) {
-            CustomerDAOImpl.delete(SelectedItem.getSelectedCustomer().getCustomerID());
-            //Need to reset this otherwise it will still have reference to an object which is supposed to be deleted
+        } else if(doesCustomerIDHaveAppointments(SelectedItem.getSelectedCustomer().getCustomerID())) {
             SelectedItem.clearSelectedCustomer();
-            //Need to set the table view to update it
-            customerTableView.setItems(CustomerDAOImpl.getCustomersList());
+            System.out.println("Error: You must delete ALL appointments for a customer prior to deleting the customer.");
         } else {
-            for(Appointment appointment: AppointmentDAOImpl.getAppointmentsList()) {
-                if(appointment.getCustomerID() == SelectedItem.getSelectedCustomer().getCustomerID()) {
-                    System.out.println("Error: You must delete ALL appointments for a customer prior to deleting the customer.");
-                    return;
-                }
-            }
             CustomerDAOImpl.delete(SelectedItem.getSelectedCustomer().getCustomerID());
             //Need to reset this otherwise it will still have reference to an object which is supposed to be deleted
             SelectedItem.clearSelectedCustomer();
