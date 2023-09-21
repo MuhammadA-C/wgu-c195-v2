@@ -208,16 +208,8 @@ public class AddAppointmentController implements Initializable {
         }
 
         //Need to verify that the appointment does NOT overlap with any other appointments the customerID has
-        /*
-            Going to change the check below to add the check for the appointment overlap check
-         */
 
 
-
-        /*
-
-        Bug: Appointment is added to the database is overlapping times
-        */
         if(Appointment.doesAppointmentHaveTheSameStartAndEndDate(appointment) && Appointment.areAppointmentTimesOverlapping(appointment) == false) {
             AppointmentDAOImpl.insert(appointment);
             System.out.println("Added appointment");
@@ -228,9 +220,14 @@ public class AddAppointmentController implements Initializable {
             System.out.println("Added appointment");
             System.out.println("Hit 2");
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
+        } else if((Appointment.doesAppointmentEndDateOverlapWithStartDate(appointment) || Appointment.doesAppointmentStartDateOverlapWithEndDate(appointment)) && !Appointment.areAppointmentTimesOverlapping(appointment)) {
+            AppointmentDAOImpl.insert(appointment);
+            System.out.println("Added appointment");
+            System.out.println("Hit 3");
+            filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else {
             System.out.println("Error: Cannot add appointment because it will overlap with an existing appointment for Customer ID: " + appointment.getCustomerID());
-            System.out.println("Hit 3");
+            System.out.println("Hit 4");
         }
 
 

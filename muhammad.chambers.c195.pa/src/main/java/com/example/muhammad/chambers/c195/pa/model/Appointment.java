@@ -349,4 +349,32 @@ public class Appointment {
         return false;
     }
 
+    public static boolean doesAppointmentStartDateOverlapWithEndDate(Appointment appointment) throws SQLException {
+        //Appointment to add to database
+        LocalDate startDate = appointment.getStart().toLocalDateTime().toLocalDate();
+
+        for(Appointment appointmentInDatabase: getAppointmentsInDatabaseForCustomerID(appointment)) {
+            LocalDate compareToEndDate = appointmentInDatabase.getEnd().toLocalDateTime().toLocalDate();
+
+            if(startDate.isEqual(compareToEndDate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean doesAppointmentEndDateOverlapWithStartDate(Appointment appointment) throws SQLException {
+        //Appointment to add to database
+        LocalDate endDate = appointment.getEnd().toLocalDateTime().toLocalDate();
+
+        for(Appointment appointmentInDatabase: getAppointmentsInDatabaseForCustomerID(appointment)) {
+            LocalDate compareToStartDate = appointmentInDatabase.getStart().toLocalDateTime().toLocalDate();
+
+            if(endDate.isEqual(compareToStartDate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
