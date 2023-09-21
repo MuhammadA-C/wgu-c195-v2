@@ -233,73 +233,62 @@ public class Appointment {
         return appointmentsForCustomerID;
     }
 
-    private static boolean isAppointmentDateBetweenOtherAppointments(Appointment appointment) throws SQLException {
+    private static int numberOfAppointmentDatesBefore(Appointment appointment) throws SQLException {
         //Appointment to add to database
         LocalDate startDate = appointment.getStart().toLocalDateTime().toLocalDate();
         LocalDate endDate = appointment.getEnd().toLocalDateTime().toLocalDate();
+        int count = 0;
 
         for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
             //Compare appointment currently in database
             LocalDate compareToStartDate = appointmentInDatabase.getStart().toLocalDateTime().toLocalDate();
             LocalDate compareToEndDate = appointmentInDatabase.getEnd().toLocalDateTime().toLocalDate();
 
-            if(!startDate.isBefore(compareToStartDate) && !endDate.isAfter(compareToEndDate)) {
-                return true;
+            if(startDate.isBefore(compareToStartDate) && startDate.isBefore(compareToEndDate) && endDate.isBefore(compareToStartDate) && endDate.isBefore(compareToEndDate)) {
+                count++;
             }
         }
-        return false;
+        return count;
     }
 
-    private static boolean isAppointmentDateNotBeforeOtherAppointments(Appointment appointment) throws SQLException {
+    private static int numberOfAppointmentDatesAfter(Appointment appointment) throws SQLException {
         //Appointment to add to database
         LocalDate startDate = appointment.getStart().toLocalDateTime().toLocalDate();
         LocalDate endDate = appointment.getEnd().toLocalDateTime().toLocalDate();
+        int count = 0;
 
         for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
             //Compare appointment currently in database
             LocalDate compareToStartDate = appointmentInDatabase.getStart().toLocalDateTime().toLocalDate();
             LocalDate compareToEndDate = appointmentInDatabase.getEnd().toLocalDateTime().toLocalDate();
 
-            if(!startDate.isBefore(compareToStartDate) && !endDate.isBefore(compareToEndDate)) {
-                return true;
+            if(startDate.isAfter(compareToStartDate) && startDate.isAfter(compareToEndDate) && endDate.isAfter(compareToStartDate) && endDate.isAfter(compareToEndDate)) {
+                count++;
             }
         }
-        return false;
+        return count;
     }
 
-    private static boolean isAppointmentDateNotAfterOtherAppointments(Appointment appointment) throws SQLException {
-        //Appointment to add to database
-        LocalDate startDate = appointment.getStart().toLocalDateTime().toLocalDate();
-        LocalDate endDate = appointment.getEnd().toLocalDateTime().toLocalDate();
-
-        for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
-            //Compare appointment currently in database
-            LocalDate compareToStartDate = appointmentInDatabase.getStart().toLocalDateTime().toLocalDate();
-            LocalDate compareToEndDate = appointmentInDatabase.getEnd().toLocalDateTime().toLocalDate();
-
-            if(!startDate.isAfter(compareToStartDate) && !endDate.isAfter(compareToEndDate)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    /*
+        1. Need to add a check to see if start date is same as end date, and end date is after end date-> user should be able to schedule appointment
+        2. Need to add a check to see if start date is before start date, and end date is the same as start date-> user should be able to schedule appointment
+        3. Need to add check if start date is on the same day as the start/or end date of an appointment because they should be able to schedule as long as the start & end times don't overlap
+     */
     public static boolean areAppointmentDatesOverlapping(Appointment appointment) throws SQLException {
-        if(!isAppointmentDateBetweenOtherAppointments(appointment)) {
-            return false;
-        } else if(!isAppointmentDateNotBeforeOtherAppointments(appointment)) {
-            return false;
-        } else if(!isAppointmentDateNotBeforeOtherAppointments(appointment)) {
+        int appointmentsBefore = numberOfAppointmentDatesBefore(appointment);
+        int appointmentsAfter = numberOfAppointmentDatesAfter(appointment);
+        int totalAppointments = appointmentsBefore + appointmentsAfter;
+
+        if(totalAppointments == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
             return false;
         }
         return true;
     }
 
-    private static int numberOfAppointmentsAfter(Appointment appointment) throws SQLException {
+    private static int numberOfAppointmentTimesAfter(Appointment appointment) throws SQLException {
         //Appointment to add to database
         LocalTime startTime = appointment.getStart().toLocalDateTime().toLocalTime();
         LocalTime endTime = appointment.getEnd().toLocalDateTime().toLocalTime();
-
         int count = 0;
 
         for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
@@ -314,11 +303,10 @@ public class Appointment {
         return count;
     }
 
-    private static int numberOfAppointmentsBefore(Appointment appointment) throws SQLException {
+    private static int numberOfAppointmentTimesBefore(Appointment appointment) throws SQLException {
         //Appointment to add to database
         LocalTime startTime = appointment.getStart().toLocalDateTime().toLocalTime();
         LocalTime endTime = appointment.getEnd().toLocalDateTime().toLocalTime();
-
         int count = 0;
 
         for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
@@ -334,14 +322,13 @@ public class Appointment {
     }
 
     public static boolean areAppointmentTimesOverlapping(Appointment appointment) throws SQLException {
-        int appointmentsBefore = numberOfAppointmentsBefore(appointment);
-        int appointmentsAfter = numberOfAppointmentsAfter(appointment);
+        int appointmentsBefore = numberOfAppointmentTimesBefore(appointment);
+        int appointmentsAfter = numberOfAppointmentTimesAfter(appointment);
         int totalAppointments = appointmentsBefore + appointmentsAfter;
 
         if(totalAppointments == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
             return false;
         }
-
         return true;
     }
 
