@@ -48,7 +48,7 @@ public class StateOrProvinceDAOImpl {
         }
     }
 
-    private static boolean isStateInList(StateOrProvince state) throws SQLException {
+    private static boolean isStateInList(StateOrProvince state) {
         /*
             Checks to see if the State object is already present
             in the states list by comparing state names.

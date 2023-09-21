@@ -1,6 +1,5 @@
 package com.example.muhammad.chambers.c195.pa.dao;
 
-import com.example.muhammad.chambers.c195.pa.model.Contact;
 import com.example.muhammad.chambers.c195.pa.model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,7 +47,7 @@ public class UserDAOImpl {
         }
     }
 
-    private static boolean isUserInList(User user) throws SQLException {
+    private static boolean isUserInList(User user) {
         /*
             Checks to see if the User object is already present
             in the users list by comparing usernames.

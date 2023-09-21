@@ -50,25 +50,6 @@ public class CustomerDAOImpl {
         return rowsAffected;
     }
 
-    public static int insert(String customerName, String address, String postalCode, String phoneNumber, Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdatedBy, int stateID) throws SQLException {
-        String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-
-        ps.setString(1, customerName);
-        ps.setString(2, address);
-        ps.setString(3, postalCode);
-        ps.setString(4, phoneNumber);
-        ps.setTimestamp(5, createDate);
-        ps.setString(6, createdBy);
-        ps.setTimestamp(7, lastUpdate);
-        ps.setString(8, lastUpdatedBy);
-        ps.setInt(9, stateID);
-
-        int rowsAffected = ps.executeUpdate();
-
-        return rowsAffected;
-    }
-
     public static int updateForStrColumn(int customerID, String columnName, String valueToUpdate) throws SQLException {
         String sql = String.format("UPDATE %s SET %s = ? WHERE %s = ?", TABLE_NAME, columnName, CUSTOMER_ID_COLUMN_NAME);
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -148,7 +129,7 @@ public class CustomerDAOImpl {
         }
     }
 
-    private static boolean isCustomerInList(Customer customer1) throws SQLException {
+    private static boolean isCustomerInList(Customer customer1) {
         /*
             Checks to see if the Customer object is already present
             in the customers list by comparing customer name, address, and postal code.

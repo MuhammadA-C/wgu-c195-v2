@@ -2,7 +2,6 @@ package com.example.muhammad.chambers.c195.pa.dao;
 
 import com.example.muhammad.chambers.c195.pa.helper.InputValidation;
 import com.example.muhammad.chambers.c195.pa.model.Contact;
-import com.example.muhammad.chambers.c195.pa.model.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

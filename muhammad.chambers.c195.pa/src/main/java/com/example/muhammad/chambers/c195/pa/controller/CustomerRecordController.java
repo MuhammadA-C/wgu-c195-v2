@@ -4,7 +4,6 @@ import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.CustomerDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.JDBC;
 import com.example.muhammad.chambers.c195.pa.helper.FilePath;
-import com.example.muhammad.chambers.c195.pa.helper.InputValidation;
 import com.example.muhammad.chambers.c195.pa.helper.ScreenEnum;
 import com.example.muhammad.chambers.c195.pa.helper.SelectedItem;
 import com.example.muhammad.chambers.c195.pa.model.Appointment;

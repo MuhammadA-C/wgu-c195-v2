@@ -64,7 +64,7 @@ public class AppointmentDAOImpl {
         }
     }
 
-    private static boolean isAppointmentInList(Appointment appointment) throws SQLException {
+    private static boolean isAppointmentInList(Appointment appointment) {
         /*
             Checks to see if the Appointment object is already present
             in the appointments list by comparing the customer id, start and end times, and location
@@ -91,25 +91,6 @@ public class AppointmentDAOImpl {
         }
         return false;
     }
-
-    //Check if dates are the same for the appointment
-    public static boolean areAppointmentDatesTheSame(int customerID, Timestamp startTime, Timestamp endTime) throws SQLException {
-        LocalDate startDate = startTime.toLocalDateTime().toLocalDate();
-        LocalDate endDate = endTime.toLocalDateTime().toLocalDate();
-        ObservableList<Appointment> appointments = AppointmentDAOImpl.getAppointmentsList();
-
-        for(int i = 0; i < appointments.size(); i++) {
-            LocalDate compareToStartDate = appointments.get(i).getStart().toLocalDateTime().toLocalDate();
-            LocalDate compareToEndDate = appointments.get(i).getEnd().toLocalDateTime().toLocalDate();
-
-            if(appointments.get(i).getCustomerID() == customerID && startDate.isEqual(compareToStartDate) && endDate.isEqual(compareToEndDate)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    //Need a method to compare start and end times next
 
     public static int insert(Appointment appointment) throws SQLException {
         String sql = "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

@@ -7,30 +7,20 @@ import com.example.muhammad.chambers.c195.pa.dao.UserDAOImpl;
 import com.example.muhammad.chambers.c195.pa.helper.*;
 import com.example.muhammad.chambers.c195.pa.model.Appointment;
 import com.example.muhammad.chambers.c195.pa.model.Contact;
-import com.example.muhammad.chambers.c195.pa.model.Customer;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZonedDateTime;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class AddAppointmentController implements Initializable {
@@ -208,45 +198,21 @@ public class AddAppointmentController implements Initializable {
         }
 
         //Need to verify that the appointment does NOT overlap with any other appointments the customerID has
-
-
-        if(Appointment.doesAppointmentHaveTheSameStartAndEndDate(appointment) && Appointment.areAppointmentTimesOverlapping(appointment) == false) {
+        if(AppointmentOverlap.doesAppointmentHaveTheSameStartAndEndDate(appointment) && AppointmentOverlap.areAppointmentTimesOverlapping(appointment) == false) {
             AppointmentDAOImpl.insert(appointment);
             System.out.println("Added appointment");
-            System.out.println("Hit 1");
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
-        } else if(!Appointment.areAppointmentDatesOverlapping(appointment)) {
+        } else if(!AppointmentOverlap.areAppointmentDatesOverlapping(appointment)) {
             AppointmentDAOImpl.insert(appointment);
             System.out.println("Added appointment");
-            System.out.println("Hit 2");
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
-        } else if((Appointment.doesAppointmentEndDateOverlapWithStartDate(appointment) || Appointment.doesAppointmentStartDateOverlapWithEndDate(appointment)) && !Appointment.areAppointmentTimesOverlapping(appointment)) {
+        } else if((AppointmentOverlap.doesAppointmentEndDateOverlapWithStartDate(appointment) || AppointmentOverlap.doesAppointmentStartDateOverlapWithEndDate(appointment)) && !AppointmentOverlap.areAppointmentTimesOverlapping(appointment)) {
             AppointmentDAOImpl.insert(appointment);
             System.out.println("Added appointment");
-            System.out.println("Hit 3");
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else {
             System.out.println("Error: Cannot add appointment because it will overlap with an existing appointment for Customer ID: " + appointment.getCustomerID());
-            System.out.println("Hit 4");
         }
-
-
-
-
-
-
-        /*
-        if(!AppointmentDAOImpl.areAppointmentDatesTheSame(appointment.getCustomerID(), appointment.getStart(), appointment.getEnd())) {
-            AppointmentDAOImpl.insert(appointment);
-            System.out.println("Added appointment");
-            filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
-        } else {
-            //Need to verify that the appointment does NOT overlap with any other appointments the customerID has
-            System.out.println("Cannot add appointment");
-
-        }
-         */
-
     }
 
     @Override

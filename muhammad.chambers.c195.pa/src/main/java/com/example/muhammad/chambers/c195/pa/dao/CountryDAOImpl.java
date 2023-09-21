@@ -1,6 +1,5 @@
 package com.example.muhammad.chambers.c195.pa.dao;
 
-import com.example.muhammad.chambers.c195.pa.helper.SelectedItem;
 import com.example.muhammad.chambers.c195.pa.model.Country;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
