@@ -8,4 +8,5 @@ public enum ScreenEnum {
     ADD_APPOINTMENT,
     ADD_CUSTOMER,
     UPDATE_CUSTOMER,
+    UPDATE_APPOINTMENT
 }

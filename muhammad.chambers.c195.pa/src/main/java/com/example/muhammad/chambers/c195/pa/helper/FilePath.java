@@ -22,6 +22,7 @@ public class FilePath {
     private static final String ADD_APPOINTMENT_FILE_PATH = "/com/example/muhammad/chambers/c195/pa/add-appointment-view.fxml";
     private static final String ADD_CUSTOMER_FILE_PATH = "/com/example/muhammad/chambers/c195/pa/add-customer-view.fxml";
     private static final String UPDATE_CUSTOMER_FILE_PATH = "/com/example/muhammad/chambers/c195/pa/update-customer-view.fxml";
+    private static final String UPDATE_APPOINTMENT_FILE_PATH = "/com/example/muhammad/chambers/c195/pa/update-appointment-view.fxml";
 
 
     //Getter methods
@@ -50,7 +51,11 @@ public class FilePath {
     }
 
     public String getUpdateCustomerFilePath() {
-        return  UPDATE_CUSTOMER_FILE_PATH;
+        return UPDATE_CUSTOMER_FILE_PATH;
+    }
+
+    public String getUpdateAppointmentFilePath() {
+        return UPDATE_APPOINTMENT_FILE_PATH;
     }
 
     public void switchScreen(ActionEvent event, String filePath, String screenName) throws IOException {

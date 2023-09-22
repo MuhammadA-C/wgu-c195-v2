@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="labelTxt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.muhammad.chambers.c195.pa.controller.UpdateAppointmentController">
+    <children>
+        <VBox layoutX="74.0" layoutY="121.0" prefHeight="200.0" prefWidth="486.0">
+            <children>
+                <GridPane vgap="30.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="239.63076782226562" minWidth="10.0" prefWidth="123.39163208007812" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="372.71612548828125" minWidth="10.0" prefWidth="362.6083679199219" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Appointment ID:" />
+                        <TextField disable="true" prefHeight="26.0" prefWidth="202.0" GridPane.columnIndex="1" />
+                        <Label text="Title:" GridPane.rowIndex="1" />
+                        <Label text="Description:" GridPane.rowIndex="2" />
+                        <TextField fx:id="descriptionTxtField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="titleTxtField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Location:" GridPane.rowIndex="3" />
+                        <TextField fx:id="locationTxtField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Contact:" GridPane.rowIndex="4" />
+                        <Label text="Type:" GridPane.rowIndex="5" />
+                        <Label text="Start Date:" GridPane.rowIndex="6" />
+                        <Label text="End Date:" GridPane.rowIndex="8" />
+                        <Label text="Customer_ID:" GridPane.rowIndex="10" />
+                        <Label text="User_ID:" GridPane.rowIndex="11" />
+                        <TextField fx:id="customerIdTxtField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <TextField fx:id="userIdTxtField" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                        <TextField fx:id="typeTxtField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Start Time:" GridPane.rowIndex="7" />
+                        <Label text="End Time:" GridPane.rowIndex="9" />
+                        <DatePicker fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <DatePicker fx:id="endDate" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <ComboBox fx:id="contactComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="startTimeComboBox" prefHeight="26.0" prefWidth="211.0" promptText="Times are in your Time Zone" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <ComboBox fx:id="endTimeComboBox" prefHeight="26.0" prefWidth="209.0" promptText="Times are in your Time Zone" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                    </children>
+                </GridPane>
+            </children>
+        </VBox>
+        <Text layoutX="75.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Appointment">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Text>
+        <Button layoutX="295.0" layoutY="728.0" mnemonicParsing="false" onAction="#onActionSave" prefHeight="26.0" prefWidth="99.0" text="Save" />
+        <Button layoutX="463.0" layoutY="728.0" mnemonicParsing="false" onAction="#onActionCancel" prefHeight="26.0" prefWidth="99.0" text="Cancel" />
+        <VBox layoutX="75.0" layoutY="611.0" prefHeight="37.0" prefWidth="487.0">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Note: Business hours are Mon-Sun  from 8:00 AM to 10:00 PM EST. " />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments can ONLY be scheduled within that time frame." />
+            </children>
+        </VBox>
+      <Text fx:id="businessHoursHint" layoutX="76.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note: 8:00 AM to 10:00 PM EST converted to your time zone is: " wrappingWidth="486.0" />
+    </children>
+</AnchorPane>

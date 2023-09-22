@@ -83,6 +83,14 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    void onClickUpdate(ActionEvent event) throws IOException {
+        if(SelectedItem.getSelectedAppointment() != null) {
+            filePath.switchScreen(event, filePath.getUpdateAppointmentFilePath(), ScreenEnum.UPDATE_APPOINTMENT.toString());
+        }
+        System.out.println("Error: You must select a row from the Appointments table prior to selecting the Update button.");
+    }
+
+    @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
         if(SelectedItem.getSelectedAppointment() == null) {
             System.out.println("You need to select an appointment first prior to clicking the remove button");
