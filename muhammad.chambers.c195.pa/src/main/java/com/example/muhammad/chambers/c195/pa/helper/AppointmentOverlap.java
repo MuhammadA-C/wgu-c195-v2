@@ -28,11 +28,11 @@ public class AppointmentOverlap {
         int count = 0;
 
         for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
-            //Compare appointment currently in database
+            //Appointment to compare in database
             LocalDate compareToStartDate = appointmentInDatabase.getStart().toLocalDateTime().toLocalDate();
             LocalDate compareToEndDate = appointmentInDatabase.getEnd().toLocalDateTime().toLocalDate();
 
-            if(startDate.isBefore(compareToStartDate) && startDate.isBefore(compareToEndDate) && endDate.isBefore(compareToStartDate) && endDate.isBefore(compareToEndDate)) {
+            if(startDate.isBefore(compareToStartDate) && startDate.isBefore(compareToEndDate) && endDate.isBefore(compareToStartDate) && endDate.isBefore(compareToEndDate) && appointment.getAppointmentID() != appointmentInDatabase.getAppointmentID()) {
                 count++;
             }
         }
@@ -46,11 +46,11 @@ public class AppointmentOverlap {
         int count = 0;
 
         for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
-            //Compare appointment currently in database
+            //Appointment to compare in database
             LocalDate compareToStartDate = appointmentInDatabase.getStart().toLocalDateTime().toLocalDate();
             LocalDate compareToEndDate = appointmentInDatabase.getEnd().toLocalDateTime().toLocalDate();
 
-            if(startDate.isAfter(compareToStartDate) && startDate.isAfter(compareToEndDate) && endDate.isAfter(compareToStartDate) && endDate.isAfter(compareToEndDate)) {
+            if(startDate.isAfter(compareToStartDate) && startDate.isAfter(compareToEndDate) && endDate.isAfter(compareToStartDate) && endDate.isAfter(compareToEndDate) && appointment.getAppointmentID() != appointmentInDatabase.getAppointmentID()) {
                 count++;
             }
         }
@@ -64,6 +64,13 @@ public class AppointmentOverlap {
 
         if(totalAppointments == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
             return false;
+        } else if((totalAppointments + 1) == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
+            /*
+                This check is for the Update Appointment form. +1 is being added because for the update appointment form
+                the search for overlapping appointments will ignore the appointment with the same appointment id as
+                the appointment being updated. So, the +1 is taking into account that skipped appointment
+             */
+            return false;
         }
         return true;
     }
@@ -75,11 +82,11 @@ public class AppointmentOverlap {
         int count = 0;
 
         for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
-            //Compare appointment currently in database
+            //Appointment to compare in database
             LocalTime compareToStartTime = appointmentInDatabase.getStart().toLocalDateTime().toLocalTime();
             LocalTime compareToEndTime = appointmentInDatabase.getEnd().toLocalDateTime().toLocalTime();
 
-            if(startTime.isAfter(compareToStartTime) && startTime.isAfter(compareToEndTime) && endTime.isAfter(compareToStartTime) && endTime.isAfter(compareToEndTime)) {
+            if(startTime.isAfter(compareToStartTime) && startTime.isAfter(compareToEndTime) && endTime.isAfter(compareToStartTime) && endTime.isAfter(compareToEndTime) && appointment.getAppointmentID() != appointmentInDatabase.getAppointmentID()) {
                 count++;
             }
         }
@@ -93,11 +100,11 @@ public class AppointmentOverlap {
         int count = 0;
 
         for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
-            //Compare appointment currently in database
+            //Appointment to compare in database
             LocalTime compareToStartTime = appointmentInDatabase.getStart().toLocalDateTime().toLocalTime();
             LocalTime compareToEndTime = appointmentInDatabase.getEnd().toLocalDateTime().toLocalTime();
 
-            if(startTime.isBefore(compareToStartTime) && startTime.isBefore(compareToEndTime) && endTime.isBefore(compareToStartTime) && endTime.isBefore(compareToEndTime)) {
+            if(startTime.isBefore(compareToStartTime) && startTime.isBefore(compareToEndTime) && endTime.isBefore(compareToStartTime) && endTime.isBefore(compareToEndTime) && appointment.getAppointmentID() != appointmentInDatabase.getAppointmentID()) {
                 count++;
             }
         }
@@ -111,6 +118,13 @@ public class AppointmentOverlap {
 
         if(totalAppointments == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
             return false;
+        } else if((totalAppointments + 1) == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
+            /*
+                This check is for the Update Appointment form. +1 is being added because for the update appointment form
+                the search for overlapping appointments will ignore the appointment with the same appointment id as
+                the appointment being updated. So, the +1 is taking into account that skipped appointment
+             */
+            return false;
         }
         return true;
     }
@@ -121,11 +135,11 @@ public class AppointmentOverlap {
         LocalDate endDate = appointment.getEnd().toLocalDateTime().toLocalDate();
 
         for(Appointment appointmentInDatabase : getAppointmentsInDatabaseForCustomerID(appointment)) {
-            //Compare appointment currently in database
+            //Appointment to compare in database
             LocalDate compareToStartDate = appointmentInDatabase.getStart().toLocalDateTime().toLocalDate();
             LocalDate compareToEndDate = appointmentInDatabase.getEnd().toLocalDateTime().toLocalDate();
 
-            if(startDate.isEqual(compareToStartDate) && endDate.isEqual(compareToEndDate)) {
+            if(startDate.isEqual(compareToStartDate) && endDate.isEqual(compareToEndDate) && appointment.getAppointmentID() != appointmentInDatabase.getAppointmentID()) {
                 return true;
             }
         }
@@ -139,7 +153,7 @@ public class AppointmentOverlap {
         for(Appointment appointmentInDatabase: getAppointmentsInDatabaseForCustomerID(appointment)) {
             LocalDate compareToEndDate = appointmentInDatabase.getEnd().toLocalDateTime().toLocalDate();
 
-            if(startDate.isEqual(compareToEndDate)) {
+            if(startDate.isEqual(compareToEndDate) && appointment.getAppointmentID() != appointmentInDatabase.getAppointmentID()) {
                 return true;
             }
         }
@@ -153,7 +167,7 @@ public class AppointmentOverlap {
         for(Appointment appointmentInDatabase: getAppointmentsInDatabaseForCustomerID(appointment)) {
             LocalDate compareToStartDate = appointmentInDatabase.getStart().toLocalDateTime().toLocalDate();
 
-            if(endDate.isEqual(compareToStartDate)) {
+            if(endDate.isEqual(compareToStartDate) && appointment.getAppointmentID() != appointmentInDatabase.getAppointmentID()) {
                 return true;
             }
         }
