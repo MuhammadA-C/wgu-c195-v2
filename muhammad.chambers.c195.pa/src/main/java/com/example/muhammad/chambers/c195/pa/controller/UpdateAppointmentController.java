@@ -52,6 +52,8 @@ public class UpdateAppointmentController implements Initializable {
     private DatePicker endDate;
     @FXML
     private Text businessHoursHint;
+    @FXML
+    private TextField appointmentID;
 
 
     private void setContactComboBox() throws SQLException {
@@ -139,9 +141,14 @@ public class UpdateAppointmentController implements Initializable {
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
+        SelectedItem.clearSelectedAppointment();
         filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
     }
 
+    /*
+        Bug found with saving, it won't let it save because it's flagging the appointment that you're editing.
+        Need to change this so that with the comparison it ignores the appointment id that you're updating
+     */
     @FXML
     void onActionSave(ActionEvent event) throws SQLException, IOException {
         if(!areAllInputFieldsFilledOut()) {
@@ -192,22 +199,26 @@ public class UpdateAppointmentController implements Initializable {
             //Adds appointment if customer id does NOT have any appointments already
             AppointmentDAOImpl.insert(appointment);
             System.out.println("Added appointment");
+            SelectedItem.clearSelectedAppointment();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else if(AppointmentOverlap.doesAppointmentHaveTheSameStartAndEndDate(appointment) && AppointmentOverlap.areAppointmentTimesOverlapping(appointment) == false) {
             //Adds appointment if start date and end date for appointment to add matches an appointment in the database, but the start and end times do NOT overlap
             AppointmentDAOImpl.insert(appointment);
             System.out.println("Added appointment");
+            SelectedItem.clearSelectedAppointment();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else if(!AppointmentOverlap.areAppointmentDatesOverlapping(appointment)) {
             //Adds appointment if the start and end dates do NOT overlap with any appointments in the database
             AppointmentDAOImpl.insert(appointment);
             System.out.println("Added appointment");
+            SelectedItem.clearSelectedAppointment();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else if((AppointmentOverlap.doesAppointmentEndDateOverlapWithStartDate(appointment) || AppointmentOverlap.doesAppointmentStartDateOverlapWithEndDate(appointment)) && !AppointmentOverlap.areAppointmentTimesOverlapping(appointment)) {
             //Adds appointment if the start date overlaps with an end date in the database, but the times do NOT overlap
             //Or adds an appointment if the end date overlaps with a start date in the database, but the times do NOT overlap
             AppointmentDAOImpl.insert(appointment);
             System.out.println("Added appointment");
+            SelectedItem.clearSelectedAppointment();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else {
             System.out.println("Error: Cannot add appointment because it will overlap with an existing appointment for Customer ID: " + appointment.getCustomerID());
@@ -220,10 +231,22 @@ public class UpdateAppointmentController implements Initializable {
             setContactComboBox();
             endTimeComboBox.setItems(DateTimeConversion.getAppointmentsTimesFormatted());
             startTimeComboBox.setItems(DateTimeConversion.getAppointmentsTimesFormatted());
+            contactComboBox.setValue(ContactDAOImpl.getContactInList(SelectedItem.getSelectedAppointment().getContactID()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         //Sets the note text which converts the EST business hours to the users time zone
         businessHoursHint.setText(BusinessHour.businessHoursHintTxt());
+        appointmentID.setText(String.valueOf(SelectedItem.getSelectedAppointment().getAppointmentID()));
+        titleTxtField.setText(SelectedItem.getSelectedAppointment().getTitle());
+        descriptionTxtField.setText(SelectedItem.getSelectedAppointment().getDescription());
+        locationTxtField.setText(SelectedItem.getSelectedAppointment().getLocation());
+        typeTxtField.setText(SelectedItem.getSelectedAppointment().getType());
+        startDate.setValue(SelectedItem.getSelectedAppointment().getStart().toLocalDateTime().toLocalDate());
+        startTimeComboBox.setValue(DateTimeConversion.convert24hrTo12hrTime(SelectedItem.getSelectedAppointment().getStart().toLocalDateTime().toLocalTime()));
+        endDate.setValue(SelectedItem.getSelectedAppointment().getEnd().toLocalDateTime().toLocalDate());
+        customerIdTxtField.setText(String.valueOf(SelectedItem.getSelectedAppointment().getCustomerID()));
+        userIdTxtField.setText(String.valueOf(SelectedItem.getSelectedAppointment().getUserID()));
+        endTimeComboBox.setValue(DateTimeConversion.convert24hrTo12hrTime(SelectedItem.getSelectedAppointment().getEnd().toLocalDateTime().toLocalTime()));
     }
 }

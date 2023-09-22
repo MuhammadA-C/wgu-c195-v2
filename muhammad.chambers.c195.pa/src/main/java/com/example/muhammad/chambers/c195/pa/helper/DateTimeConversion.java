@@ -34,15 +34,29 @@ public class DateTimeConversion {
         final int time_12hour = 12;
         final int time_13hour = 13;
         final int time_22hour = 22;
+        final int minutes_30 = 30;
 
         if(time.getHour() < time_10hour) {
-            return String.format("0%d:%d AM", time.getHour(), time.getMinute());
+            if(time.getMinute() == minutes_30) {
+                return String.format("0%d:%d AM", time.getHour(), time.getMinute());
+            }
+            return String.format("0%d:%d0 AM", time.getHour(), time.getMinute());
         } else if(time.getHour() >= time_10hour && time.getHour() <= time_12hour) {
-            return String.format("%d:%d AM", time.getHour(), time.getMinute());
+            if(time.getMinute() == minutes_30) {
+                return String.format("%d:%d AM", time.getHour(), time.getMinute());
+            }
+            return String.format("%d:%d0 AM", time.getHour(), time.getMinute());
         } else if (time.getHour() >= time_13hour && time.getHour() < time_22hour) {
-            return "0" + (time.getHour() - time_12hour) + ":" + time.getMinute() + " PM";
+            if(time.getMinute() == minutes_30) {
+                return "0" + (time.getHour() - time_12hour) + ":" + time.getMinute() + " PM";
+            }
+            return "0" + (time.getHour() - time_12hour) + ":0" + time.getMinute() + " PM";
         }
-        return (time.getHour() - time_12hour) + ":" + time.getMinute() + " PM";
+
+        if(time.getMinute() == minutes_30) {
+            return (time.getHour() - time_12hour) + ":" + time.getMinute() + " PM";
+        }
+        return (time.getHour() - time_12hour) + ":0" + time.getMinute() + " PM";
     }
 
     public static Timestamp convertTimeZone(Timestamp timestamp ,String currentTimeZone, String convertToTimeZone) {

@@ -39,7 +39,7 @@
                     </rowConstraints>
                     <children>
                         <Label text="Appointment ID:" />
-                        <TextField disable="true" prefHeight="26.0" prefWidth="202.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="appointmentID" disable="true" prefHeight="26.0" prefWidth="202.0" GridPane.columnIndex="1" />
                         <Label text="Title:" GridPane.rowIndex="1" />
                         <Label text="Description:" GridPane.rowIndex="2" />
                         <TextField fx:id="descriptionTxtField" GridPane.columnIndex="1" GridPane.rowIndex="2" />

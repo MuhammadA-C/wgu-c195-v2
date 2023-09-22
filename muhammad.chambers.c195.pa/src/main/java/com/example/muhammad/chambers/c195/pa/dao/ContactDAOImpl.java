@@ -71,4 +71,13 @@ public class ContactDAOImpl {
         return name;
     }
 
+    public static Contact getContactInList(int contactID) throws SQLException {
+        for(Contact contact: getContactsList()) {
+            if(contact.getContactID() == contactID) {
+                return contact;
+            }
+        }
+        return null;
+    }
+
 }
