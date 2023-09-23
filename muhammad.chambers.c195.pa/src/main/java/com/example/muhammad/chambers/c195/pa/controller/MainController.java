@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,6 +53,8 @@ public class MainController implements Initializable {
     private RadioButton sortByMonth;
     @FXML
     private RadioButton viewAll;
+    @FXML
+    private Text upcomingAppointmentAlert;
 
 
     private void setAppointmentsTableView(ObservableList<Appointment> appointments) {
@@ -179,10 +182,9 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             setAppointmentsTableView(AppointmentDAOImpl.getAppointmentsList());
+            upcomingAppointmentAlert.setText("Upcoming Appointment(s) within 15 minutes: " + UpcomingAppointment.upcomingAppointmentsStr(UpcomingAppointment.getUpcomingAppointments(AppointmentDAOImpl.getAppointmentsList())));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }
