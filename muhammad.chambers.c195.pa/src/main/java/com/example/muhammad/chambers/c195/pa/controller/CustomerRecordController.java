@@ -3,6 +3,7 @@ package com.example.muhammad.chambers.c195.pa.controller;
 import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.CustomerDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.JDBC;
+import com.example.muhammad.chambers.c195.pa.helper.DialogBox;
 import com.example.muhammad.chambers.c195.pa.helper.FilePath;
 import com.example.muhammad.chambers.c195.pa.helper.ScreenEnum;
 import com.example.muhammad.chambers.c195.pa.helper.SelectedItem;
@@ -78,8 +79,9 @@ public class CustomerRecordController implements Initializable {
     void onActionUpdate(ActionEvent event) throws IOException {
         if(SelectedItem.getSelectedCustomer() != null) {
             filePath.switchScreen(event, filePath.getUpdateCustomerFilePath(), ScreenEnum.UPDATE_CUSTOMER.toString());
+        } else {
+            DialogBox.errorAlert("Error Dialog", "Error: You must select a row from the Customer records table prior to selecting the Update button.");
         }
-        System.out.println("Error: You must select a row from the Customer records table prior to selecting the Update button.");
     }
 
     private boolean doesCustomerIDHaveAppointments(int customerID) throws SQLException {
@@ -94,10 +96,10 @@ public class CustomerRecordController implements Initializable {
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
         if(SelectedItem.getSelectedCustomer() == null) {
-            System.out.println("Error: You must select a row from the Customer records table prior to selecting the Remove button.");
+            DialogBox.errorAlert("Error Dialog", "Error: You must select a row from the Customer records table prior to selecting the Remove button.");
         } else if(doesCustomerIDHaveAppointments(SelectedItem.getSelectedCustomer().getCustomerID())) {
             SelectedItem.clearSelectedCustomer();
-            System.out.println("Error: You must delete ALL appointments for a customer prior to deleting the customer.");
+            DialogBox.errorAlert("Error Dialog", "Error: You must delete ALL appointments for a customer prior to deleting the customer.");
             //Add check here if customer wants to delete all customers
         } else {
             CustomerDAOImpl.delete(SelectedItem.getSelectedCustomer().getCustomerID());

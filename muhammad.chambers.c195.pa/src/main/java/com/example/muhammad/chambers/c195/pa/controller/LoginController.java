@@ -2,10 +2,7 @@ package com.example.muhammad.chambers.c195.pa.controller;
 
 import com.example.muhammad.chambers.c195.pa.dao.JDBC;
 import com.example.muhammad.chambers.c195.pa.dao.UserDAOImpl;
-import com.example.muhammad.chambers.c195.pa.helper.DateTimeConversion;
-import com.example.muhammad.chambers.c195.pa.helper.FilePath;
-import com.example.muhammad.chambers.c195.pa.helper.LoggedIn;
-import com.example.muhammad.chambers.c195.pa.helper.ScreenEnum;
+import com.example.muhammad.chambers.c195.pa.helper.*;
 import com.example.muhammad.chambers.c195.pa.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -102,41 +99,6 @@ public class LoginController implements Initializable {
         return null;
     }
 
-
-    @FXML
-    private void onLogin (ActionEvent event) throws IOException, SQLException {
-        /*
-            Note:
-                1. Supposed to log ALL login attempts to a text file that'll be stored
-                in the root folder
-                2. Need to swap out the println methods with alerts
-         */
-        User userAccount = returnUserObjectIfUsernameExists(usernameField.getText());
-
-        /*
-            If the user entered the correct username and password then the program will
-            log them in and switch screens to the Main Screen.
-         */
-
-        if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
-            System.out.println("Error: You have empty fields. You must fill out all fields prior to clicking log-in");
-        } else if(userAccount == null) {
-            System.out.println("Login Failed. Account does NOT exist");
-            logLoginAttemptToTxtFile(usernameField.getText(), false);
-            clearLoginFields();
-        } else if(userAccount.getPassword().equals(passwordField.getText())) {
-            System.out.println("Successful Login!");
-            LoggedIn.setLoggedInUsername(usernameField.getText());
-            logLoginAttemptToTxtFile(usernameField.getText(), true);
-            clearLoginFields();
-            filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
-        } else {
-            System.out.println("Login Failed. Your password was incorrect");
-            logLoginAttemptToTxtFile(usernameField.getText(), false);
-            clearLoginFields();
-        }
-    }
-
     private void logLoginAttemptToTxtFile(String username, boolean loginAttemptSuccess) throws IOException {
         FileWriter fwVariable = new FileWriter("login_activity.txt", true);
         PrintWriter pwVariable = new PrintWriter(fwVariable);
@@ -148,6 +110,29 @@ public class LoginController implements Initializable {
         }
 
         pwVariable.close();
+    }
+
+
+    @FXML
+    private void onLogin (ActionEvent event) throws IOException, SQLException {
+        User userAccount = returnUserObjectIfUsernameExists(usernameField.getText());
+
+        if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+            DialogBox.errorAlert("Error Dialog", "Error: You have empty fields. You must fill out all fields prior to clicking log-in");
+        } else if(userAccount == null) {
+            DialogBox.errorAlert("Error Dialog", "Login Failed. Account does NOT exist");
+            logLoginAttemptToTxtFile(usernameField.getText(), false);
+            clearLoginFields();
+        } else if(userAccount.getPassword().equals(passwordField.getText())) {
+            LoggedIn.setLoggedInUsername(usernameField.getText());
+            logLoginAttemptToTxtFile(usernameField.getText(), true);
+            clearLoginFields();
+            filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
+        } else {
+            DialogBox.errorAlert("Error Dialog", "Login Failed. Your password was incorrect");
+            logLoginAttemptToTxtFile(usernameField.getText(), false);
+            clearLoginFields();
+        }
     }
 
     @FXML

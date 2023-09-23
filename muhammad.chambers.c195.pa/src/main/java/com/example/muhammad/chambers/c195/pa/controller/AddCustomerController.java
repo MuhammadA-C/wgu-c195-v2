@@ -91,8 +91,8 @@ public class AddCustomerController implements Initializable {
 
     @FXML
     void onActionSave(ActionEvent event) throws SQLException, IOException {
-
         if(!areAllInputFieldsFilledOut()) {
+            DialogBox.errorAlert("Error Dialog", "Error: You must fill in all input fields prior to clicking save");
             return;
         }
 
@@ -102,11 +102,10 @@ public class AddCustomerController implements Initializable {
 
         //Customer is ONLY added if it already doesn't exist in the database
         if(!doesCustomerExist(addCustomer)) {
-            System.out.println("Added Customer");
             CustomerDAOImpl.insert(addCustomer);
             filePath.switchScreen(event, filePath.getCustomerRecordFilePath(), ScreenEnum.CUSTOMER_RECORD.toString());
         } else {
-            System.out.println("Customer already exists");
+            DialogBox.errorAlert("Error Dialog", "Error: Customer already exists");
         }
     }
 

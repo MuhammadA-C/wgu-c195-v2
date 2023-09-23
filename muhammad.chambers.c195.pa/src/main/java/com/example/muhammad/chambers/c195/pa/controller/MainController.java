@@ -16,8 +16,6 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -107,14 +105,15 @@ public class MainController implements Initializable {
     void onClickUpdate(ActionEvent event) throws IOException {
         if(SelectedItem.getSelectedAppointment() != null) {
             filePath.switchScreen(event, filePath.getUpdateAppointmentFilePath(), ScreenEnum.UPDATE_APPOINTMENT.toString());
+        } else {
+            DialogBox.errorAlert("Error Dialog", "Error: You must select a row from the Appointments table prior to selecting the Update button.");
         }
-        System.out.println("Error: You must select a row from the Appointments table prior to selecting the Update button.");
     }
 
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
         if(SelectedItem.getSelectedAppointment() == null) {
-            System.out.println("You need to select an appointment first prior to clicking the remove button");
+            DialogBox.errorAlert("Error Dialog", "Error: You need to select an appointment first prior to clicking the remove button");
             return;
         }
 
@@ -156,7 +155,7 @@ public class MainController implements Initializable {
 
     @FXML
     void onClickSortByMonth(ActionEvent event) throws SQLException {
-        if(sortByMonth.isSelected()) {
+        if(!sortByMonth.isSelected()) {
             sortByMonth.setSelected(true);
         }
         //Prevents the other filter buttons to be activated at the same time

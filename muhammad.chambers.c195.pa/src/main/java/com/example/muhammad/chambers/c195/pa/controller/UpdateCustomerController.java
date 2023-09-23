@@ -61,6 +61,23 @@ public class UpdateCustomerController implements Initializable {
         stateComboBox.setItems(states);
     }
 
+    private boolean areAllTextFieldsFieldOut() {
+        if(customerNameTxtField.getText().isEmpty()) {
+            return false;
+        } else if(addressTxtField.getText().isEmpty()) {
+            return false;
+        } else if(postalCodeTxtField.getText().isEmpty()) {
+            return false;
+        } else if(phoneNumberTxtField.getText().isEmpty()) {
+            return false;
+        } else if(countryComboBox.getValue() == null) {
+            return false;
+        } else if(stateComboBox.getValue() == null) {
+            return false;
+        }
+        return true;
+    }
+
 
     @FXML
     void onCountryComboBoxSelected() throws SQLException {
@@ -73,19 +90,11 @@ public class UpdateCustomerController implements Initializable {
 
     @FXML
     void onActionSave(ActionEvent event) throws SQLException, IOException {
-        if(customerNameTxtField.getText().isEmpty()) {
-            return;
-        } else if(addressTxtField.getText().isEmpty()) {
-            return;
-        } else if(postalCodeTxtField.getText().isEmpty()) {
-            return;
-        } else if(phoneNumberTxtField.getText().isEmpty()) {
-            return;
-        } else if(countryComboBox.getValue() == null) {
-            return;
-        } else if(stateComboBox.getValue() == null) {
+        if(!areAllTextFieldsFieldOut()) {
+            DialogBox.errorAlert("Error Dialog", "Error: You must fill in all input fields prior to clicking save");
             return;
         }
+
 
         String loggedInUsername = LoggedIn.getLoggedInUsername();
         Timestamp currentDateAndTime = Timestamp.valueOf(DateTimeConversion.getCurrentDateTimeFormatted());
