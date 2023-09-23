@@ -2,11 +2,10 @@ package com.example.muhammad.chambers.c195.pa.controller;
 
 import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.JDBC;
-import com.example.muhammad.chambers.c195.pa.helper.FilePath;
-import com.example.muhammad.chambers.c195.pa.helper.ScreenEnum;
-import com.example.muhammad.chambers.c195.pa.helper.SelectedItem;
+import com.example.muhammad.chambers.c195.pa.helper.*;
 import com.example.muhammad.chambers.c195.pa.model.Appointment;
 import com.example.muhammad.chambers.c195.pa.model.Customer;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,6 +53,20 @@ public class MainController implements Initializable {
     @FXML
     private RadioButton viewAll;
 
+
+    private void setAppointmentsTableView(ObservableList<Appointment> appointments) {
+        appointmentsTableView.setItems(appointments);
+        appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        contactCol.setCellValueFactory(new PropertyValueFactory<>("contactName"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        startCol.setCellValueFactory(new PropertyValueFactory<>("startStr"));
+        endCol.setCellValueFactory(new PropertyValueFactory<>("endStr"));
+        customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+        userIdCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
+    }
 
     @FXML
     void onClickCustomerRecordBtn(ActionEvent event) throws IOException {
@@ -108,75 +121,58 @@ public class MainController implements Initializable {
         //Need to add a confirmation check to verify if they want to delete
         AppointmentDAOImpl.delete(SelectedItem.getSelectedAppointment().getAppointmentID());
         SelectedItem.clearSelectedAppointment();
-        appointmentsTableView.setItems(AppointmentDAOImpl.getAppointmentsList());
+
+        //Check below is used to stop the error from deleting an appointment and the table view being reset to view all
+        if(sortByWeek.isSelected()) {
+            setAppointmentsTableView(AppointmentFilter.getAppointmentsForCurrentWeek(AppointmentDAOImpl.getAppointmentsList()));
+        } else if(sortByMonth.isSelected()) {
+            setAppointmentsTableView(AppointmentFilter.getAppointmentsForCurrentMonth(AppointmentDAOImpl.getAppointmentsList()));
+        } else {
+            setAppointmentsTableView(AppointmentDAOImpl.getAppointmentsList());
+        }
     }
 
     @FXML
-    void onClickViewAll(ActionEvent event) {
+    void onClickViewAll(ActionEvent event) throws SQLException {
         if(!viewAll.isSelected()) {
-
             viewAll.setSelected(true);
-
         }
         //Prevents the other filter buttons to be activated at the same time
         sortByWeek.setSelected(false);
         sortByMonth.setSelected(false);
-
-
+        setAppointmentsTableView(AppointmentDAOImpl.getAppointmentsList());
     }
 
     @FXML
-    void onClickSortByWeek(ActionEvent event) {
+    void onClickSortByWeek(ActionEvent event) throws SQLException {
         if(!sortByWeek.isSelected()) {
-
             sortByWeek.setSelected(true);
-
         }
         //Prevents the other filter buttons to be activated at the same time
         sortByMonth.setSelected(false);
         viewAll.setSelected(false);
-
+        setAppointmentsTableView(AppointmentFilter.getAppointmentsForCurrentWeek(AppointmentDAOImpl.getAppointmentsList()));
     }
 
     @FXML
-    void onClickSortByMonth(ActionEvent event) {
+    void onClickSortByMonth(ActionEvent event) throws SQLException {
         if(sortByMonth.isSelected()) {
-
             sortByMonth.setSelected(true);
-
         }
         //Prevents the other filter buttons to be activated at the same time
         sortByWeek.setSelected(false);
         viewAll.setSelected(false);
-
-
+        setAppointmentsTableView(AppointmentFilter.getAppointmentsForCurrentMonth(AppointmentDAOImpl.getAppointmentsList()));
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            appointmentsTableView.setItems(AppointmentDAOImpl.getAppointmentsList());
-
-            appointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
-            titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-            descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-            locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-            contactCol.setCellValueFactory(new PropertyValueFactory<>("contactName"));
-            typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-            startCol.setCellValueFactory(new PropertyValueFactory<>("startStr"));
-            endCol.setCellValueFactory(new PropertyValueFactory<>("endStr"));
-            customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-            userIdCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
+            setAppointmentsTableView(AppointmentDAOImpl.getAppointmentsList());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
 
     }
-
-
-
-
-
-
 }

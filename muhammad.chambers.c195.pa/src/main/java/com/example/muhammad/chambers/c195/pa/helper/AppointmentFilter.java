@@ -1,5 +1,6 @@
 package com.example.muhammad.chambers.c195.pa.helper;
 
+import com.example.muhammad.chambers.c195.pa.model.Appointment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -7,7 +8,7 @@ import java.time.LocalDate;
 
 public class AppointmentFilter {
 
-    private static LocalDate currentDate() {
+    public static LocalDate currentDate() {
         return LocalDate.now();
     }
 
@@ -27,5 +28,36 @@ public class AppointmentFilter {
             daysForCurrentWeek.add(firstDayOfCurrentWeek.plusDays(i));
         }
         return daysForCurrentWeek;
+    }
+
+    public static ObservableList<Appointment> getAppointmentsForCurrentWeek(ObservableList<Appointment> appointments) {
+        ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
+
+        for(LocalDate date : daysForCurrentWeekList()) {
+            for(Appointment appointment : appointments) {
+                LocalDate appointmentDate = appointment.getStart().toLocalDateTime().toLocalDate();
+
+                if(appointmentDate.isEqual(date)) {
+                    appointmentList.add(appointment);
+                }
+            }
+        }
+        return appointmentList;
+    }
+
+    public static ObservableList<Appointment> getAppointmentsForCurrentMonth(ObservableList<Appointment> appointments) {
+        ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
+        int currentMonth = currentDate().getMonthValue();
+        int currentYear = currentDate().getYear();
+
+        for(Appointment appointment : appointments) {
+            int appointmentMonth = appointment.getStart().toLocalDateTime().toLocalDate().getMonthValue();
+            int appointmentYear = appointment.getStart().toLocalDateTime().toLocalDate().getYear();
+
+            if(appointmentMonth == currentMonth && appointmentYear == currentYear) {
+                appointmentList.add(appointment);
+            }
+        }
+        return appointmentList;
     }
 }
