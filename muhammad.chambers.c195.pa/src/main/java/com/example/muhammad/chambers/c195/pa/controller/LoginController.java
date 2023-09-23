@@ -16,9 +16,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -114,19 +117,37 @@ public class LoginController implements Initializable {
             If the user entered the correct username and password then the program will
             log them in and switch screens to the Main Screen.
          */
-        if(userAccount == null) {
-            clearLoginFields();
+
+        if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+            System.out.println("Error: You have empty fields. You must fill out all fields prior to clicking log-in");
+        } else if(userAccount == null) {
             System.out.println("Login Failed. Account does NOT exist");
+            logLoginAttemptToTxtFile(usernameField.getText(), false);
+            clearLoginFields();
         } else if(userAccount.getPassword().equals(passwordField.getText())) {
-            //Have to store the username prior to clearing the text fields
-            LoggedIn.setLoggedInUsername(usernameField.getText());
             System.out.println("Successful Login!");
+            LoggedIn.setLoggedInUsername(usernameField.getText());
+            logLoginAttemptToTxtFile(usernameField.getText(), true);
             clearLoginFields();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else {
+            System.out.println("Login Failed. Your password was incorrect");
+            logLoginAttemptToTxtFile(usernameField.getText(), false);
             clearLoginFields();
-            System.out.println("Login Failed. Your Username and/or Password was incorrect");
         }
+    }
+
+    private void logLoginAttemptToTxtFile(String username, boolean loginAttemptSuccess) throws IOException {
+        FileWriter fwVariable = new FileWriter("login_activity.txt", true);
+        PrintWriter pwVariable = new PrintWriter(fwVariable);
+
+        if(loginAttemptSuccess) {
+            pwVariable.println("User " + username + " successfully logged in at " + DateTimeConversion.getCurrentDateTimeFormatted().toLocalDate() + " " + DateTimeConversion.getCurrentDateTimeFormatted().toLocalTime());
+        } else {
+            pwVariable.println("User " + username + " gave invalid log-in at " + DateTimeConversion.getCurrentDateTimeFormatted().toLocalDate() + " " + DateTimeConversion.getCurrentDateTimeFormatted().toLocalTime());
+        }
+
+        pwVariable.close();
     }
 
     @FXML
