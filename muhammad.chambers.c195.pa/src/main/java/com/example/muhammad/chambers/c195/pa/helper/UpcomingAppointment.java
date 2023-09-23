@@ -1,19 +1,18 @@
 package com.example.muhammad.chambers.c195.pa.helper;
 
-import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
 import com.example.muhammad.chambers.c195.pa.model.Appointment;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class UpcomingAppointment {
 
-    public static String getUpcomingAppointments(ObservableList<Appointment> appointments) throws SQLException {
-        String upcomingAppointment = "There are no upcoming appointments.";
+    public static ObservableList<String> getUpcomingAppointments(ObservableList<Appointment> appointments) throws SQLException {
         final int minutes_15 = 15;
+        ObservableList<String> upcomingAppointments = FXCollections.observableArrayList();
 
         /*
             Loop is used to check for upcoming appointments by increasing the minute by +1 each time
@@ -34,15 +33,29 @@ public class UpcomingAppointment {
                 }
 
                 if(appointmentHour == upcomingHour && appointmentMinute == upcomingMinute) {
-                    //Formats the string for upcoming appointments
-                    if(i == 0) {
-                        upcomingAppointment = appointment.getAppointmentID() + ", " + appointment.getStart().toLocalDateTime().toLocalDate() + ", " + appointment.getStart().toLocalDateTime().toLocalTime();
-                    } else {
-                        upcomingAppointment += " | " + appointment.getAppointmentID() + ", " + appointment.getStart().toLocalDateTime().toLocalDate() + ", " + appointment.getStart().toLocalDateTime().toLocalTime();
-                    }
+                    upcomingAppointments.add(appointment.getAppointmentID() + ", " + appointment.getStart().toLocalDateTime().toLocalDate() + ", " + appointment.getStart().toLocalDateTime().toLocalTime());
                 }
             }
         }
-        return upcomingAppointment;
+        return upcomingAppointments;
     }
+
+    public static String upcomingAppointmentsStr( ObservableList<String> upcomingAppointments) {
+        String appointments = "";
+
+        if(upcomingAppointments.size() == 0) {
+            return "There are no upcoming appointments.";
+        }
+
+        for(int i = 0; i < upcomingAppointments.size(); i++) {
+            if(i == 0) {
+                appointments.trim();
+                appointments = upcomingAppointments.get(i);
+            } else {
+                appointments += " | " + upcomingAppointments.get(i);
+            }
+        }
+        return appointments;
+    }
+
 }

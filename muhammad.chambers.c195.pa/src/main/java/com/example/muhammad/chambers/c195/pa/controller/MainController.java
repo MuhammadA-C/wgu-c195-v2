@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -110,6 +111,9 @@ public class MainController implements Initializable {
         }
     }
 
+    /*
+        Note: Need to add a message when an appointment is deleted with Appointment ID & type of appointment
+     */
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
         if(SelectedItem.getSelectedAppointment() == null) {
@@ -117,11 +121,17 @@ public class MainController implements Initializable {
             return;
         }
 
-        //Need to add a confirmation check to verify if they want to delete
+        Optional<ButtonType> result = DialogBox.confirmationAlert("Confirmation", "Are you sure you want to cancel the appointment?");
+
+        if(result.isPresent() && result.get() == ButtonType.CANCEL) {
+            SelectedItem.clearSelectedAppointment();
+            return;
+        }
+
         AppointmentDAOImpl.delete(SelectedItem.getSelectedAppointment().getAppointmentID());
         SelectedItem.clearSelectedAppointment();
 
-        //Check below is used to stop the error from deleting an appointment and the table view being reset to view all
+        //Check below is used to stop the bug when deleting an appointment and the table view being reset to view all
         if(sortByWeek.isSelected()) {
             setAppointmentsTableView(AppointmentFilter.getAppointmentsForCurrentWeek(AppointmentDAOImpl.getAppointmentsList()));
         } else if(sortByMonth.isSelected()) {

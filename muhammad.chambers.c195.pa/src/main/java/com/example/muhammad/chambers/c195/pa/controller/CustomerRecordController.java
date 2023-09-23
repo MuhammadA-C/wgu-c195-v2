@@ -12,6 +12,7 @@ import com.example.muhammad.chambers.c195.pa.model.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerRecordController implements Initializable {
@@ -93,6 +95,9 @@ public class CustomerRecordController implements Initializable {
         return false;
     }
 
+    /*
+        Note: Need to add a custom message when a customer is deleted.
+     */
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
         if(SelectedItem.getSelectedCustomer() == null) {
@@ -102,6 +107,13 @@ public class CustomerRecordController implements Initializable {
             DialogBox.errorAlert("Error Dialog", "Error: You must delete ALL appointments for a customer prior to deleting the customer.");
             //Add check here if customer wants to delete all customers
         } else {
+            Optional<ButtonType> result = DialogBox.confirmationAlert("Confirmation", "Customer ID: " + SelectedItem.getSelectedCustomer().getCustomerID() + " has appointments.\nConfirm if you want to delete ALL of the appointments belonging to Customer ID: " + SelectedItem.getSelectedCustomer().getCustomerID() + "\nalong with deleting the customer");
+
+            if(result.isPresent() && result.get() == ButtonType.CANCEL) {
+                SelectedItem.clearSelectedCustomer();
+                return;
+            }
+
             CustomerDAOImpl.delete(SelectedItem.getSelectedCustomer().getCustomerID());
             //Need to reset this otherwise it will still have reference to an object which is supposed to be deleted
             SelectedItem.clearSelectedCustomer();

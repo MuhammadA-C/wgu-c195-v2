@@ -30,7 +30,7 @@
         <Button layoutX="737.0" layoutY="566.0" mnemonicParsing="false" onAction="#onActionOpenAddAppointment" prefHeight="26.0" prefWidth="107.0" text="Add" />
         <Button layoutX="908.0" layoutY="566.0" mnemonicParsing="false" onAction="#onClickUpdate" prefHeight="26.0" prefWidth="107.0" text="Update" />
         <Button layoutX="1070.0" layoutY="566.0" mnemonicParsing="false" onAction="#onActionDelete" prefHeight="26.0" prefWidth="107.0" text="Remove" />
-        <Text layoutX="262.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upcomming Appointment in 15 Minutes:" wrappingWidth="760.3321449130019">
+        <Text layoutX="251.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upcomming Appointment in 15 Minutes:" wrappingWidth="951.0">
             <font>
                 <Font size="18.0" />
             </font>

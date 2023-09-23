@@ -32,7 +32,7 @@ public class Login extends Application {
     public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
         //Locale.setDefault(new Locale("fr")); //Changes the language for the software
-        launch();
+        //launch();
 
         JDBC.closeConnection();
     }

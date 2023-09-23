@@ -10,6 +10,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class AppointmentOverlap {
+    /*
+
+        Found issue with overlapping appointments. Need to double check that it works and DOES NOT allow appoints to be set on the same start times
+     */
     private static ObservableList<Appointment> getAppointmentsInDatabaseForCustomerID(Appointment appointment) throws SQLException {
         ObservableList<Appointment> appointmentsForCustomerID = FXCollections.observableArrayList();
 
