@@ -49,9 +49,9 @@
                 </Button>
             </children>
         </VBox>
-        <RadioButton layoutX="251.0" layoutY="117.0" mnemonicParsing="false" text="Sort by Week" />
-        <RadioButton layoutX="384.0" layoutY="117.0" mnemonicParsing="false" text="Sort by Month" />
-        <RadioButton layoutX="526.0" layoutY="117.0" mnemonicParsing="false" selected="true" text="View All" />
+        <RadioButton fx:id="sortByWeek" layoutX="251.0" layoutY="117.0" mnemonicParsing="false" onAction="#onClickSortByWeek" text="Sort by Week" />
+        <RadioButton fx:id="sortByMonth" layoutX="384.0" layoutY="117.0" mnemonicParsing="false" onAction="#onClickSortByMonth" text="Sort by Month" />
+        <RadioButton fx:id="viewAll" layoutX="526.0" layoutY="117.0" mnemonicParsing="false" onAction="#onClickViewAll" selected="true" text="View All" />
         <Text fill="WHITE" layoutX="-1.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Screen" textAlignment="CENTER" wrappingWidth="231.0">
             <font>
                 <Font size="24.0" />

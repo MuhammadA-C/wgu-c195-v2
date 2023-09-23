@@ -17,6 +17,8 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -45,6 +47,12 @@ public class MainController implements Initializable {
     private TableColumn<Customer, Integer> customerIdCol;
     @FXML
     private TableColumn<Customer, Integer> userIdCol;
+    @FXML
+    private RadioButton sortByWeek;
+    @FXML
+    private RadioButton sortByMonth;
+    @FXML
+    private RadioButton viewAll;
 
 
     @FXML
@@ -103,6 +111,47 @@ public class MainController implements Initializable {
         appointmentsTableView.setItems(AppointmentDAOImpl.getAppointmentsList());
     }
 
+    @FXML
+    void onClickViewAll(ActionEvent event) {
+        if(!viewAll.isSelected()) {
+
+            viewAll.setSelected(true);
+
+        }
+        //Prevents the other filter buttons to be activated at the same time
+        sortByWeek.setSelected(false);
+        sortByMonth.setSelected(false);
+
+
+    }
+
+    @FXML
+    void onClickSortByWeek(ActionEvent event) {
+        if(!sortByWeek.isSelected()) {
+
+            sortByWeek.setSelected(true);
+
+        }
+        //Prevents the other filter buttons to be activated at the same time
+        sortByMonth.setSelected(false);
+        viewAll.setSelected(false);
+
+    }
+
+    @FXML
+    void onClickSortByMonth(ActionEvent event) {
+        if(sortByMonth.isSelected()) {
+
+            sortByMonth.setSelected(true);
+
+        }
+        //Prevents the other filter buttons to be activated at the same time
+        sortByWeek.setSelected(false);
+        viewAll.setSelected(false);
+
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -121,6 +170,7 @@ public class MainController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
 
     }
 
