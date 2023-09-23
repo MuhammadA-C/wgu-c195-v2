@@ -66,7 +66,7 @@
                 </GridPane>
             </children>
         </VBox>
-        <Text layoutX="75.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Appointment">
+        <Text layoutX="75.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Appointment">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>

@@ -13,6 +13,8 @@ import java.time.LocalDate;
 
 public class AppointmentDAOImpl {
     private static ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+    public final static String TABLE_NAME = "appointments";
+    public final static String APPOINTMENT_ID_COLUMN_NAME = "Appointment_ID";
 
 
     public static ObservableList<Appointment> getAppointmentsList() throws SQLException {
@@ -115,16 +117,15 @@ public class AppointmentDAOImpl {
 
         return rowsAffected;
     }
-
-    public static int delete(int appointmentID) throws SQLException {
-        String sql = "DELETE FROM appointments WHERE Appointment_ID = ?";
+    public static int updateForStrColumn(int customerID, String columnName, String valueToUpdate) throws SQLException {
+        String sql = String.format("UPDATE appointments SET %s = ? WHERE %s = ?", TABLE_NAME, columnName, APPOINTMENT_ID_COLUMN_NAME);
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
 
-        ps.setInt(1, appointmentID);
+        ps.setString(1, valueToUpdate);
+        ps.setInt(2, customerID);
 
         int rowsAffected = ps.executeUpdate();
 
         return rowsAffected;
     }
-
 }

@@ -2,6 +2,7 @@ package com.example.muhammad.chambers.c195.pa.controller;
 
 import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.JDBC;
+import com.example.muhammad.chambers.c195.pa.dao.SQLHelper;
 import com.example.muhammad.chambers.c195.pa.helper.*;
 import com.example.muhammad.chambers.c195.pa.model.Appointment;
 import com.example.muhammad.chambers.c195.pa.model.Customer;
@@ -128,7 +129,7 @@ public class MainController implements Initializable {
             return;
         }
 
-        AppointmentDAOImpl.delete(SelectedItem.getSelectedAppointment().getAppointmentID());
+        SQLHelper.delete(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, SelectedItem.getSelectedAppointment().getAppointmentID());
         SelectedItem.clearSelectedAppointment();
 
         //Check below is used to stop the bug when deleting an appointment and the table view being reset to view all

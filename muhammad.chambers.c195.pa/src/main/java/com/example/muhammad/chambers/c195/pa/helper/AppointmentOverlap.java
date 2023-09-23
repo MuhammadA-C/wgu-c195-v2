@@ -10,10 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class AppointmentOverlap {
-    /*
-
-        Found issue with overlapping appointments. Need to double check that it works and DOES NOT allow appoints to be set on the same start times
-     */
     private static ObservableList<Appointment> getAppointmentsInDatabaseForCustomerID(Appointment appointment) throws SQLException {
         ObservableList<Appointment> appointmentsForCustomerID = FXCollections.observableArrayList();
 
@@ -61,14 +57,14 @@ public class AppointmentOverlap {
         return count;
     }
 
-    public static boolean areAppointmentDatesOverlapping(Appointment appointment) throws SQLException {
+    public static boolean areAppointmentDatesOverlapping(Appointment appointment, boolean isUpdateAppointment) throws SQLException {
         int appointmentsBefore = numberOfAppointmentDatesBefore(appointment);
         int appointmentsAfter = numberOfAppointmentDatesAfter(appointment);
         int totalAppointments = appointmentsBefore + appointmentsAfter;
 
-        if(totalAppointments == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
+        if(isUpdateAppointment == false && totalAppointments == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
             return false;
-        } else if((totalAppointments + 1) == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
+        } else if(isUpdateAppointment == true && (totalAppointments + 1) == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
             /*
                 This check is for the Update Appointment form. +1 is being added because for the update appointment form
                 the search for overlapping appointments will ignore the appointment with the same appointment id as
@@ -76,6 +72,11 @@ public class AppointmentOverlap {
              */
             return false;
         }
+
+
+
+
+
         return true;
     }
 
@@ -115,14 +116,14 @@ public class AppointmentOverlap {
         return count;
     }
 
-    public static boolean areAppointmentTimesOverlapping(Appointment appointment) throws SQLException {
+    public static boolean areAppointmentTimesOverlapping(Appointment appointment, boolean isUpdateAppointment) throws SQLException {
         int appointmentsBefore = numberOfAppointmentTimesBefore(appointment);
         int appointmentsAfter = numberOfAppointmentTimesAfter(appointment);
         int totalAppointments = appointmentsBefore + appointmentsAfter;
 
-        if(totalAppointments == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
+        if(isUpdateAppointment == false && totalAppointments == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
             return false;
-        } else if((totalAppointments + 1) == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
+        } else if(isUpdateAppointment == true && (totalAppointments + 1) == getAppointmentsInDatabaseForCustomerID(appointment).size()) {
             /*
                 This check is for the Update Appointment form. +1 is being added because for the update appointment form
                 the search for overlapping appointments will ignore the appointment with the same appointment id as

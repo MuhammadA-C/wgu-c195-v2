@@ -25,6 +25,10 @@ import java.util.ResourceBundle;
 
 public class UpdateAppointmentController implements Initializable {
 
+    /*
+
+        Bug, updating appointment creates duplicate
+     */
     private FilePath filePath = new FilePath();
 
     //FXML Fields
@@ -194,22 +198,25 @@ public class UpdateAppointmentController implements Initializable {
         appointment.setLastUpdate(currentDateAndTime);
         appointment.setLastUpdatedBy(loggedInUsername);
 
+        /*
+            Need to replace insert with update method
+         */
         if(!AppointmentDAOImpl.doesCustomerIDHaveAnyAppointments(appointment.getCustomerID())) {
             //Adds appointment if customer id does NOT have any appointments already
             AppointmentDAOImpl.insert(appointment);
             SelectedItem.clearSelectedAppointment();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
-        } else if(AppointmentOverlap.doesAppointmentHaveTheSameStartAndEndDate(appointment) && AppointmentOverlap.areAppointmentTimesOverlapping(appointment) == false) {
+        } else if(AppointmentOverlap.doesAppointmentHaveTheSameStartAndEndDate(appointment) && AppointmentOverlap.areAppointmentTimesOverlapping(appointment, true) == false) {
             //Adds appointment if start date and end date for appointment to add matches an appointment in the database, but the start and end times do NOT overlap
             AppointmentDAOImpl.insert(appointment);
             SelectedItem.clearSelectedAppointment();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
-        } else if(!AppointmentOverlap.areAppointmentDatesOverlapping(appointment)) {
+        } else if(!AppointmentOverlap.areAppointmentDatesOverlapping(appointment, true)) {
             //Adds appointment if the start and end dates do NOT overlap with any appointments in the database
             AppointmentDAOImpl.insert(appointment);
             SelectedItem.clearSelectedAppointment();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
-        } else if((AppointmentOverlap.doesAppointmentEndDateOverlapWithStartDate(appointment) || AppointmentOverlap.doesAppointmentStartDateOverlapWithEndDate(appointment)) && !AppointmentOverlap.areAppointmentTimesOverlapping(appointment)) {
+        } else if((AppointmentOverlap.doesAppointmentEndDateOverlapWithStartDate(appointment) || AppointmentOverlap.doesAppointmentStartDateOverlapWithEndDate(appointment)) && !AppointmentOverlap.areAppointmentTimesOverlapping(appointment, true)) {
             //Adds appointment if the start date overlaps with an end date in the database, but the times do NOT overlap
             //Or adds an appointment if the end date overlaps with a start date in the database, but the times do NOT overlap
             AppointmentDAOImpl.insert(appointment);

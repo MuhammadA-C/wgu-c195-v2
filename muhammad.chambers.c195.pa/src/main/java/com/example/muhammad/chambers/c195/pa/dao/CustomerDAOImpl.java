@@ -8,9 +8,8 @@ import java.sql.*;
 
 public class CustomerDAOImpl {
     private static ObservableList<Customer> customers = FXCollections.observableArrayList();
-    final static String TABLE_NAME = "customers";
-    final static String CUSTOMER_ID_COLUMN_NAME = "Customer_ID";
-
+    public final static String TABLE_NAME = "customers";
+    public final static String CUSTOMER_ID_COLUMN_NAME = "Customer_ID";
     public final static String CUSTOMER_NAME_COL_NAME = "Customer_Name";
     public final static String ADDRESS_COL_NAME = "Address";
     public final static String POSTAL_CODE_COL_NAME = "Postal_Code";
@@ -80,17 +79,6 @@ public class CustomerDAOImpl {
 
         ps.setTimestamp(1, valueToUpdate);
         ps.setInt(2, customerID);
-
-        int rowsAffected = ps.executeUpdate();
-
-        return rowsAffected;
-    }
-
-    public static int delete(int customerID) throws SQLException {
-        String sql = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, CUSTOMER_ID_COLUMN_NAME);
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-
-        ps.setInt(1, customerID);
 
         int rowsAffected = ps.executeUpdate();
 

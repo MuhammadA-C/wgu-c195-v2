@@ -3,6 +3,7 @@ package com.example.muhammad.chambers.c195.pa.controller;
 import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.CustomerDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.JDBC;
+import com.example.muhammad.chambers.c195.pa.dao.SQLHelper;
 import com.example.muhammad.chambers.c195.pa.helper.DialogBox;
 import com.example.muhammad.chambers.c195.pa.helper.FilePath;
 import com.example.muhammad.chambers.c195.pa.helper.ScreenEnum;
@@ -114,7 +115,7 @@ public class CustomerRecordController implements Initializable {
                 return;
             }
 
-            CustomerDAOImpl.delete(SelectedItem.getSelectedCustomer().getCustomerID());
+            SQLHelper.delete(CustomerDAOImpl.TABLE_NAME, CustomerDAOImpl.CUSTOMER_ID_COLUMN_NAME, SelectedItem.getSelectedCustomer().getCustomerID());
             //Need to reset this otherwise it will still have reference to an object which is supposed to be deleted
             SelectedItem.clearSelectedCustomer();
             //Need to set the table view to update it
