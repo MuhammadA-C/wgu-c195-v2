@@ -255,12 +255,10 @@ public class UpdateAppointmentController implements Initializable {
         locationTxtField.setText(SelectedItem.getSelectedAppointment().getLocation());
         typeTxtField.setText(SelectedItem.getSelectedAppointment().getType());
         startDate.setValue(SelectedItem.getSelectedAppointment().getStart().toLocalDateTime().toLocalDate());
-
-        startTimeComboBox.setValue(DateTimeConversion.test(SelectedItem.getSelectedAppointment().getStart().toLocalDateTime().toLocalTime()));
+        startTimeComboBox.setValue(DateTimeConversion.convert24hrTo12hrTime(SelectedItem.getSelectedAppointment().getStart().toLocalDateTime().toLocalTime()));
         endDate.setValue(SelectedItem.getSelectedAppointment().getEnd().toLocalDateTime().toLocalDate());
         customerIdTxtField.setText(String.valueOf(SelectedItem.getSelectedAppointment().getCustomerID()));
         userIdTxtField.setText(String.valueOf(SelectedItem.getSelectedAppointment().getUserID()));
-
-        endTimeComboBox.setValue(DateTimeConversion.test(SelectedItem.getSelectedAppointment().getEnd().toLocalDateTime().toLocalTime()));
+        endTimeComboBox.setValue(DateTimeConversion.convert24hrTo12hrTime(SelectedItem.getSelectedAppointment().getEnd().toLocalDateTime().toLocalTime()));
     }
 }
