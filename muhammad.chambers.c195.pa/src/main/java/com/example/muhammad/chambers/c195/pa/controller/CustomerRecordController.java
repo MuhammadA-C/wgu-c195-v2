@@ -98,6 +98,7 @@ public class CustomerRecordController implements Initializable {
         } else if(doesCustomerIDHaveAppointments(SelectedItem.getSelectedCustomer().getCustomerID())) {
             SelectedItem.clearSelectedCustomer();
             System.out.println("Error: You must delete ALL appointments for a customer prior to deleting the customer.");
+            //Add check here if customer wants to delete all customers
         } else {
             CustomerDAOImpl.delete(SelectedItem.getSelectedCustomer().getCustomerID());
             //Need to reset this otherwise it will still have reference to an object which is supposed to be deleted
