@@ -2,6 +2,7 @@ package com.example.muhammad.chambers.c195.pa.controller;
 
 import com.example.muhammad.chambers.c195.pa.dao.CountryDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.CustomerDAOImpl;
+import com.example.muhammad.chambers.c195.pa.dao.SQLHelper;
 import com.example.muhammad.chambers.c195.pa.dao.StateOrProvinceDAOImpl;
 import com.example.muhammad.chambers.c195.pa.helper.*;
 import com.example.muhammad.chambers.c195.pa.model.Country;
@@ -95,17 +96,17 @@ public class UpdateCustomerController implements Initializable {
             return;
         }
 
-
         String loggedInUsername = LoggedIn.getLoggedInUsername();
         Timestamp currentDateAndTime = Timestamp.valueOf(DateTimeConversion.getCurrentDateTimeFormatted());
 
-        CustomerDAOImpl.updateForStrColumn(SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.CUSTOMER_NAME_COL_NAME, customerNameTxtField.getText());
-        CustomerDAOImpl.updateForStrColumn(SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.ADDRESS_COL_NAME, addressTxtField.getText());
-        CustomerDAOImpl.updateForStrColumn(SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.POSTAL_CODE_COL_NAME, postalCodeTxtField.getText());
-        CustomerDAOImpl.updateForStrColumn(SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.PHONE_COL_NAME, phoneNumberTxtField.getText());
-        CustomerDAOImpl.updateForTimestampColumn(SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.LAST_UPDATE_COL_NAME, currentDateAndTime);
-        CustomerDAOImpl.updateForStrColumn(SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.LAST_UPDATED_BY_COL_NAME, loggedInUsername);
-        CustomerDAOImpl.updateForIntColumn(SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.DIVISION_ID_COL_NAME, StateOrProvinceDAOImpl.findStateInListByName(stateComboBox.getValue()).getStateID());
+        //Updates all fields for the Customer object in the database
+        SQLHelper.updateForStrColumn(CustomerDAOImpl.TABLE_NAME, CustomerDAOImpl.CUSTOMER_ID_COLUMN_NAME, SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.CUSTOMER_NAME_COL_NAME, customerNameTxtField.getText());
+        SQLHelper.updateForStrColumn(CustomerDAOImpl.TABLE_NAME, CustomerDAOImpl.CUSTOMER_ID_COLUMN_NAME, SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.ADDRESS_COL_NAME, addressTxtField.getText());
+        SQLHelper.updateForStrColumn(CustomerDAOImpl.TABLE_NAME, CustomerDAOImpl.CUSTOMER_ID_COLUMN_NAME, SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.POSTAL_CODE_COL_NAME, postalCodeTxtField.getText());
+        SQLHelper.updateForStrColumn(CustomerDAOImpl.TABLE_NAME, CustomerDAOImpl.CUSTOMER_ID_COLUMN_NAME, SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.PHONE_COL_NAME, phoneNumberTxtField.getText());
+        SQLHelper.updateForStrColumn(CustomerDAOImpl.TABLE_NAME, CustomerDAOImpl.CUSTOMER_ID_COLUMN_NAME, SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.LAST_UPDATED_BY_COL_NAME, loggedInUsername);
+        SQLHelper.updateForTimestampColumn(CustomerDAOImpl.TABLE_NAME, CustomerDAOImpl.CUSTOMER_ID_COLUMN_NAME, SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.LAST_UPDATE_COL_NAME, currentDateAndTime);
+        SQLHelper.updateForIntColumn(CustomerDAOImpl.TABLE_NAME, CustomerDAOImpl.CUSTOMER_ID_COLUMN_NAME, SelectedItem.getSelectedCustomer().getCustomerID(), CustomerDAOImpl.DIVISION_ID_COL_NAME, StateOrProvinceDAOImpl.findStateInListByName(stateComboBox.getValue()).getStateID());
 
         SelectedItem.clearSelectedCustomer();
         filePath.switchScreen(event, filePath.getCustomerRecordFilePath(), ScreenEnum.CUSTOMER_RECORD.toString());

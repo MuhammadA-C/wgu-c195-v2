@@ -8,13 +8,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
 
 public class AppointmentDAOImpl {
     private static ObservableList<Appointment> appointments = FXCollections.observableArrayList();
     public final static String TABLE_NAME = "appointments";
     public final static String APPOINTMENT_ID_COLUMN_NAME = "Appointment_ID";
+    public final static String TITLE_COL_NAME = "Title";
+    public final static String DESCRIPTION_COL_NAME = "Description";
+    public final static String LOCATION_COL_NAME = "Location";
+    public final static String TYPE_COL_NAME = "Type";
+    public final static String START_COL_NAME = "Start";
+    public final static String END_COL_NAME = "End";
+    public final static  String LAST_UPDATE_COL_NAME = "Last_Update";
+    public final static  String LAST_UPDATED_BY_COL_NAME = "Last_Updated_By";
+    public final static String CUSTOMER_ID_COL_NAME = "Customer_ID";
+    public final static String USER_ID_COL_NAME = "User_ID";
+    public final static  String CONTACT_ID_COL_NAME = "Contact_ID";
+
 
 
     public static ObservableList<Appointment> getAppointmentsList() throws SQLException {
@@ -36,20 +47,20 @@ public class AppointmentDAOImpl {
         //Continues to loop through all data entries in the database until it reaches the last row
         while(rs.next()) {
             //Creates variables for the contact object from the database columns
-            int appointmentID = rs.getInt("Appointment_ID");
-            String title = rs.getString("Title");
-            String description = rs.getString("Description");
-            String location = rs.getString("Location");
-            String type = rs.getString("Type");
-            Timestamp start = rs.getTimestamp("Start");
-            Timestamp end = rs.getTimestamp("End");
+            int appointmentID = rs.getInt(APPOINTMENT_ID_COLUMN_NAME);
+            String title = rs.getString(TITLE_COL_NAME);
+            String description = rs.getString(DESCRIPTION_COL_NAME);
+            String location = rs.getString(LOCATION_COL_NAME);
+            String type = rs.getString(TYPE_COL_NAME);
+            Timestamp start = rs.getTimestamp(START_COL_NAME);
+            Timestamp end = rs.getTimestamp(END_COL_NAME);
             Timestamp createDate = rs.getTimestamp("Create_Date");
             String createdBy = rs.getString("Created_By");
-            Timestamp lastUpdate = rs.getTimestamp("Last_Update");
-            String lastUpdatedBy = rs.getString("Last_Updated_By");
-            int customerID = rs.getInt("Customer_ID");
-            int userID = rs.getInt("User_ID");
-            int contactID = rs.getInt("Contact_ID");
+            Timestamp lastUpdate = rs.getTimestamp(LAST_UPDATE_COL_NAME);
+            String lastUpdatedBy = rs.getString(LAST_UPDATED_BY_COL_NAME);
+            int customerID = rs.getInt(CUSTOMER_ID_COL_NAME);
+            int userID = rs.getInt(USER_ID_COL_NAME);
+            int contactID = rs.getInt(CONTACT_ID_COL_NAME);
 
             Appointment appointment = new Appointment(title, description, location, type, start, end, contactID, customerID, userID);
 
@@ -112,17 +123,6 @@ public class AppointmentDAOImpl {
         ps.setInt(12, appointment.getCustomerID());
         ps.setInt(13, appointment.getUserID());
         ps.setInt(14, appointment.getContactID());
-
-        int rowsAffected = ps.executeUpdate();
-
-        return rowsAffected;
-    }
-    public static int updateForStrColumn(int customerID, String columnName, String valueToUpdate) throws SQLException {
-        String sql = String.format("UPDATE appointments SET %s = ? WHERE %s = ?", TABLE_NAME, columnName, APPOINTMENT_ID_COLUMN_NAME);
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-
-        ps.setString(1, valueToUpdate);
-        ps.setInt(2, customerID);
 
         int rowsAffected = ps.executeUpdate();
 

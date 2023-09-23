@@ -1,9 +1,6 @@
 package com.example.muhammad.chambers.c195.pa.controller;
 
-import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
-import com.example.muhammad.chambers.c195.pa.dao.ContactDAOImpl;
-import com.example.muhammad.chambers.c195.pa.dao.CustomerDAOImpl;
-import com.example.muhammad.chambers.c195.pa.dao.UserDAOImpl;
+import com.example.muhammad.chambers.c195.pa.dao.*;
 import com.example.muhammad.chambers.c195.pa.helper.*;
 import com.example.muhammad.chambers.c195.pa.model.Appointment;
 import com.example.muhammad.chambers.c195.pa.model.Contact;
@@ -142,6 +139,20 @@ public class UpdateAppointmentController implements Initializable {
         return false;
     }
 
+    private void updateAppointmentInDatabase(Appointment appointment) throws SQLException {
+        SQLHelper.updateForStrColumn(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID(), AppointmentDAOImpl.TITLE_COL_NAME, appointment.getTitle());
+        SQLHelper.updateForStrColumn(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID(), AppointmentDAOImpl.DESCRIPTION_COL_NAME, appointment.getDescription());
+        SQLHelper.updateForStrColumn(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID(), AppointmentDAOImpl.LOCATION_COL_NAME, appointment.getLocation());
+        SQLHelper.updateForStrColumn(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID(), AppointmentDAOImpl.TYPE_COL_NAME, appointment.getType());
+        SQLHelper.updateForStrColumn(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID(), AppointmentDAOImpl.LAST_UPDATED_BY_COL_NAME, appointment.getLastUpdatedBy());
+        SQLHelper.updateForIntColumn(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID(), AppointmentDAOImpl.CUSTOMER_ID_COL_NAME, appointment.getCustomerID());
+        SQLHelper.updateForIntColumn(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID(), AppointmentDAOImpl.USER_ID_COL_NAME, appointment.getUserID());
+        SQLHelper.updateForIntColumn(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID(), AppointmentDAOImpl.CONTACT_ID_COL_NAME, appointment.getContactID());
+        SQLHelper.updateForTimestampColumn(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID(), AppointmentDAOImpl.START_COL_NAME, appointment.getStart());
+        SQLHelper.updateForTimestampColumn(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID(), AppointmentDAOImpl.END_COL_NAME, appointment.getEnd());
+        SQLHelper.updateForTimestampColumn(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID(), AppointmentDAOImpl.LAST_UPDATE_COL_NAME, appointment.getLastUpdate());
+    }
+
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         SelectedItem.clearSelectedAppointment();
@@ -193,8 +204,7 @@ public class UpdateAppointmentController implements Initializable {
         String loggedInUsername = LoggedIn.getLoggedInUsername();
         Timestamp currentDateAndTime = Timestamp.valueOf(DateTimeConversion.getCurrentDateTimeFormatted());
 
-        appointment.setCreateDate(currentDateAndTime);
-        appointment.setCreatedBy(loggedInUsername);
+        appointment.setAppointmentID(SelectedItem.getSelectedAppointment().getAppointmentID());
         appointment.setLastUpdate(currentDateAndTime);
         appointment.setLastUpdatedBy(loggedInUsername);
 
@@ -203,23 +213,23 @@ public class UpdateAppointmentController implements Initializable {
          */
         if(!AppointmentDAOImpl.doesCustomerIDHaveAnyAppointments(appointment.getCustomerID())) {
             //Adds appointment if customer id does NOT have any appointments already
-            AppointmentDAOImpl.insert(appointment);
+            updateAppointmentInDatabase(appointment);
             SelectedItem.clearSelectedAppointment();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else if(AppointmentOverlap.doesAppointmentHaveTheSameStartAndEndDate(appointment) && AppointmentOverlap.areAppointmentTimesOverlapping(appointment, true) == false) {
             //Adds appointment if start date and end date for appointment to add matches an appointment in the database, but the start and end times do NOT overlap
-            AppointmentDAOImpl.insert(appointment);
+            updateAppointmentInDatabase(appointment);
             SelectedItem.clearSelectedAppointment();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else if(!AppointmentOverlap.areAppointmentDatesOverlapping(appointment, true)) {
             //Adds appointment if the start and end dates do NOT overlap with any appointments in the database
-            AppointmentDAOImpl.insert(appointment);
+            updateAppointmentInDatabase(appointment);
             SelectedItem.clearSelectedAppointment();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else if((AppointmentOverlap.doesAppointmentEndDateOverlapWithStartDate(appointment) || AppointmentOverlap.doesAppointmentStartDateOverlapWithEndDate(appointment)) && !AppointmentOverlap.areAppointmentTimesOverlapping(appointment, true)) {
             //Adds appointment if the start date overlaps with an end date in the database, but the times do NOT overlap
             //Or adds an appointment if the end date overlaps with a start date in the database, but the times do NOT overlap
-            AppointmentDAOImpl.insert(appointment);
+            updateAppointmentInDatabase(appointment);
             SelectedItem.clearSelectedAppointment();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else {
@@ -245,10 +255,12 @@ public class UpdateAppointmentController implements Initializable {
         locationTxtField.setText(SelectedItem.getSelectedAppointment().getLocation());
         typeTxtField.setText(SelectedItem.getSelectedAppointment().getType());
         startDate.setValue(SelectedItem.getSelectedAppointment().getStart().toLocalDateTime().toLocalDate());
-        startTimeComboBox.setValue(DateTimeConversion.convert24hrTo12hrTime(SelectedItem.getSelectedAppointment().getStart().toLocalDateTime().toLocalTime()));
+
+        startTimeComboBox.setValue(DateTimeConversion.test(SelectedItem.getSelectedAppointment().getStart().toLocalDateTime().toLocalTime()));
         endDate.setValue(SelectedItem.getSelectedAppointment().getEnd().toLocalDateTime().toLocalDate());
         customerIdTxtField.setText(String.valueOf(SelectedItem.getSelectedAppointment().getCustomerID()));
         userIdTxtField.setText(String.valueOf(SelectedItem.getSelectedAppointment().getUserID()));
-        endTimeComboBox.setValue(DateTimeConversion.convert24hrTo12hrTime(SelectedItem.getSelectedAppointment().getEnd().toLocalDateTime().toLocalTime()));
+
+        endTimeComboBox.setValue(DateTimeConversion.test(SelectedItem.getSelectedAppointment().getEnd().toLocalDateTime().toLocalTime()));
     }
 }

@@ -49,58 +49,22 @@ public class CustomerDAOImpl {
         return rowsAffected;
     }
 
-    public static int updateForStrColumn(int customerID, String columnName, String valueToUpdate) throws SQLException {
-        String sql = String.format("UPDATE %s SET %s = ? WHERE %s = ?", TABLE_NAME, columnName, CUSTOMER_ID_COLUMN_NAME);
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-
-        ps.setString(1, valueToUpdate);
-        ps.setInt(2, customerID);
-
-        int rowsAffected = ps.executeUpdate();
-
-        return rowsAffected;
-    }
-
-    public static int updateForIntColumn(int customerID, String columnName, int valueToUpdate) throws SQLException {
-        String sql = String.format("UPDATE %s SET %s = ? WHERE %s = ?", TABLE_NAME, columnName, CUSTOMER_ID_COLUMN_NAME);
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-
-        ps.setInt(1, valueToUpdate);
-        ps.setInt(2, customerID);
-
-        int rowsAffected = ps.executeUpdate();
-
-        return rowsAffected;
-    }
-
-    public static int updateForTimestampColumn(int customerID, String columnName, Timestamp valueToUpdate) throws SQLException {
-        String sql = String.format("UPDATE %s SET %s = ? WHERE %s = ?", TABLE_NAME, columnName, CUSTOMER_ID_COLUMN_NAME);
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-
-        ps.setTimestamp(1, valueToUpdate);
-        ps.setInt(2, customerID);
-
-        int rowsAffected = ps.executeUpdate();
-
-        return rowsAffected;
-    }
-
     private static void addAllCustomersToListFromDatabase() throws SQLException {
         String sql = "SELECT * FROM customers";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
 
         while(rs.next()) {
-            int customerID = rs.getInt("Customer_ID");
-            String customerName = rs.getString("Customer_Name");
-            String address = rs.getString("Address");
-            String postalCode = rs.getString("Postal_Code");
-            String phoneNumber = rs.getString("Phone");
+            int customerID = rs.getInt(CUSTOMER_ID_COLUMN_NAME);
+            String customerName = rs.getString(CUSTOMER_NAME_COL_NAME);
+            String address = rs.getString(ADDRESS_COL_NAME);
+            String postalCode = rs.getString(POSTAL_CODE_COL_NAME);
+            String phoneNumber = rs.getString(PHONE_COL_NAME);
             Timestamp createDate = rs.getTimestamp("Create_Date");
             String createdBy = rs.getString("Created_By");
-            Timestamp lastUpdate = rs.getTimestamp("Last_Update");
-            String lastUpdatedBy = rs.getString("Last_Updated_By");
-            int stateID = rs.getInt("Division_ID");
+            Timestamp lastUpdate = rs.getTimestamp(LAST_UPDATE_COL_NAME);
+            String lastUpdatedBy = rs.getString(LAST_UPDATED_BY_COL_NAME);
+            int stateID = rs.getInt(DIVISION_ID_COL_NAME);
 
             Customer customer = new Customer(customerName, address, postalCode, phoneNumber, stateID);
 
