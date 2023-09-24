@@ -87,15 +87,6 @@ public class CustomerRecordController implements Initializable {
         }
     }
 
-    private boolean doesCustomerIDHaveAppointments(int customerID) throws SQLException {
-        for(Appointment appointment: AppointmentDAOImpl.getAppointmentsList()) {
-            if(appointment.getCustomerID() == customerID) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /*
         Note: Need to add a custom message when a customer is deleted.
      */
@@ -103,24 +94,38 @@ public class CustomerRecordController implements Initializable {
     void onActionDelete(ActionEvent event) throws SQLException {
         if(SelectedItem.getSelectedCustomer() == null) {
             DialogBox.errorAlert("Error Dialog", "Error: You must select a row from the Customer records table prior to selecting the Remove button.");
-        } else if(doesCustomerIDHaveAppointments(SelectedItem.getSelectedCustomer().getCustomerID())) {
-            SelectedItem.clearSelectedCustomer();
-            DialogBox.errorAlert("Error Dialog", "Error: You must delete ALL appointments for a customer prior to deleting the customer.");
-            //Add check here if customer wants to delete all customers
-        } else {
-            Optional<ButtonType> result = DialogBox.confirmationAlert("Confirmation", "Customer ID: " + SelectedItem.getSelectedCustomer().getCustomerID() + " has appointments.\nConfirm if you want to delete ALL of the appointments belonging to Customer ID: " + SelectedItem.getSelectedCustomer().getCustomerID() + "\nalong with deleting the customer");
+            return;
+        }
 
-            if(result.isPresent() && result.get() == ButtonType.CANCEL) {
-                SelectedItem.clearSelectedCustomer();
-                return;
-            }
-
+        //Deletes customer record if it does not have any appointments
+        if(!AppointmentDAOImpl.doesCustomerIDHaveAnyAppointments(SelectedItem.getSelectedCustomer().getCustomerID())) {
             SQLHelper.delete(CustomerDAOImpl.TABLE_NAME, CustomerDAOImpl.CUSTOMER_ID_COLUMN_NAME, SelectedItem.getSelectedCustomer().getCustomerID());
             //Need to reset this otherwise it will still have reference to an object which is supposed to be deleted
             SelectedItem.clearSelectedCustomer();
             //Need to set the table view to update it
             customerTableView.setItems(CustomerDAOImpl.getCustomersList());
+            return;
         }
+
+        Optional<ButtonType> result = DialogBox.confirmationAlert("Confirmation", "Customer ID: " + SelectedItem.getSelectedCustomer().getCustomerID() + " has appointments.\nConfirm if you want to delete ALL of the appointments belonging to Customer ID: " + SelectedItem.getSelectedCustomer().getCustomerID() + "\nalong with deleting the customer");
+
+        if(result.isPresent() && result.get() == ButtonType.CANCEL) {
+            SelectedItem.clearSelectedCustomer();
+            return;
+        }
+
+        for(Appointment appointment : AppointmentDAOImpl.getAppointmentsList()) {
+            if(appointment.getCustomerID() == SelectedItem.getSelectedCustomer().getCustomerID()) {
+                SQLHelper.delete(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID());
+            }
+        }
+
+        SQLHelper.delete(CustomerDAOImpl.TABLE_NAME, CustomerDAOImpl.CUSTOMER_ID_COLUMN_NAME, SelectedItem.getSelectedCustomer().getCustomerID());
+        //Need to reset this otherwise it will still have reference to an object which is supposed to be deleted
+        SelectedItem.clearSelectedCustomer();
+        //Need to set the table view to update it
+        customerTableView.setItems(CustomerDAOImpl.getCustomersList());
+
     }
 
     @FXML
