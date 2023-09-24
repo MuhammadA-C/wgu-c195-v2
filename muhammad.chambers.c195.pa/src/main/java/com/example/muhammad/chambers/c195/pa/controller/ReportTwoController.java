@@ -6,30 +6,24 @@ import com.example.muhammad.chambers.c195.pa.helper.ScreenEnum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ReportController implements Initializable {
+public class ReportTwoController implements Initializable {
 
     private FilePath filePath = new FilePath();
 
 
     @FXML
+    void onClickReports(ActionEvent event) throws IOException {
+        filePath.switchScreen(event, filePath.getReportFilePath(), ScreenEnum.REPORT.toString());
+    }
+
+    @FXML
     void onClickReportOne(ActionEvent event) throws IOException {
         filePath.switchScreen(event, filePath.getReportOneFilePath(), ScreenEnum.REPORT_ONE.toString());
-    }
-
-    @FXML
-    void onClickReportTwo(ActionEvent event) throws IOException {
-        filePath.switchScreen(event, filePath.getReportTwoFilePath(), ScreenEnum.REPORT_TWO.toString());
-    }
-
-    @FXML
-    void onClickReportThree(ActionEvent event) {
-
     }
 
     @FXML

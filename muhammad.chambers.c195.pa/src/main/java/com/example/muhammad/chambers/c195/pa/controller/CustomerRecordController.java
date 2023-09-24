@@ -125,7 +125,6 @@ public class CustomerRecordController implements Initializable {
         SelectedItem.clearSelectedCustomer();
         //Need to set the table view to update it
         customerTableView.setItems(CustomerDAOImpl.getCustomersList());
-
     }
 
     @FXML
