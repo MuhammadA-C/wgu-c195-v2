@@ -29,3 +29,8 @@ User test successfully logged in at 2023-09-24 19:38:07
 User test successfully logged in at 2023-09-24 19:47:48
 User test successfully logged in at 2023-09-24 19:51:32
 User test successfully logged in at 2023-09-24 20:03:16
+User test gave invalid log-in at 2023-09-24 22:52:37
+User test gave invalid log-in at 2023-09-24 22:52:48
+User ttt gave invalid log-in at 2023-09-24 22:55:50
+User test gave invalid log-in at 2023-09-24 22:56:03
+User test successfully logged in at 2023-09-24 22:56:08

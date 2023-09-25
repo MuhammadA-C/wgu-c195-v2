@@ -69,6 +69,17 @@ public class LoginController implements Initializable {
         }
     }
 
+    private String getTextToLocale(String text) {
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("LoginScreen", Locale.getDefault());
+        String translatedStr = null;
+
+        if (Locale.getDefault().getLanguage().equals("en") || Locale.getDefault().getLanguage().equals("fr")) {
+            translatedStr = resourceBundle.getString(text);
+        }
+        return translatedStr;
+    }
+
+
     private void translateAllTxt() {
         setTextToLocaleForText(topTxtOne, "topTxtOne");
         setTextToLocaleForText(topTxtTwo, "topTxtTwo");
@@ -115,9 +126,9 @@ public class LoginController implements Initializable {
         User userAccount = returnUserObjectIfUsernameExists(usernameField.getText());
 
         if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
-            DialogBox.errorAlert("Error Dialog", "Error: You have empty fields. You must fill out all fields prior to clicking log-in");
+            DialogBox.errorAlert(getTextToLocale("errorDialog"), getTextToLocale("emptyFields"));
         } else if(userAccount == null) {
-            DialogBox.errorAlert("Error Dialog", "Login Failed. Account does NOT exist");
+            DialogBox.errorAlert(getTextToLocale("errorDialog"), getTextToLocale("accountExists"));
             logLoginAttemptToTxtFile(usernameField.getText(), false);
             clearLoginFields();
         } else if(userAccount.getPassword().equals(passwordField.getText())) {
@@ -126,7 +137,7 @@ public class LoginController implements Initializable {
             clearLoginFields();
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else {
-            DialogBox.errorAlert("Error Dialog", "Login Failed. Your password was incorrect");
+            DialogBox.errorAlert(getTextToLocale("errorDialog"), getTextToLocale("incorrectPassword"));
             logLoginAttemptToTxtFile(usernameField.getText(), false);
             clearLoginFields();
         }
