@@ -11,5 +11,6 @@ public enum ScreenEnum {
     UPDATE_APPOINTMENT,
     REPORT_ONE,
     REPORT_TWO,
+    REPORT_THREE
     
 }

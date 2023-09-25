@@ -41,6 +41,11 @@ public class ReportOneController implements Initializable {
     }
 
     @FXML
+    void onClickReportThree(ActionEvent event) throws IOException {
+        filePath.switchScreen(event, filePath.getReportThreeFilePath(), ScreenEnum.REPORT_THREE.toString());
+    }
+
+    @FXML
     void onClickCustomerRecordBtn(ActionEvent event) throws IOException {
         filePath.switchScreen(event, filePath.getCustomerRecordFilePath(), ScreenEnum.CUSTOMER_RECORD.toString());
     }

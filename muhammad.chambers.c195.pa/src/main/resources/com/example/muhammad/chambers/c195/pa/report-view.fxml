@@ -10,7 +10,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.muhammad.chambers.c195.pa.controller.ReportController">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4caafc" height="646.0" layoutX="-10.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="240.0" />
-        <Text layoutX="262.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upcomming Appointment in 15 Minutes:" wrappingWidth="760.3321449130019">
+        <Text layoutX="262.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upcoming Appointment in 15 Minutes:" wrappingWidth="760.3321449130019">
             <font>
                 <Font size="18.0" />
             </font>
@@ -53,5 +53,6 @@
         </Text>
       <Text layoutX="262.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report 1:  Shows the total number of customer reports by type and month" wrappingWidth="184.0" />
       <Text layoutX="550.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report 2:  Schedule for each contact that includes appointment information. (i.e. appointment id, title, type, description, start and end times, etc...)" wrappingWidth="184.0" />
+      <Text layoutX="838.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report 3: Shows the total number of reports for based on customer id and month" wrappingWidth="184.0" />
     </children>
 </AnchorPane>
