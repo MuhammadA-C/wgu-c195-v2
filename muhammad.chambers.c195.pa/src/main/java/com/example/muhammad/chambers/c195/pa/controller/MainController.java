@@ -131,6 +131,10 @@ public class MainController implements Initializable {
             return;
         }
 
+        String canceled = String.format("Appointment ID: %d  Type: %s was canceled", SelectedItem.getSelectedAppointment().getAppointmentID(), SelectedItem.getSelectedAppointment().getType());
+
+        DialogBox.notificationAlert("Notification", canceled);
+
         SQLHelper.delete(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, SelectedItem.getSelectedAppointment().getAppointmentID());
         SelectedItem.clearSelectedAppointment();
 

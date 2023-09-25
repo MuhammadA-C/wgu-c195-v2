@@ -70,7 +70,7 @@ public class ReportTwoController implements Initializable {
         }
 
         if(reportsList.size() == 0) {
-            DialogBox.errorAlert("Notification", "The Contact that you selected does not have any appointments associated to them.");
+            DialogBox.notificationAlert("Notification", "The Contact that you selected does not have any appointments associated to them.");
             return;
         }
 
