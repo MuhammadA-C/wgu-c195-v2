@@ -97,6 +97,9 @@ public class CustomerRecordController implements Initializable {
 
         //Deletes customer record if it does not have any appointments
         if(!AppointmentDAOImpl.doesCustomerIDHaveAnyAppointments(SelectedItem.getSelectedCustomer().getCustomerID())) {
+            String deletedCustomer = String.format("Customer ID: %d, Customer Name: %s, customer record was deleted", SelectedItem.getSelectedCustomer().getCustomerID(), SelectedItem.getSelectedCustomer().getCustomerName());
+            DialogBox.notificationAlert("Notification", deletedCustomer);
+
             SQLHelper.delete(CustomerDAOImpl.TABLE_NAME, CustomerDAOImpl.CUSTOMER_ID_COLUMN_NAME, SelectedItem.getSelectedCustomer().getCustomerID());
             //Need to reset this otherwise it will still have reference to an object which is supposed to be deleted
             SelectedItem.clearSelectedCustomer();
@@ -112,11 +115,29 @@ public class CustomerRecordController implements Initializable {
             return;
         }
 
+        String deletedAppointments = "";
+        int count = 0;
+
         for(Appointment appointment : AppointmentDAOImpl.getAppointmentsList()) {
             if(appointment.getCustomerID() == SelectedItem.getSelectedCustomer().getCustomerID()) {
                 SQLHelper.delete(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID());
+
+                if(count == 0) {
+                    deletedAppointments.trim();
+                    deletedAppointments = "Appointment ID: " + appointment.getAppointmentID() + " Type: " + appointment.getType() + " was canceled\n";
+                } else {
+                    deletedAppointments += "Appointment ID: " + appointment.getAppointmentID() + " Type: " + appointment.getType() + " was canceled\n";
+                }
+                count++;
             }
         }
+
+        if(!deletedAppointments.isEmpty()) {
+            DialogBox.notificationAlert("Notification", deletedAppointments);
+        }
+
+        String deletedCustomer = String.format("Customer ID: %d, Customer Name: %s, customer record was deleted", SelectedItem.getSelectedCustomer().getCustomerID(), SelectedItem.getSelectedCustomer().getCustomerName());
+        DialogBox.notificationAlert("Notification", deletedCustomer);
 
         SQLHelper.delete(CustomerDAOImpl.TABLE_NAME, CustomerDAOImpl.CUSTOMER_ID_COLUMN_NAME, SelectedItem.getSelectedCustomer().getCustomerID());
         //Need to reset this otherwise it will still have reference to an object which is supposed to be deleted
