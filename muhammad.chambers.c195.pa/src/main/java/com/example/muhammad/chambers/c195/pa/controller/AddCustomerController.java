@@ -20,10 +20,8 @@ import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 public class AddCustomerController implements Initializable {
-
     private FilePath filePath = new FilePath();
 
-    //FXML Fields
     @FXML
     ComboBox<Country> countryComboBox;
     @FXML

@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 public class SQLHelper {
-
     public static int updateForStrColumn(String tableName, String primaryKeyIdColumnName, int primaryKeyId, String columnToUpdateName, String valueToUpdate) throws SQLException {
         String sql = String.format("UPDATE %s SET %s = ? WHERE %s = ?", tableName, columnToUpdateName, primaryKeyIdColumnName);
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);

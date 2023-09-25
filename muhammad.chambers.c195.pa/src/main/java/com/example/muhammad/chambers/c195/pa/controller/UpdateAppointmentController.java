@@ -21,14 +21,8 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class UpdateAppointmentController implements Initializable {
-
-    /*
-
-        Bug, updating appointment creates duplicate
-     */
     private FilePath filePath = new FilePath();
 
-    //FXML Fields
     @FXML
     private ComboBox<Contact> contactComboBox;
     @FXML

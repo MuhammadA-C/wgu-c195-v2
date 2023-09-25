@@ -26,10 +26,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerRecordController implements Initializable {
-
     private FilePath filePath = new FilePath();
 
-    //FXML Fields
     @FXML
     private TableView<Customer> customerTableView;
     @FXML

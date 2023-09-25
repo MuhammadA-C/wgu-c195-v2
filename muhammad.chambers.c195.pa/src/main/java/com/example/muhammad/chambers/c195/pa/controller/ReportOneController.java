@@ -1,9 +1,7 @@
 package com.example.muhammad.chambers.c195.pa.controller;
 
-import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.JDBC;
 import com.example.muhammad.chambers.c195.pa.helper.FilePath;
-import com.example.muhammad.chambers.c195.pa.model.Appointment;
 import com.example.muhammad.chambers.c195.pa.model.ReportOne;
 import com.example.muhammad.chambers.c195.pa.helper.ScreenEnum;
 import javafx.event.ActionEvent;
@@ -67,7 +65,6 @@ public class ReportOneController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             reportOneTableView.setItems(ReportOne.getReportsList());
-
             reportTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
             reportMonthCol.setCellValueFactory(new PropertyValueFactory<>("month"));
             totalNumberCol.setCellValueFactory(new PropertyValueFactory<>("totalNumber"));

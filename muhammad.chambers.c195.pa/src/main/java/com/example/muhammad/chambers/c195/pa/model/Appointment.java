@@ -7,9 +7,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 public class Appointment {
-    /*
-        Note: For the start and end date/time, I might need to change things around when adding it to the database
-     */
     private int appointmentID;
     private String title;
     private String description;

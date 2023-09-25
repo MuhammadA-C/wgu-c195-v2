@@ -6,14 +6,12 @@ import com.example.muhammad.chambers.c195.pa.helper.ScreenEnum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ReportController implements Initializable {
-
     private FilePath filePath = new FilePath();
 
 

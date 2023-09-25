@@ -22,10 +22,8 @@ import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 public class UpdateCustomerController implements Initializable {
-
     private FilePath filePath = new FilePath();
 
-    //FXML Fields
     @FXML
     ComboBox<String> countryComboBox;
     @FXML

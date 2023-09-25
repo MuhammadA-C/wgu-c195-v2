@@ -27,7 +27,6 @@ public class AppointmentDAOImpl {
     public final static  String CONTACT_ID_COL_NAME = "Contact_ID";
 
 
-
     public static ObservableList<Appointment> getAppointmentsList() throws SQLException {
         /*
             Appointments Observable list is only accessible through a getter method,

@@ -18,15 +18,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
-
     private FilePath filePath = new FilePath();
 
-    //FXML Fields
     @FXML
     private Text loginTxt;
     @FXML

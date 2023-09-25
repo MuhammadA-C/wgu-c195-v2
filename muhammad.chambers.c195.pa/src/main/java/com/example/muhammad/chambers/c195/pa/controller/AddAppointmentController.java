@@ -24,10 +24,8 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AddAppointmentController implements Initializable {
-
     private FilePath filePath = new FilePath();
 
-    //FXML Fields
     @FXML
     private ComboBox<Contact> contactComboBox;
     @FXML

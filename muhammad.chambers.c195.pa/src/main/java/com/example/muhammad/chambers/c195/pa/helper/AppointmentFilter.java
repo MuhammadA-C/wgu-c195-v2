@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import java.time.LocalDate;
 
 public class AppointmentFilter {
-
     public static LocalDate currentDate() {
         return LocalDate.now();
     }

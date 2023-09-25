@@ -86,8 +86,4 @@ public class ReportOne {
             ReportOne.addReportToReportsList(report);
         }
     }
-
-
-
-
 }
