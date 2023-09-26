@@ -4,13 +4,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 
+/** This class handles the input checking to see if an appointment is within business hours.*/
 public class BusinessHour {
+    /** Holds the business start time*/
     private static LocalTime businessStartTime;
+    /** Holds the business end time*/
     private static LocalTime businessEndTime;
+    /** Holds the date*/
     private static LocalDate date;
 
 
-    //Getter methods
+    /** This is the getBusinessStartTime method
+     This method is used to get the business start time.
+     @return Returns the business start time*/
     public static LocalTime getBusinessStartTime() {
         //Sets the business hours start time to 08:00 am with no specified time zone
         setBusinessStartTime();
@@ -24,6 +30,9 @@ public class BusinessHour {
         return businessStartTime;
     }
 
+    /** This is the getBusinessEndTime method
+     This method is used to get the business end time.
+     @return Returns the business end time*/
     public static LocalTime getBusinessEndTime() {
         //Sets the business hours end time to 10:00 pm with no specified time zone
         setBusinessEndTime();
@@ -37,21 +46,28 @@ public class BusinessHour {
         return businessEndTime;
     }
 
+    /** This is the getDate method
+     This method is used to get the date.
+     @return Returns the date*/
     private static LocalDate getDate() {
         setDate();
         return date;
     }
 
-
-    //Setter methods
+    /** This is the setBusinessStartTime method.
+     This method sets the business start time.*/
     private static void setBusinessStartTime() {
         businessStartTime = LocalTime.of(8, 00, 00);
     }
 
+    /** This is the setBusinessEndTime method.
+     This method sets the business end time.*/
     private static void setBusinessEndTime() {
         businessEndTime = LocalTime.of(22, 00, 00);
     }
 
+    /** This is the setDate method.
+     This method sets the date.*/
     private static void setDate() {
         /*
             In this case, it doesn't matter what the specific date is being set to because I only need the time.

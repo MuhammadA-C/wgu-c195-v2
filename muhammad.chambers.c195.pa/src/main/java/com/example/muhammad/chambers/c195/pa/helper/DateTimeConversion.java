@@ -7,23 +7,38 @@ import java.sql.Timestamp;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
+/** This class holds code for date time conversion*/
 public class DateTimeConversion {
+    /** Holds a date time formatter pattern*/
     public final static DateTimeFormatter dateTimeFormatterPattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-
+    /** This is the getCurrentDateTimeFormatted method.
+     This method returns the current date and time based on the users system time.
+     @return Returns a LocalDateTime object*/
     public static LocalDateTime getCurrentDateTimeFormatted() {
         LocalDateTime now = LocalDateTime.now();
 
         return LocalDateTime.parse(dateTimeFormatterPattern.format(now), dateTimeFormatterPattern);
     }
 
+    /** This is the getSystemZoneID method.
+     This method returns users system zone id.
+     @return Returns a ZoneID object*/
     public static ZoneId getSystemZoneID() {
         return ZoneId.systemDefault();
     }
 
     //Lambda Expression #2
+    /** This is the timeZoneIdFromStr Lambda Express.
+     This method takes a string to look up its ZoneID object and return it.
+     @param timeZone a string to look up the time zone
+     @return Returns a ZoneID object*/
     public static GetTimeZoneIdInterface timeZoneIdFromStr = (timeZone) -> ZoneId.of(timeZone);
 
+    /** This is the convert24hrTo12hrTime method.
+     This method converts a 24hr time to 12hrs and returns it as a string.
+     @param time the time to convert from 24hrs to 12hrs
+     @return Returns the time as a string*/
     public static String convert24hrTo12hrTime(LocalTime time) {
         final int time_10hour = 10;
         final int time_12hour = 12;
@@ -63,6 +78,12 @@ public class DateTimeConversion {
         return (time.getHour() - time_12hour) + ":0" + time.getMinute() + " PM";
     }
 
+    /** This is the convertTimeZone method.
+     This method converts a time in one time zone to another time zone.
+     @param timestamp time to convert
+     @param currentTimeZone the current time zone the time is in
+     @param convertToTimeZone the time zone to convert the time to
+     @return Returns the converted time as a timestamp*/
     public static Timestamp convertTimeZone(Timestamp timestamp , String currentTimeZone, String convertToTimeZone) {
         ZoneId currentZoneId = ZoneId.of(currentTimeZone);
         ZoneId convertToZoneId = ZoneId.of(convertToTimeZone);
@@ -73,6 +94,9 @@ public class DateTimeConversion {
         return Timestamp.valueOf(convertToZDT.toLocalDateTime());
     }
 
+    /** This is the getTimesInMilitaryTime method.
+     This method returns a list of times in military time.
+     @return Returns a list of military times*/
     public static ObservableList<LocalTime> getTimesInMilitaryTime() {
         final int MILITARY_TIME_24HRS = 24;
         ObservableList<LocalTime> times = FXCollections.observableArrayList();
@@ -89,6 +113,9 @@ public class DateTimeConversion {
         return times;
     }
 
+    /** This is the getAppointmentsTimesFormatted method.
+     This method formats the times for the day with AM or PM.
+     @return Returns a list of times formatted with AM or PM*/
     public static ObservableList<String> getAppointmentsTimesFormatted() {
         final int HOURS_12 = 12;
         ObservableList<String> times = FXCollections.observableArrayList();
@@ -122,6 +149,10 @@ public class DateTimeConversion {
         return times;
     }
 
+    /** This is the convertFormattedAppointmentStrToLocalTime method.
+     This method is used to convert a time string to local time.
+     @param time time to convert
+     @return Returns a LocalTime object*/
     public static LocalTime convertFormattedAppointmentStrToLocalTime(String time) {
         int index = -1;
         LocalTime localTime = null;
@@ -141,5 +172,4 @@ public class DateTimeConversion {
         }
         return localTime;
     }
-
 }
