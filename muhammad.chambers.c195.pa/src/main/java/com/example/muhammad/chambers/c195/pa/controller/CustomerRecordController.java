@@ -4,10 +4,7 @@ import com.example.muhammad.chambers.c195.pa.dao.AppointmentDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.CustomerDAOImpl;
 import com.example.muhammad.chambers.c195.pa.dao.JDBC;
 import com.example.muhammad.chambers.c195.pa.dao.SQLHelper;
-import com.example.muhammad.chambers.c195.pa.helper.DialogBox;
-import com.example.muhammad.chambers.c195.pa.helper.FilePath;
-import com.example.muhammad.chambers.c195.pa.helper.ScreenEnum;
-import com.example.muhammad.chambers.c195.pa.helper.SelectedItem;
+import com.example.muhammad.chambers.c195.pa.helper.*;
 import com.example.muhammad.chambers.c195.pa.model.Appointment;
 import com.example.muhammad.chambers.c195.pa.model.Customer;
 import javafx.event.ActionEvent;
@@ -122,11 +119,14 @@ public class CustomerRecordController implements Initializable {
             if(appointment.getCustomerID() == SelectedItem.getSelectedCustomer().getCustomerID()) {
                 SQLHelper.delete(AppointmentDAOImpl.TABLE_NAME, AppointmentDAOImpl.APPOINTMENT_ID_COLUMN_NAME, appointment.getAppointmentID());
 
+                //Lambda Expression#1
+                CanceledCustomerInterface canceledMessage = (id , type) -> "Appointment ID: " + id + " Type: " + type + " was canceled\n";
+                
                 if(count == 0) {
                     deletedAppointments.trim();
-                    deletedAppointments = "Appointment ID: " + appointment.getAppointmentID() + " Type: " + appointment.getType() + " was canceled\n";
+                    deletedAppointments = canceledMessage.canceledAppointmentAndDeletedCustomer(appointment.getAppointmentID(), appointment.getType());
                 } else {
-                    deletedAppointments += "Appointment ID: " + appointment.getAppointmentID() + " Type: " + appointment.getType() + " was canceled\n";
+                    deletedAppointments += canceledMessage.canceledAppointmentAndDeletedCustomer(appointment.getAppointmentID(), appointment.getType());
                 }
                 count++;
             }
