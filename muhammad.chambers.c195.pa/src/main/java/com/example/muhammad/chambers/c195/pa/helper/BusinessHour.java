@@ -15,7 +15,7 @@ public class BusinessHour {
         //Sets the business hours start time to 08:00 am with no specified time zone
         setBusinessStartTime();
         //Sets the time zone for 08:00 am to EST
-        ZonedDateTime businessZDT = ZonedDateTime.of(getDate(), businessStartTime, DateTimeConversion.getESTZoneID());
+        ZonedDateTime businessZDT = ZonedDateTime.of(getDate(), businessStartTime, DateTimeConversion.timeZoneIdFromStr.getTimeZoneID("US/Eastern"));
         //Converts the time zone from 08:00 am EST to the users system time zone
         ZonedDateTime convertedToSystemZDT = businessZDT.withZoneSameInstant(DateTimeConversion.getSystemZoneID());
         //Sets the business hours start time to the users system time equivalent for 08:00 am EST
@@ -28,7 +28,7 @@ public class BusinessHour {
         //Sets the business hours end time to 10:00 pm with no specified time zone
         setBusinessEndTime();
         //Sets the time zone for 10:00 pm to EST
-        ZonedDateTime businessZDT = ZonedDateTime.of(getDate(), businessEndTime, DateTimeConversion.getESTZoneID());
+        ZonedDateTime businessZDT = ZonedDateTime.of(getDate(), businessEndTime, DateTimeConversion.timeZoneIdFromStr.getTimeZoneID("US/Eastern"));
         //Converts the time zone from 10:00 pm EST to the users system time zone
         ZonedDateTime convertedToSystemZDT = businessZDT.withZoneSameInstant(DateTimeConversion.getSystemZoneID());
         //Sets the business hours end time to the users system time equivalent for 10:00 pm EST

@@ -21,13 +21,8 @@ public class DateTimeConversion {
         return ZoneId.systemDefault();
     }
 
-    public static ZoneId getUTCZoneID() {
-        return ZoneId.of("UTC");
-    }
-
-    public static ZoneId getESTZoneID() {
-        return ZoneId.of("US/Eastern");
-    }
+    //Lambda Expression #2
+    public static GetTimeZoneIdInterface timeZoneIdFromStr = (timeZone) -> ZoneId.of(timeZone);
 
     public static String convert24hrTo12hrTime(LocalTime time) {
         final int time_10hour = 10;
@@ -68,7 +63,7 @@ public class DateTimeConversion {
         return (time.getHour() - time_12hour) + ":0" + time.getMinute() + " PM";
     }
 
-    public static Timestamp convertTimeZone(Timestamp timestamp ,String currentTimeZone, String convertToTimeZone) {
+    public static Timestamp convertTimeZone(Timestamp timestamp , String currentTimeZone, String convertToTimeZone) {
         ZoneId currentZoneId = ZoneId.of(currentTimeZone);
         ZoneId convertToZoneId = ZoneId.of(convertToTimeZone);
         LocalDateTime ldt = timestamp.toLocalDateTime();
