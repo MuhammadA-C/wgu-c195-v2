@@ -2,6 +2,7 @@ package com.example.muhammad.chambers.c195.pa.helper;
 
 import java.time.ZoneId;
 
+/** This interface class is used for one of the Lambda Expressions. This specific one obtains a zone id from string*/
 public interface GetTimeZoneIdInterface {
     ZoneId getTimeZoneID(String timeZone);
 

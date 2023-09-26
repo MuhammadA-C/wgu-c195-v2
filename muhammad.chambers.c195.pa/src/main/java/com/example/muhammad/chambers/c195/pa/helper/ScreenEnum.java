@@ -1,5 +1,6 @@
 package com.example.muhammad.chambers.c195.pa.helper;
 
+/** This class is store enums for the screen names.*/
 public enum ScreenEnum {
     MAIN,
     LOGIN,
@@ -12,5 +13,4 @@ public enum ScreenEnum {
     REPORT_ONE,
     REPORT_TWO,
     REPORT_THREE
-    
 }

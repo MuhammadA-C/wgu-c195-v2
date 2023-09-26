@@ -8,8 +8,13 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/** This class is used to create a list containing all upcoming appointments.*/
 public class UpcomingAppointment {
 
+    /** This is the upcomingAppointmentsStr method.
+     This method creates a list containing all upcoming appointments.
+     @param appointments a list containing all appointments from the database
+     @return Returns a list containing all upcoming appointments*/
     public static ObservableList<String> getUpcomingAppointments(ObservableList<Appointment> appointments) throws SQLException {
         final int minutes_15 = 15;
         ObservableList<String> upcomingAppointments = FXCollections.observableArrayList();
@@ -40,6 +45,10 @@ public class UpcomingAppointment {
         return upcomingAppointments;
     }
 
+    /** This is the upcomingAppointmentsStr method.
+     This method creates a string which is used to display in the interface if there are any upcoming appointments.
+     @param upcomingAppointments a list containing upcoming appointments
+     @return Returns a string that either says no upcoming appointments if there are not any, or a string containing the upcoming appointments*/
     public static String upcomingAppointmentsStr( ObservableList<String> upcomingAppointments) {
         String appointments = "";
 
@@ -57,5 +66,4 @@ public class UpcomingAppointment {
         }
         return appointments;
     }
-
 }
