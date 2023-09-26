@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
 
+/** This class is used to create a ReportOne object.*/
 public class ReportOne {
     private String type;
     private String month;
