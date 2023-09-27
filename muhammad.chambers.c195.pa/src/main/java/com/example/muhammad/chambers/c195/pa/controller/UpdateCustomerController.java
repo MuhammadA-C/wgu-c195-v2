@@ -21,25 +21,36 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
+/** This class holds the code for the update customer controller for the update customer fxml file*/
 public class UpdateCustomerController implements Initializable {
+    /** Holds a reference to the file path class*/
     private FilePath filePath = new FilePath();
 
+    /** Holds the country combo box*/
     @FXML
     ComboBox<String> countryComboBox;
+    /** Holds the state combo box*/
     @FXML
     ComboBox<String> stateComboBox;
+    /** Holds the customer name text field*/
     @FXML
     TextField customerNameTxtField;
+    /** Holds the address text field*/
     @FXML
     TextField addressTxtField;
+    /** Holds the phone number text field*/
     @FXML
     TextField phoneNumberTxtField;
+    /** Holds the postal code text field*/
     @FXML
     TextField postalCodeTxtField;
+    /** Holds the customer id text field*/
     @FXML
     TextField customerIDTxtField;
 
 
+    /** This is the setCountryComboBox method.
+     This method is used to set the selection values for the country combo box with the values from the database.*/
     private void setCountryComboBox() throws SQLException {
         ObservableList<String> countries = FXCollections.observableArrayList();
 
@@ -50,6 +61,8 @@ public class UpdateCustomerController implements Initializable {
         countryComboBox.setItems(countries);
     }
 
+    /** This is the setStateComboBox method.
+     This method is used to set the selection values for the state combo box with the values from the database.*/
     private void setStateComboBox(String countryName) throws SQLException {
         ObservableList<String> states = FXCollections.observableArrayList();
 
@@ -60,7 +73,10 @@ public class UpdateCustomerController implements Initializable {
         stateComboBox.setItems(states);
     }
 
-    private boolean areAllTextFieldsFieldOut() {
+    /** This is the areAllTextFieldsFilledOut method.
+     This method is used to check if all the text fields have a value, and returns a boolean.
+     @return Returns a boolean, true if all fields are filled out; or false otherwise*/
+    private boolean areAllTextFieldsFilledOut() {
         if(customerNameTxtField.getText().isEmpty()) {
             return false;
         } else if(addressTxtField.getText().isEmpty()) {
@@ -77,7 +93,8 @@ public class UpdateCustomerController implements Initializable {
         return true;
     }
 
-
+    /** This is the onCountryComboBoxSelected method.
+     This method is used to set the values for the state combo box if the country combo box has a value selected.*/
     @FXML
     void onCountryComboBoxSelected() throws SQLException {
         String selectedCountry = countryComboBox.getSelectionModel().getSelectedItem();
@@ -87,9 +104,12 @@ public class UpdateCustomerController implements Initializable {
         }
     }
 
+    /** This is the onActionSave method.
+     This method is used to save any changes made to the customer object, and takes the user back to the customer records screen.
+     @param event the event*/
     @FXML
     void onActionSave(ActionEvent event) throws SQLException, IOException {
-        if(!areAllTextFieldsFieldOut()) {
+        if(!areAllTextFieldsFilledOut()) {
             DialogBox.errorAlert("Error Dialog", "Error: You must fill in all input fields prior to clicking save");
             return;
         }
@@ -110,23 +130,27 @@ public class UpdateCustomerController implements Initializable {
         filePath.switchScreen(event, filePath.getCustomerRecordFilePath(), ScreenEnum.CUSTOMER_RECORD.toString());
     }
 
+    /** This is the onActionCancel method.
+     This method is used to cancel any changes and take the user back to the customer records screen.
+     @param event the event*/
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         SelectedItem.clearSelectedCustomer();
         filePath.switchScreen(event, filePath.getCustomerRecordFilePath(), ScreenEnum.CUSTOMER_RECORD.toString());
     }
 
+    /** This is the initialize method.
+     This method is used to initialize values as soon as this screen is loaded such as the country combo box, state combo box,
+     and text fields based on the values from the selected row from the customer table.
+     @param url the url
+     @param rb the resource bundle*/
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
-            //Populates the list with all selection options
             setCountryComboBox();
-            //Sets the selected value
             countryComboBox.setValue(CountryDAOImpl.findCountryInListByName(SelectedItem.getSelectedCustomer().getCountryName()).getCountry());
-            //Populates with list with all selection options
             setStateComboBox(SelectedItem.getSelectedCustomer().getCountryName());
-            //Sets the selected value
             stateComboBox.setValue(StateOrProvinceDAOImpl.findStateInListByID(SelectedItem.getSelectedCustomer().getStateID()).getState());
         } catch (SQLException e) {
             throw new RuntimeException(e);
