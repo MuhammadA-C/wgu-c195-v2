@@ -6,12 +6,15 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 
+/** This class holds code to access the database for the User table.*/
 public class UserDAOImpl {
-    //This class will only be used to pull the data from the database and not creating new objets
+    /** Holds a list of all the user objects from the database*/
     private static ObservableList<User> users = FXCollections.observableArrayList();
 
 
-    //Getter methods
+    /** This is the getUsersList method.
+     This method sets the user list with values from the database prior to returning a list of user objects.
+     @return Returns a list of user objects from the database*/
     public static ObservableList<User> getUsersList() throws SQLException {
         /*
             Users Observable list is only accessible through a getter method,
@@ -22,6 +25,8 @@ public class UserDAOImpl {
         return users;
     }
 
+    /** This is the addAllUsersToListFromDatabase method.
+     This method is used to pull the rows from the database from the user table, create user objects, and add them to the users list.*/
     private static void addAllUsersToListFromDatabase() throws SQLException {
         String sql = "SELECT * FROM users";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -47,6 +52,10 @@ public class UserDAOImpl {
         }
     }
 
+    /** This is the isUserInList method.
+     This method checks to see if a user is in the users list, and returns a boolean.
+     @param user the user object to check to see if it's in the database
+     @return Returns true if the user is found in the list, or false otherwise*/
     private static boolean isUserInList(User user) {
         /*
             Checks to see if the User object is already present
@@ -63,6 +72,10 @@ public class UserDAOImpl {
         return found;
     }
 
+    /** This is the isUserIDInList method.
+     This method checks to see if a user is in the users list by userID, and returns a boolean.
+     @param userID the userID to check to see if it's in the database
+     @return Returns true if the user is found in the list, or false otherwise*/
     public static boolean isUserIDInList(int userID) throws SQLException {
 
         for(User user: getUsersList()) {

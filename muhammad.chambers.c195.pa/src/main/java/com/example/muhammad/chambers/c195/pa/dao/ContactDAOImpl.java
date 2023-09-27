@@ -7,12 +7,15 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 
+/** This class holds code to access the database for the contact table.*/
 public class ContactDAOImpl {
-    //This class will only be used to pull the data from the database and not creating new objets
+    /** Holds a list of contact objects*/
     private static ObservableList<Contact> contacts = FXCollections.observableArrayList();
 
 
-    //Getter methods
+    /** This is the getContactsList method.
+     This method sets the contacts list with values from the database prior to returning a list of contact objects.
+     @return Returns a list of contact objects from the database*/
     public static ObservableList<Contact> getContactsList() throws SQLException {
         /*
             Contacts Observable list is only accessible through a getter method,
@@ -23,6 +26,8 @@ public class ContactDAOImpl {
         return contacts;
     }
 
+    /** This is the addAllContactsToListFromDatabase method.
+     This method is used to pull the rows from the database from the contact table, create contact objects, and add them to the contacts list.*/
     private static void addAllContactsToListFromDatabase() throws SQLException {
         String sql = "SELECT * FROM contacts";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -44,6 +49,10 @@ public class ContactDAOImpl {
         }
     }
 
+    /** This is the isContactInList method.
+     This method checks to see if a contact is in the contacts list, and returns a boolean.
+     @param contact the contact object to check to see if it's in the database
+     @return Returns true if the contact is found in the list, or false otherwise*/
     private static boolean isContactInList(Contact contact) throws SQLException {
         /*
             Checks to see if the Contact object is already present
@@ -60,6 +69,10 @@ public class ContactDAOImpl {
         return found;
     }
 
+    /** This is the findContactInListByID method.
+     This method checks to see if a contactID is in the contacts list, and returns the contacts name.
+     @param contactID the country id to check to see if it's in the database
+     @return Returns the name of the contact if found, or Not Found*/
     public static String findContactInListByID(int contactID) throws SQLException {
         String name = InputValidation.NOT_FOUND;
 
@@ -71,6 +84,10 @@ public class ContactDAOImpl {
         return name;
     }
 
+    /** This is the getContactInList method.
+     This method is used to retrieve a contact object from the contacts list by the contactID.
+     @param contactID the contactID of the contact object you want to retrieve
+     @return Returns a contact object if found, or NULL otherwise*/
     public static Contact getContactInList(int contactID) throws SQLException {
         for(Contact contact: getContactsList()) {
             if(contact.getContactID() == contactID) {
@@ -79,5 +96,4 @@ public class ContactDAOImpl {
         }
         return null;
     }
-
 }

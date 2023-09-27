@@ -6,12 +6,15 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 
+/** This class holds code to access the database for the First Level Division table.*/
 public class StateOrProvinceDAOImpl {
-    //This class will only be used to pull the data from the database and not creating new objets
+    /** Holds a list of all the first level division objects from the database*/
     private static ObservableList<StateOrProvince> states = FXCollections.observableArrayList();
 
 
-    //Getter methods
+    /** This is the getStatesList method.
+     This method sets the states list with values from the database prior to returning a list of first level division objects.
+     @return Returns a list of first level division objects from the database*/
     public static ObservableList<StateOrProvince> getStatesList() throws SQLException {
         /*
             States Observable list is only accessible through a getter method,
@@ -22,7 +25,8 @@ public class StateOrProvinceDAOImpl {
         return states;
     }
 
-
+    /** This is the addAllStatesToListFromDatabase method.
+     This method is used to pull the rows from the database from the first level division table, create first level division objects, and add them to the states list.*/
     private static void addAllStatesToListFromDatabase() throws SQLException {
         String sql = "SELECT * FROM first_level_divisions";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -48,6 +52,10 @@ public class StateOrProvinceDAOImpl {
         }
     }
 
+    /** This is the isStateInList method.
+     This method checks to see if a state is in the states list, and returns a boolean.
+     @param state the first level division object to check to see if it's in the database
+     @return Returns true if the first level division is found in the list, or false otherwise*/
     private static boolean isStateInList(StateOrProvince state) {
         /*
             Checks to see if the State object is already present
@@ -64,6 +72,10 @@ public class StateOrProvinceDAOImpl {
         return found;
     }
 
+    /** This is the findStateInListByID method.
+     This method checks to see if a stateID is in the states list, and returns the object.
+     @param stateID the first level division id to check to see if it's in the database
+     @return Returns a first level division object if found, or NULL otherwise*/
     public static StateOrProvince findStateInListByID(int stateID) {
         for(StateOrProvince state: states) {
             if(state.getStateID() == stateID) {
@@ -73,6 +85,10 @@ public class StateOrProvinceDAOImpl {
         return null;
     }
 
+    /** This is the findStateInListByName method.
+     This method checks to see if a stateName is in the states list, and returns the object.
+     @param stateName the first level division name to check to see if it's in the database
+     @return Returns a first level division object if found, or NULL otherwise */
     public static StateOrProvince findStateInListByName(String stateName) {
         for(StateOrProvince state: states) {
             if(state.getState().equals(stateName)) {
@@ -81,5 +97,4 @@ public class StateOrProvinceDAOImpl {
         }
         return null;
     }
-
 }

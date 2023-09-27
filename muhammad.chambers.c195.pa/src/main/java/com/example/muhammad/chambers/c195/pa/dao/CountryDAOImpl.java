@@ -6,12 +6,15 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 
+/** This class holds code to access the database for the country table.*/
 public class CountryDAOImpl {
-    //This class will only be used to pull the data from the database and not creating new objets
+    /** Holds a list of country objects*/
     private static ObservableList<Country> countries = FXCollections.observableArrayList();
 
 
-    //Getter methods
+    /** This is the getCountriesList method.
+     This method sets the countries list with values from the database prior to returning a list of country objects.
+     @return Returns a list of country objects from the database*/
     public static ObservableList<Country> getCountriesList() throws SQLException {
         /*
             Countries Observable list is only accessible through a getter method,
@@ -22,6 +25,8 @@ public class CountryDAOImpl {
         return countries;
     }
 
+    /** This is the addAllCountriesToListFromDatabase method.
+     This method is used to pull the rows from the database from the country table, create country objects, and add them to the countries list.*/
     private static void addAllCountriesToListFromDatabase() throws SQLException {
         String sql = "SELECT * FROM countries";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -46,6 +51,10 @@ public class CountryDAOImpl {
         }
     }
 
+    /** This is the isCountryInList method.
+     This method checks to see if a country is in the countries list, and returns a boolean.
+     @param country the country object to check to see if it's in the database
+     @return Returns true if the customer is found in the list, or false otherwise*/
     private static boolean isCountryInList(Country country) throws SQLException {
         /*
             Checks to see if the Country object is already present
@@ -62,6 +71,10 @@ public class CountryDAOImpl {
         return found;
     }
 
+    /** This is the findCountryInListByName method.
+     This method checks to see if a countryName is in the countries list, and returns the object.
+     @param countryName the country name to check to see if it's in the database
+     @return Returns a country object if found, or NULL otherwise*/
     public static Country findCountryInListByName(String countryName) throws SQLException {
         for(Country country: getCountriesList()) {
             if(country.getCountry().equals(countryName)) {
@@ -70,6 +83,4 @@ public class CountryDAOImpl {
         }
         return null;
     }
-
-
 }
