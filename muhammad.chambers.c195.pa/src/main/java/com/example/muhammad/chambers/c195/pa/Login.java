@@ -41,7 +41,7 @@ public class Login extends Application {
      @throws SQLException due to the SQL queries*/
     public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
-        //Locale.setDefault(new Locale("fr")); //Changes the language for the software
+        Locale.setDefault(new Locale("fr")); //Changes the language for the software
         launch();
 
         JDBC.closeConnection();
