@@ -202,11 +202,11 @@ public class AddAppointmentController implements Initializable {
     void onActionSave(ActionEvent event) throws SQLException, IOException {
         if(!areAllInputFieldsFilledOut()) {
             //Checks if all input fields are filled out
-            DialogBox.errorAlert("Error Dialog", "Error: You must fill in all input fields prior to clicking save");
+            DialogBox.errorAlert("Error Dialog", "Error: You must fill in all input fields prior \nto clicking save");
             return;
         } else if(!CustomerDAOImpl.isCustomerIDInList(Integer.valueOf(customerIdTxtField.getText()))) {
             //Checks if the customer id is valid; is the customer id present in the database?
-            DialogBox.errorAlert("Error Dialog", "Error: You entered in an incorrect Customer ID. Enter another Customer ID.");
+            DialogBox.errorAlert("Error Dialog", "Error: You entered in an incorrect Customer ID. \nEnter another Customer ID.");
             return;
         } else if(!UserDAOImpl.isUserIDInList(Integer.valueOf(userIdTxtField.getText()))) {
             //Checks if the user id is valid; is the user id present in the database?
@@ -214,7 +214,7 @@ public class AddAppointmentController implements Initializable {
             return;
         } else if(!isStartDateBeforeEndDateOrTheSame(startDate, endDate)) {
             //Checks if the start date is before end date, or the same
-            DialogBox.errorAlert("Error Dialog", "Error: Start Date must either come before End Date or be the same as End Date.");
+            DialogBox.errorAlert("Error Dialog", "Error: Start Date must either come before End Date \nor be the same as End Date.");
             return;
         }
 
@@ -230,7 +230,7 @@ public class AddAppointmentController implements Initializable {
 
         //Check to verify if the time range is correct, within business hours
         if(!BusinessHour.isStartAndEndTimeWithBusinessHours(startTimestamp.toLocalDateTime().toLocalTime(), endTimestamp.toLocalDateTime().toLocalTime())) {
-            DialogBox.errorAlert("Error Dialog", "Error: Start and end Times must be within business hours.");
+            DialogBox.errorAlert("Error Dialog", "Error: Start and end Times must be within \nbusiness hours.");
             return;
         }
 
@@ -262,7 +262,7 @@ public class AddAppointmentController implements Initializable {
             AppointmentDAOImpl.insert(appointment);
             filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
         } else {
-            DialogBox.errorAlert("Error Dialog", "Error: Cannot add appointment because it will overlap with an existing appointment for Customer ID: " + appointment.getCustomerID());
+            DialogBox.errorAlert("Error Dialog", "Error: Cannot add appointment because it will \noverlap with an existing appointment for Customer ID: " + appointment.getCustomerID());
         }
     }
 

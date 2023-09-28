@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="644.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.muhammad.chambers.c195.pa.controller.ReportTwoController">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4caafc" height="646.0" layoutX="-10.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="240.0" />
+        <Text layoutX="262.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upcoming Appointment in 15 Minutes:" wrappingWidth="760.3321449130019">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Text>
+        <VBox layoutX="-1.0" layoutY="145.0" prefHeight="200.0" prefWidth="237.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#onClickMainBtn" prefHeight="43.0" prefWidth="231.0" text="Main Menu">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#onClickCustomerRecordBtn" prefHeight="43.0" prefWidth="231.0" text="Customer Records">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+            <Button mnemonicParsing="false" onAction="#onClickReports" prefHeight="43.0" prefWidth="231.0" text="Reports">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            </children>
+        </VBox>
+        <Button layoutX="819.0" layoutY="145.0" mnemonicParsing="false" onAction="#onClickReportOne" prefHeight="26.0" prefWidth="130.0" text="Report 1" />
+        <Button layoutX="1034.0" layoutY="145.0" mnemonicParsing="false" onAction="#onClickReportThree" prefHeight="26.0" prefWidth="130.0" text="Report 3" />
+        <VBox layoutX="-1.0" layoutY="555.0" prefHeight="89.0" prefWidth="231.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#onLogOut" prefHeight="50.0" prefWidth="231.0" text="Log Out">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onActionExitApplication" prefHeight="43.0" prefWidth="231.0" text="Exit">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+        <Text fill="WHITE" layoutX="-1.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report 2" textAlignment="CENTER" wrappingWidth="231.0">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Text>
+      <TableView fx:id="reportTwoTableView" layoutX="266.0" layoutY="221.0" prefHeight="369.0" prefWidth="898.0">
+        <columns>
+          <TableColumn fx:id="appointmentIdCol" prefWidth="100.0" text="Appointment ID" />
+            <TableColumn fx:id="titleCol" prefWidth="93.0" text="Title" />
+            <TableColumn fx:id="typeCol" prefWidth="117.0" text="Type" />
+            <TableColumn fx:id="descriptionCol" prefWidth="138.0" text="Description" />
+            <TableColumn fx:id="startCol" prefWidth="154.0" text="Start Date and Time" />
+            <TableColumn fx:id="endCol" prefWidth="178.0" text="End Date and Time" />
+            <TableColumn fx:id="customerIdCol" prefWidth="117.0" text="Customer ID" />
+        </columns>
+      </TableView>
+      <ComboBox fx:id="contactComboBox" layoutX="266.0" layoutY="146.0" onAction="#contactSelected" opacity="0.78" prefWidth="150.0" promptText="Select Contact" />
+      <Text layoutX="266.0" layoutY="619.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note: Select a Contact from the contact combo box for the table data to populate" />
+    </children>
+</AnchorPane>

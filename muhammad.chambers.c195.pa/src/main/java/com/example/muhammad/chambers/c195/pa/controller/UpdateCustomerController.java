@@ -110,7 +110,7 @@ public class UpdateCustomerController implements Initializable {
     @FXML
     void onActionSave(ActionEvent event) throws SQLException, IOException {
         if(!areAllTextFieldsFilledOut()) {
-            DialogBox.errorAlert("Error Dialog", "Error: You must fill in all input fields prior to clicking save");
+            DialogBox.errorAlert("Error Dialog", "Error: You must fill in all input fields prior to \nclicking save");
             return;
         }
 

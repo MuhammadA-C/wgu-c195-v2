@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="819d2b93-b8af-4b0d-8d4a-ed4355dfc585" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/muhammad.chambers.c195.pa/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/muhammad.chambers.c195.pa/login_activity.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/muhammad.chambers.c195.pa/src/main/java/com/example/muhammad/chambers/c195/pa/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/muhammad.chambers.c195.pa/src/main/java/com/example/muhammad/chambers/c195/pa/Login.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2W0MW6q7JGg8o1fI94TrvLGnVsP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/muhammadchambers/Real-Desktop/wgu-c195"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="819d2b93-b8af-4b0d-8d4a-ed4355dfc585" name="Changes" comment="" />
+      <created>1695865073093</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695865073093</updated>
+    </task>
+    <servers />
+  </component>
+</project>

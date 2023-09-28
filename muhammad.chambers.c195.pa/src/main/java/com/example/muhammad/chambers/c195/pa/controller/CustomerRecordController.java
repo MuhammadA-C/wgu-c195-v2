@@ -111,7 +111,7 @@ public class CustomerRecordController implements Initializable {
         if(SelectedItem.getSelectedCustomer() != null) {
             filePath.switchScreen(event, filePath.getUpdateCustomerFilePath(), ScreenEnum.UPDATE_CUSTOMER.toString());
         } else {
-            DialogBox.errorAlert("Error Dialog", "Error: You must select a row from the Customer records table prior to selecting the Update button.");
+            DialogBox.errorAlert("Error Dialog", "Error: You must select a row from the Customer \nrecords table prior to selecting the Update button.");
         }
     }
 
@@ -125,7 +125,7 @@ public class CustomerRecordController implements Initializable {
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
         if(SelectedItem.getSelectedCustomer() == null) {
-            DialogBox.errorAlert("Error Dialog", "Error: You must select a row from the Customer records table prior to selecting the Remove button.");
+            DialogBox.errorAlert("Error Dialog", "Error: You must select a row from the Customer \nrecords table prior to selecting the Remove button.");
             return;
         }
 

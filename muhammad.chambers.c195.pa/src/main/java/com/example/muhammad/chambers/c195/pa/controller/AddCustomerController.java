@@ -117,7 +117,7 @@ public class AddCustomerController implements Initializable {
     @FXML
     void onActionSave(ActionEvent event) throws SQLException, IOException {
         if(!areAllInputFieldsFilledOut()) {
-            DialogBox.errorAlert("Error Dialog", "Error: You must fill in all input fields prior to clicking save");
+            DialogBox.errorAlert("Error Dialog", "Error: You must fill in all input fields prior \nto clicking save");
             return;
         }
 

@@ -150,7 +150,7 @@ public class MainController implements Initializable {
         if(SelectedItem.getSelectedAppointment() != null) {
             filePath.switchScreen(event, filePath.getUpdateAppointmentFilePath(), ScreenEnum.UPDATE_APPOINTMENT.toString());
         } else {
-            DialogBox.errorAlert("Error Dialog", "Error: You must select a row from the Appointments table prior to selecting the Update button.");
+            DialogBox.errorAlert("Error Dialog", "Error: You must select a row from the Appointments \ntable prior to selecting the Update button.");
         }
     }
 
@@ -160,11 +160,11 @@ public class MainController implements Initializable {
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
         if(SelectedItem.getSelectedAppointment() == null) {
-            DialogBox.errorAlert("Error Dialog", "Error: You need to select an appointment first prior to clicking the remove button");
+            DialogBox.errorAlert("Error Dialog", "Error: You need to select an appointment first \nprior to clicking the remove button");
             return;
         }
 
-        Optional<ButtonType> result = DialogBox.confirmationAlert("Confirmation", "Are you sure you want to cancel the appointment?");
+        Optional<ButtonType> result = DialogBox.confirmationAlert("Confirmation", "Are you sure you \nwant to cancel the appointment?");
 
         if(result.isPresent() && result.get() == ButtonType.CANCEL) {
             SelectedItem.clearSelectedAppointment();

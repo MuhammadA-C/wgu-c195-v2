@@ -16,7 +16,7 @@ import java.util.Locale;
      Western Governors University
      C195 Software 2
      Term 2
-     26 September 2023
+     27 September 2023
  */
 
 /** This class creates the application which allows you to create appointments, customer records, and view reports*/
