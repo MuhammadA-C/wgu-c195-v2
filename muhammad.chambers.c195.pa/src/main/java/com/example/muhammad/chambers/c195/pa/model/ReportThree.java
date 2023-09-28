@@ -53,7 +53,8 @@ public class ReportThree {
 
     /** This is the getReportList method.
      This method returns the reports list field.
-     @return Returns the reports*/
+     @return Returns the reports
+     @throws SQLException due to the SQL queries*/
     public static ObservableList<ReportThree> getReportsList() throws SQLException {
         reports.clear();
         populateReportsList();

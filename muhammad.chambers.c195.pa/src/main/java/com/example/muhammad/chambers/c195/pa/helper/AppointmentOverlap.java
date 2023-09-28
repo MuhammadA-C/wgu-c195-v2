@@ -76,7 +76,8 @@ public class AppointmentOverlap {
      This method checks to see if the appointment you want to add to the database overlaps with any appointments already in the database for the customerID.
      @param appointment the appointment to add
      @param isUpdateAppointment check to see if the update appointment screen is calling this method
-     @return Returns a boolean, true if the appointment you want to add overlaps; or false otherwise*/
+     @return Returns a boolean, true if the appointment you want to add overlaps; or false otherwise
+     @throws SQLException due to using SQL for database queries*/
     public static boolean areAppointmentDatesOverlapping(Appointment appointment, boolean isUpdateAppointment) throws SQLException {
         int appointmentsBefore = numberOfAppointmentDatesBefore(appointment);
         int appointmentsAfter = numberOfAppointmentDatesAfter(appointment);
@@ -99,7 +100,8 @@ public class AppointmentOverlap {
      This method compares the appointment to add to the database with the appointments in the database by their times,
      and returns the number of appointments in the database that have a time after the appointment to add to the database.
      @param appointment the appointment to add to the database
-     @return Returns the number of appointments after the appointment to add*/
+     @return Returns the number of appointments after the appointment to add
+     @throws SQLException due to using SQL for database queries*/
     private static int numberOfAppointmentTimesAfter(Appointment appointment) throws SQLException {
         //Appointment to add to database
         LocalTime startTime = appointment.getStart().toLocalDateTime().toLocalTime();
@@ -122,7 +124,8 @@ public class AppointmentOverlap {
      This method compares the appointment to add to the database with the appointments in the database by their time,
      and returns the number of appointments in the database that have a time before the appointment to add to the database.
      @param appointment the appointment to add to the database
-     @return Returns the number of appointments before the appointment to add*/
+     @return Returns the number of appointments before the appointment to add
+     @throws SQLException due to using SQL for database queries*/
     private static int numberOfAppointmentTimesBefore(Appointment appointment) throws SQLException {
         //Appointment to add to database
         LocalTime startTime = appointment.getStart().toLocalDateTime().toLocalTime();
@@ -145,7 +148,8 @@ public class AppointmentOverlap {
      This method checks to see if the appointment you want to add to the database overlaps with any appointments already in the database for the customerID.
      @param appointment the appointment to add
      @param isUpdateAppointment check to see if the update appointment screen is calling this method
-     @return Returns a boolean, true if the appointment you want to add overlaps; or false otherwise*/
+     @return Returns a boolean, true if the appointment you want to add overlaps; or false otherwise
+     @throws SQLException due to using SQL for database queries*/
     public static boolean areAppointmentTimesOverlapping(Appointment appointment, boolean isUpdateAppointment) throws SQLException {
         int appointmentsBefore = numberOfAppointmentTimesBefore(appointment);
         int appointmentsAfter = numberOfAppointmentTimesAfter(appointment);
@@ -167,7 +171,8 @@ public class AppointmentOverlap {
     /** This is the doesAppointmentHaveTheSameStartAndEndDate method.
      This method is used to check if the appointment you want to add has the same start and end dates as an appointment already in thr database for a customerID.
      @param appointment the appointment to add
-     @return Returns a boolean; true if there is a math, or false otherwise*/
+     @return Returns a boolean; true if there is a math, or false otherwise
+     @throws SQLException due to using SQL for database queries*/
     public static boolean doesAppointmentHaveTheSameStartAndEndDate(Appointment appointment) throws SQLException {
         //Appointment to add to database
         LocalDate startDate = appointment.getStart().toLocalDateTime().toLocalDate();
@@ -188,7 +193,8 @@ public class AppointmentOverlap {
     /** This is the doesAppointmentStartDateOverlapWithEndDate method.
      This method is used to check if the appointment you want to add has a start date that overlaps with an appointments end date.
      @param appointment the appointment to add
-     @return Returns a boolean; true if there is a math, or false otherwise*/
+     @return Returns a boolean; true if there is a math, or false otherwise
+     @throws SQLException due to using SQL for database queries*/
     public static boolean doesAppointmentStartDateOverlapWithEndDate(Appointment appointment) throws SQLException {
         //Appointment to add to database
         LocalDate startDate = appointment.getStart().toLocalDateTime().toLocalDate();
@@ -206,7 +212,8 @@ public class AppointmentOverlap {
     /** This is the doesAppointmentEndDateOverlapWithStartDate method
      This method is used to check if the appointment you want to add has an end date that overlaps with an appointments start date.
      @param appointment the appointment to add
-     @return Returns a boolean; true if there is a math, or false otherwise*/
+     @return Returns a boolean; true if there is a math, or false otherwise
+     @throws SQLException due to using SQL for database queries*/
     public static boolean doesAppointmentEndDateOverlapWithStartDate(Appointment appointment) throws SQLException {
         //Appointment to add to database
         LocalDate endDate = appointment.getEnd().toLocalDateTime().toLocalDate();

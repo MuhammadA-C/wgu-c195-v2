@@ -14,7 +14,8 @@ public class StateOrProvinceDAOImpl {
 
     /** This is the getStatesList method.
      This method sets the states list with values from the database prior to returning a list of first level division objects.
-     @return Returns a list of first level division objects from the database*/
+     @return Returns a list of first level division objects from the database
+     @throws SQLException due to the SQL queries*/
     public static ObservableList<StateOrProvince> getStatesList() throws SQLException {
         /*
             States Observable list is only accessible through a getter method,
@@ -26,7 +27,8 @@ public class StateOrProvinceDAOImpl {
     }
 
     /** This is the addAllStatesToListFromDatabase method.
-     This method is used to pull the rows from the database from the first level division table, create first level division objects, and add them to the states list.*/
+     This method is used to pull the rows from the database from the first level division table, create first level division objects, and add them to the states list.
+     @throws SQLException due to the SQL queries*/
     private static void addAllStatesToListFromDatabase() throws SQLException {
         String sql = "SELECT * FROM first_level_divisions";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);

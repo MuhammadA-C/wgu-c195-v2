@@ -66,7 +66,8 @@ public class AddAppointmentController implements Initializable {
 
 
     /** This is the setContactComboBox method.
-     This method is used to set the contact combo box values with the list of contacts from the database.*/
+     This method is used to set the contact combo box values with the list of contacts from the database.
+     @throws SQLException due to using SQL for database queries*/
     private void setContactComboBox() throws SQLException {
         contactComboBox.setItems(ContactDAOImpl.getContactsList());
     }
@@ -186,7 +187,8 @@ public class AddAppointmentController implements Initializable {
 
     /** This is the updateAppointmentInDatabase method.
      This method is used to cancel any changes and return to the main screen.
-     @param event the event*/
+     @param event the event
+     @throws IOException due to switchScreen method*/
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
@@ -194,7 +196,8 @@ public class AddAppointmentController implements Initializable {
 
     /** This is the onActionSave method.
      This method saves any changes made to the appointment object to the database, and returns the user back to the main screen.
-     @param event the event*/
+     @param event the event
+     @throws IOException due to switchScreen method*/
     @FXML
     void onActionSave(ActionEvent event) throws SQLException, IOException {
         if(!areAllInputFieldsFilledOut()) {

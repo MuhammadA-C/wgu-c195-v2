@@ -24,7 +24,8 @@ public class Login extends Application {
 
     /** This is the start method.
      This method creates the Main Menu Screen when the program starts.
-     @param stage the stage to set*/
+     @param stage the stage to set
+     @throws IOException due to scene switching*/
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("login-view.fxml"));
@@ -36,7 +37,8 @@ public class Login extends Application {
 
     /** This is the main method.
      This method is where the program starts and executes code.
-     @param args the args to use*/
+     @param args the args to use
+     @throws SQLException due to the SQL queries*/
     public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
         //Locale.setDefault(new Locale("fr")); //Changes the language for the software

@@ -55,7 +55,8 @@ public class CustomerRecordController implements Initializable {
 
     /** This is the onClickMainBtn method.
      This method is used to take the user to the main screen.
-     @param event the event*/
+     @param event the event
+     @throws */
     @FXML
     void onClickMainBtn(ActionEvent event) throws IOException {
         SelectedItem.clearSelectedCustomer();
@@ -64,7 +65,8 @@ public class CustomerRecordController implements Initializable {
 
     /** This is the onClickReportBtn method.
      This method is used to take the user to the report screen.
-     @param event the event*/
+     @param event the event
+     @throws */
     @FXML
     void onClickReportBtn(ActionEvent event) throws IOException {
         SelectedItem.clearSelectedCustomer();
@@ -73,7 +75,8 @@ public class CustomerRecordController implements Initializable {
 
     /** This is the onLogOut method.
      This method is used to take the user to the login screen.
-     @param event the event*/
+     @param event the event
+     @throws */
     @FXML
     void onLogOut(ActionEvent event) throws IOException {
         SelectedItem.clearSelectedCustomer();
@@ -91,7 +94,8 @@ public class CustomerRecordController implements Initializable {
 
     /** This is the onActionGoToAddCustomer method.
      This method is used to take the user to the add customer screen.
-     @param event the event*/
+     @param event the event
+     @throws */
     @FXML
     void onActionGoToAddCustomer(ActionEvent event) throws IOException {
         SelectedItem.clearSelectedCustomer();
@@ -100,7 +104,8 @@ public class CustomerRecordController implements Initializable {
 
     /** This is the onActionUpdate method.
      This method is used to take the user to the update customer screen.
-     @param event the event*/
+     @param event the event
+     @throws */
     @FXML
     void onActionUpdate(ActionEvent event) throws IOException {
         if(SelectedItem.getSelectedCustomer() != null) {
@@ -114,8 +119,9 @@ public class CustomerRecordController implements Initializable {
     /** This is the onActionDelete method.
      This method is used to delete a customer record. Note: A customer record is only deleted if the customer id
      does not have any appointments. So, if a customer id has appointments the user will be asked if they want to delete all appointments associated
-     to the customer id.
-     @param event the event*/
+     to the customer id. Lambda expression was used for the canceled appointment output message to reduce repeating code.
+     @param event the event
+     @throws */
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
         if(SelectedItem.getSelectedCustomer() == null) {

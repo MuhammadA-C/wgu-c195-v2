@@ -14,7 +14,8 @@ public class UpcomingAppointment {
     /** This is the upcomingAppointmentsStr method.
      This method creates a list containing all upcoming appointments.
      @param appointments a list containing all appointments from the database
-     @return Returns a list containing all upcoming appointments*/
+     @return Returns a list containing all upcoming appointments
+     @throws SQLException due to the SQL queries*/
     public static ObservableList<String> getUpcomingAppointments(ObservableList<Appointment> appointments) throws SQLException {
         final int minutes_15 = 15;
         ObservableList<String> upcomingAppointments = FXCollections.observableArrayList();

@@ -170,7 +170,8 @@ public class Appointment {
 
     /** This is the getContactName method.
      This method returns the contactName field.
-     @return Returns the contactName*/
+     @return Returns the contactName
+     @throws SQLException due to using SQL for database queries*/
     public String getContactName() throws SQLException {
         this.setContactName();
         return this.contactName;
@@ -311,7 +312,8 @@ public class Appointment {
     }
 
     /** This is the setContactName method.
-     This method sets the contactName field by looking up the contactID and getting the contact name.*/
+     This method sets the contactName field by looking up the contactID and getting the contact name.
+     @throws SQLException due to using SQL for database queries*/
     public void setContactName() throws SQLException {
         if(this.getContactID() <= InputValidation.DOES_NOT_EXIST_IN_DATABASE) {
             this.contactName = InputValidation.NOT_FOUND;

@@ -4,6 +4,10 @@ import java.time.ZoneId;
 
 /** This interface class is used for one of the Lambda Expressions. This specific one obtains a zone id from string*/
 public interface GetTimeZoneIdInterface {
+    /** This is the getTimeZoneID method.
+     This is a lambda expression to get the zone id.
+     @param timeZone the time zone
+     @return Returns a ZoneID*/
     ZoneId getTimeZoneID(String timeZone);
 
     /*

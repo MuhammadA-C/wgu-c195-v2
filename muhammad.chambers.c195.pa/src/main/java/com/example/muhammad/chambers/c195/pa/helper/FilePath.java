@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 /** This class is used to contain the file paths for the different screens, and methods pertaining to switching screens.*/
 public class FilePath {
@@ -118,9 +119,10 @@ public class FilePath {
 
     /** This is the switchScreen method.
      This method switches to another screen.
-     @param event
+     @param event the event
      @param filePath filepath for the screen
-     @param screenName name of the screen*/
+     @param screenName name of the screen
+     @throws IOException due to scene switching*/
     public void switchScreen(ActionEvent event, String filePath, String screenName) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource(filePath));

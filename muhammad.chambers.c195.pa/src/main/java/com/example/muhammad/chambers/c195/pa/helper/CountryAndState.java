@@ -18,7 +18,8 @@ public class CountryAndState {
     /** This is the getAllStatesForCountry method.
      This method is used to get all the states for a country and store the result in a list.
      @param countryName the country to retrieve its states for
-     @return Returns a list*/
+     @return Returns a list
+     @throws SQLException due to the SQL queries*/
     public static ObservableList<StateOrProvince> getAllStatesForCountry(String countryName) throws SQLException {
         /*
             Have to reset the list each time, otherwise the previous values will still
@@ -53,7 +54,8 @@ public class CountryAndState {
     /** This is the wasCountryIDFoundInCountriesList method.
      This method is used to look up a country name for its countryID and return it.
      @param countryName the country to return the country id for
-     @return Returns the countryID as an integer if it is found, or -1 otherwise*/
+     @return Returns the countryID as an integer if it is found, or -1 otherwise
+     @throws SQLException due to the SQL queries*/
     public static int wasCountryIDFoundInCountriesList(String countryName) throws SQLException {
         for(Country i : CountryDAOImpl.getCountriesList()) {
             if(i.getCountry().equals(countryName)) {
@@ -86,7 +88,8 @@ public class CountryAndState {
     /** This is the getCountryNameForState method.
      This method is used to look up the country name for a state and return it as a string.
      @param stateID the state to look up the country name for
-     @return Returns the country name for the state*/
+     @return Returns the country name for the state
+     @throws SQLException due to the SQL queries*/
     public static String getCountryNameForState(int stateID) throws SQLException {
         int countryID = InputValidation.DOES_NOT_EXIST_IN_DATABASE;
 

@@ -38,7 +38,7 @@ public class DialogBox {
      This method creates a confirmation alert.
      @param typeOfAlert is the text that says the type of alert, i.e. error, confirmation, notification, etc...
      @param context is the text that will be shown in the alert box
-     @return Returns an Optional<ButtonType> object*/
+     @return Returns a pop up menu for the user to confirm*/
     public static Optional<ButtonType> confirmationAlert(String typeOfAlert, String context) {
         confirmationAlert.setTitle(typeOfAlert);
         confirmationAlert.setContentText(context);

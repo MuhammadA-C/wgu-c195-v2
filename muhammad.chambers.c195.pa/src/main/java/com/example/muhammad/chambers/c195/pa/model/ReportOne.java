@@ -53,7 +53,8 @@ public class ReportOne {
 
     /** This is the getReportList method.
      This method returns the reports list field.
-     @return Returns the reports*/
+     @return Returns the reports
+     @throws SQLException due to the SQL queries*/
     public static ObservableList<ReportOne> getReportsList() throws SQLException {
         reports.clear();
         populateReportsList();
@@ -107,7 +108,8 @@ public class ReportOne {
     }
 
     /** This is the populateReportsList method.
-     This method pulls the appointment data from the database, created report one objects, and adds the objects to the reports list.*/
+     This method pulls the appointment data from the database, created report one objects, and adds the objects to the reports list.
+     @throws SQLException due to the SQL queries*/
     private static void populateReportsList() throws SQLException {
         for(Appointment appointment : AppointmentDAOImpl.getAppointmentsList()) {
             String month = appointment.getStart().toLocalDateTime().toLocalDate().getMonth().toString();

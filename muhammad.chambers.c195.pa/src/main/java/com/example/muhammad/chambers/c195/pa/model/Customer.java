@@ -129,7 +129,8 @@ public class Customer {
 
     /** This is the getStateName method.
      This method returns the stateName field.
-     @return Returns the stateName*/
+     @return Returns the stateName
+     @throws SQLException due to the SQL queries*/
     public String getStateName() throws SQLException {
         setStateName();
         return this.stateName;
@@ -137,7 +138,8 @@ public class Customer {
 
     /** This is the getCountryName method.
      This method returns the countryName field.
-     @return Returns the countryName*/
+     @return Returns the countryName
+     @throws SQLException due to the SQL queries*/
     public String getCountryName() throws SQLException {
         setCountryName();
         return this.countryName;
@@ -240,7 +242,8 @@ public class Customer {
     }
 
     /** This is the setCountryName method.
-     This method sets the countryName field by looking up the country name associated with the countryID.*/
+     This method sets the countryName field by looking up the country name associated with the countryID.
+     @throws SQLException due to the SQL queries*/
     private void setCountryName() throws SQLException {
         if(this.getStateID() <= InputValidation.DOES_NOT_EXIST_IN_DATABASE) {
             this.countryName = InputValidation.NOT_FOUND;

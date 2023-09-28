@@ -1,3 +1,4 @@
+/** This file gives classes and folders access to each other*/
 module com.example.muhammad_chambers_c195_pa {
     requires javafx.controls;
     requires javafx.fxml;

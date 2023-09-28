@@ -43,7 +43,8 @@ public class AppointmentDAOImpl {
 
     /** This is the getAppointmentsList method.
      This method sets the appointments list with values from the database prior to returning a list of appointment objects.
-     @return Returns a list of appointment objects from the database*/
+     @return Returns a list of appointment objects from the database
+     @throws SQLException due to using SQL for database queries*/
     public static ObservableList<Appointment> getAppointmentsList() throws SQLException {
         /*
             Appointments Observable list is only accessible through a getter method,
@@ -56,7 +57,8 @@ public class AppointmentDAOImpl {
     }
 
     /** This is the addAllAppointmentsToListFromDatabase method.
-     This method is used to pull the rows from the database from the appointment table, create appointment objects, and add them to the appointments list.*/
+     This method is used to pull the rows from the database from the appointment table, create appointment objects, and add them to the appointments list.
+     @throws SQLException due to using SQL for database queries*/
     private static void addAllAppointmentsToListFromDatabase() throws SQLException {
         String sql = "SELECT * FROM appointments";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -118,7 +120,8 @@ public class AppointmentDAOImpl {
     /** This is the doesCustomerIDHaveAnyAppointments method.
      This method is used to check if a customer id has any appointments in the database.
      @param customerID the customerID to check if it has any appointments associated to it
-     @return  Returns true if the customerID has any appointments in the list, or false otherwise*/
+     @return  Returns true if the customerID has any appointments in the list, or false otherwise
+     @throws SQLException due to using SQL for database queries*/
     public static boolean doesCustomerIDHaveAnyAppointments(int customerID) throws SQLException {
         ObservableList<Appointment> appointments = getAppointmentsList();
 
@@ -133,7 +136,8 @@ public class AppointmentDAOImpl {
     /** This is the insert method.
      This method is used to add an appointment object as a row to the database.
      @param appointment the appointment object to add to the database
-     @return Returns an integer for the number of rows affected*/
+     @return Returns an integer for the number of rows affected
+     @throws SQLException due to using SQL for database queries*/
     public static int insert(Appointment appointment) throws SQLException {
         String sql = "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);

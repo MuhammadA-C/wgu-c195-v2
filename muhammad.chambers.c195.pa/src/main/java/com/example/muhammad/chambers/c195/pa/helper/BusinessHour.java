@@ -77,6 +77,10 @@ public class BusinessHour {
     }
 
 
+    /** This is the isStartTimeWithinBusinessStartTime method.
+     This method is used to check if start time is within business hours; and returns a boolean.
+     @param startTime the start time
+     @return Returns a boolean, true if it is within business hours, and false otherwise*/
     private static boolean isStartTimeWithinBusinessStartTime(LocalTime startTime) {
         //Selected start time cannot be less than business hours start time
         LocalTime businessStartTime = getBusinessStartTime();
@@ -89,6 +93,10 @@ public class BusinessHour {
         return false;
     }
 
+    /** This is the isEndTimeWithinBusinessEndTime method.
+     This method is used to check if the end time is within business hours; and returns a boolean.
+     @param endTime the end time
+     @return Returns a boolean, true if it is within business hours, and false otherwise*/
     private static boolean isEndTimeWithinBusinessEndTime(LocalTime endTime) {
         //Selected end time cannot be greater than business hours end time
         LocalTime businessEndTime = getBusinessEndTime();
@@ -101,6 +109,11 @@ public class BusinessHour {
         return false;
     }
 
+    /** This is the isStartAndEndTimeWithBusinessHours method.
+     This method is used to check if the start and end time are within business hours; and returns a boolean.
+     @param startTime the start time
+     @param endTime the end time
+     @return Returns a boolean, true if it is within business hours, and false otherwise*/
     public static boolean isStartAndEndTimeWithBusinessHours(LocalTime startTime, LocalTime endTime) {
         if(isStartTimeWithinBusinessStartTime(startTime) && isEndTimeWithinBusinessEndTime(endTime)) {
             return true;
@@ -108,6 +121,9 @@ public class BusinessHour {
         return false;
     }
 
+    /** This is the businessHoursHintTxt method.
+     This method is used to give the user a hint as to when the business hours are.
+     @return Returns a string*/
     public static String businessHoursHintTxt() {
         String start = DateTimeConversion.convert24hrTo12hrTime(getBusinessStartTime());
         String end =   DateTimeConversion.convert24hrTo12hrTime(getBusinessEndTime());

@@ -32,7 +32,8 @@ public class CustomerDAOImpl {
 
     /** This is the getCustomersList method.
      This method sets the customers list with values from the database prior to returning a list of customer objects.
-     @return Returns a list of customer objects from the database*/
+     @return Returns a list of customer objects from the database
+     @throws SQLException due to the SQL queries*/
     public static ObservableList<Customer> getCustomersList() throws SQLException {
         /*
             Customers Observable list is only accessible through a getter method,
@@ -47,7 +48,8 @@ public class CustomerDAOImpl {
     /** This is the insert method.
      This method is used to add a customer object as a row to the database.
      @param customer the customer object to add as a row
-     @return Returns an integer for the number of rows affected*/
+     @return Returns an integer for the number of rows affected
+     @throws SQLException due to the SQL queries*/
     public static int insert(Customer customer) throws SQLException {
         String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -68,7 +70,8 @@ public class CustomerDAOImpl {
     }
 
     /** This is the addAllCustomersToListFromDatabase method.
-     This method is used to pull the rows from the database from the customer table, create user objects, and add them to the customers list.*/
+     This method is used to pull the rows from the database from the customer table, create user objects, and add them to the customers list.
+     @throws SQLException due to the SQL queries*/
     private static void addAllCustomersToListFromDatabase() throws SQLException {
         String sql = "SELECT * FROM customers";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -121,7 +124,8 @@ public class CustomerDAOImpl {
     /** This is the isCustomerIDInList method.
      This method checks to see if a customerID is in the states list, and returns a boolean.
      @param customerID the customer id to check to see if it's in the database
-     @return Returns true if the customer is found in the list, or false otherwise*/
+     @return Returns true if the customer is found in the list, or false otherwise
+     @throws SQLException due to the SQL queries*/
     public static boolean isCustomerIDInList(int customerID) throws SQLException {
 
         for(Customer customer: getCustomersList()) {

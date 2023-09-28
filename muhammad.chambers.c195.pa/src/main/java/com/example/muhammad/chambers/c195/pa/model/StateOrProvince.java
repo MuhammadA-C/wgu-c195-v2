@@ -155,7 +155,8 @@ public class StateOrProvince {
     /** This is the getStateName method.
      This method takes a stateID, integer, as input and outputs the state name, string.
      @param stateID the integer stateID
-     @return Returns a state as a string*/
+     @return Returns a state as a string
+     @throws SQLException due to the SQL queries*/
     public static String getStateName(int stateID) throws SQLException {
         for(StateOrProvince i : StateOrProvinceDAOImpl.getStatesList()) {
             if(i.getStateID() == stateID) {

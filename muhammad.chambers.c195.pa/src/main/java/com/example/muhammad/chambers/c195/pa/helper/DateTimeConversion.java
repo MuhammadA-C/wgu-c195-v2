@@ -30,9 +30,7 @@ public class DateTimeConversion {
 
     //Lambda Expression #2
     /** This is the timeZoneIdFromStr Lambda Express.
-     This method takes a string to look up its ZoneID object and return it.
-     @param timeZone a string to look up the time zone
-     @return Returns a ZoneID object*/
+     This method takes a string to look up its ZoneID object and return it.*/
     public static GetTimeZoneIdInterface timeZoneIdFromStr = (timeZone) -> ZoneId.of(timeZone);
 
     /** This is the convert24hrTo12hrTime method.
