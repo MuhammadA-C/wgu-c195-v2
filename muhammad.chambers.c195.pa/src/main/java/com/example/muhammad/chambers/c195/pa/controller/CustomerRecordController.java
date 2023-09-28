@@ -22,57 +22,85 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** This class holds the code for the customer record fxml file*/
 public class CustomerRecordController implements Initializable {
+    /** Holds a reference to the file path class*/
     private FilePath filePath = new FilePath();
 
+    /** Holds the customer table view*/
     @FXML
     private TableView<Customer> customerTableView;
+    /** Holds the customer id column*/
     @FXML
     private TableColumn<Customer, Integer> customerIdColumn;
+    /** Holds the customer name column*/
     @FXML
     private TableColumn<Customer, String> customerNameColumn;
+    /** Holds the address column*/
     @FXML
     private TableColumn<Customer, String> addressColumn;
+    /** Holds the postal code column*/
     @FXML
     private TableColumn<Customer, String> postalCodeColumn;
+    /** Holds the phone number column*/
     @FXML
     private TableColumn<Customer, String> phoneNumberColumn;
+    /** Holds the country column*/
     @FXML
     private TableColumn<Customer, String> countryColumn;
+    /** Holds the state column*/
     @FXML
     private TableColumn<Customer, String> stateColumn;
 
 
+    /** This is the onClickMainBtn method.
+     This method is used to take the user to the main screen.
+     @param event the event*/
     @FXML
     void onClickMainBtn(ActionEvent event) throws IOException {
         SelectedItem.clearSelectedCustomer();
         filePath.switchScreen(event, filePath.getMainFilePath(), ScreenEnum.MAIN.toString());
     }
 
+    /** This is the onClickReportBtn method.
+     This method is used to take the user to the report screen.
+     @param event the event*/
     @FXML
     void onClickReportBtn(ActionEvent event) throws IOException {
         SelectedItem.clearSelectedCustomer();
         filePath.switchScreen(event, filePath.getReportFilePath(), ScreenEnum.REPORT.toString());
     }
 
+    /** This is the onLogOut method.
+     This method is used to take the user to the login screen.
+     @param event the event*/
     @FXML
     void onLogOut(ActionEvent event) throws IOException {
         SelectedItem.clearSelectedCustomer();
         filePath.switchScreen(event, filePath.getLoginFilePath(), ScreenEnum.LOGIN.toString());
     }
 
+    /** This is the onActionExitApplication method.
+     This method is used to exit out of the application.
+     @param event the event*/
     @FXML
     void onActionExitApplication(ActionEvent event) {
         JDBC.closeConnection();
         System.exit(0);
     }
 
+    /** This is the onActionGoToAddCustomer method.
+     This method is used to take the user to the add customer screen.
+     @param event the event*/
     @FXML
     void onActionGoToAddCustomer(ActionEvent event) throws IOException {
         SelectedItem.clearSelectedCustomer();
         filePath.switchScreen(event, filePath.getAddCustomerFilePath(), ScreenEnum.ADD_CUSTOMER.toString());
     }
 
+    /** This is the onActionUpdate method.
+     This method is used to take the user to the update customer screen.
+     @param event the event*/
     @FXML
     void onActionUpdate(ActionEvent event) throws IOException {
         if(SelectedItem.getSelectedCustomer() != null) {
@@ -82,9 +110,12 @@ public class CustomerRecordController implements Initializable {
         }
     }
 
-    /*
-        Note: Need to add a custom message when a customer is deleted.
-     */
+
+    /** This is the onActionDelete method.
+     This method is used to delete a customer record. Note: A customer record is only deleted if the customer id
+     does not have any appointments. So, if a customer id has appointments the user will be asked if they want to delete all appointments associated
+     to the customer id.
+     @param event the event*/
     @FXML
     void onActionDelete(ActionEvent event) throws SQLException {
         if(SelectedItem.getSelectedCustomer() == null) {
@@ -146,11 +177,18 @@ public class CustomerRecordController implements Initializable {
         customerTableView.setItems(CustomerDAOImpl.getCustomersList());
     }
 
+    /** This is the tableOnClicked method.
+     This method is used to set the selected customer variable with a reference to the row selected on the customer table view.
+     @param mouseEvent the mouse event*/
     @FXML
     public void tableOnClicked(MouseEvent mouseEvent) {
         SelectedItem.setSelectedCustomer(customerTableView.getSelectionModel().getSelectedItem());
     }
 
+    /** This is the initialize method.
+     This method is used to initialize any values once the screen loads.In this case, the table is populated with customer data from the database.
+     @param url the url
+     @param rb the resource bundle*/
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -170,7 +208,5 @@ public class CustomerRecordController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }

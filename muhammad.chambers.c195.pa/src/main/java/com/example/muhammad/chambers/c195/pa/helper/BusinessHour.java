@@ -15,7 +15,7 @@ public class BusinessHour {
 
 
     /** This is the getBusinessStartTime method
-     This method is used to get the business start time.
+     This method is used to get the business start time. A lambda expression was used in this method to retrieve the ZoneID for the Eastern time zone.
      @return Returns the business start time*/
     public static LocalTime getBusinessStartTime() {
         //Sets the business hours start time to 08:00 am with no specified time zone
@@ -31,7 +31,7 @@ public class BusinessHour {
     }
 
     /** This is the getBusinessEndTime method
-     This method is used to get the business end time.
+     This method is used to get the business end time. A lambda expression was used in this method to retrieve the ZoneID for the Eastern time zone.
      @return Returns the business end time*/
     public static LocalTime getBusinessEndTime() {
         //Sets the business hours end time to 10:00 pm with no specified time zone
