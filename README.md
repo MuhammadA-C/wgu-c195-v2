@@ -69,14 +69,10 @@ The consulting organization provided a MySQL database that the application must 
 
 ## Video Demenstration of the Appointment Scheduling Application
 
+
 ---
 
 ## Photos of the Appointment Scheduling Application GUI
-
-
----
-
-## Extra Features
 
 
 ---
