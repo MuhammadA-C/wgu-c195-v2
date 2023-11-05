@@ -104,3 +104,8 @@ The consulting organization provided a MySQL database that the application must 
 ## Software Packages
 
 *Note: Below are the versions of the software that were used*
+
+* Java JDK v17
+* JavaFX SDK v19
+* MySQL Connector Driver v8.1.0
+* IntelliJ IDEA Community v2022 
