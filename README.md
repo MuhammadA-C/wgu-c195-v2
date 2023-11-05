@@ -113,6 +113,14 @@ The consulting organization provided a MySQL database that the application must 
 
 ![Screenshot is of one of the Figma concept designs for the login screen that I created](/C195-Photos/c195-figma-login-design.png)
 
+**Note**
+
+Originally, I had started this project by concepting designs for the GUI layout of the application in Figma. 
+However, I ended up stopping this due to my skill level at the time with JavaFX and FXML not being on par with my CSS skills
+to be able to create the UI as close to my concept designs. 
+
+*Note: If using JavaFX and FXML in the future, I will need to improve my skills to be able to create the UI closer to my designs*
+
 ---
 
 ***Note: You can refer to the folder "C195-Photos" for more photos of the inventory management application***
