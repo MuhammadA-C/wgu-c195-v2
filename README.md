@@ -7,6 +7,7 @@ WGU C195 Software 2 Project v2
 * Degree: Bachelor of Science in Software Development
 * Class: C195 Software 2
 * Date: 09/28/2023
+* Project Type: Individual Project
 
 ---
 
