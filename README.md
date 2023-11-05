@@ -181,7 +181,7 @@ In this section I will be covering a few of the lessons that I learnt after comp
 * User accounts can be created
 
 ---
-## Tools Used:
+## Tools/Skills Used:
 
 * Programming Language: Java
 * IDE: IntelliJ IDEA
