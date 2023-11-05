@@ -28,6 +28,13 @@ The consulting organization provided a MySQL database that the application must 
 
 ---
 
+**Important to note**
+
+The project files in this GitHub repo will noy run the application correctly due to the databse information missing. 
+The databse information was also not provided due to the database used for this project was created by WGU.
+
+---
+
 ## Project Requirements
 
 * Appointments/Customer Records can be added, updated, and deleted
