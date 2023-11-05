@@ -53,6 +53,7 @@ The consulting organization provided a MySQL database that the application must 
 **Login Form**
 * User has to enter a username and password to login
 * Displays the users location
+  * *Note: It is not required to translate the text for the user location*
 * Translates text to English or French based on the users system language
 
 **Custom Report Form**
@@ -84,10 +85,11 @@ The consulting organization provided a MySQL database that the application must 
 
 **Login Form in French**
 
-![Screenshot is of the login form in French](/C195-Photos/c195-login-form-french.png)
-
 *Note: The text specifying the user location was not required to be translated based on the users system language. 
 Also, I used code for this screenshot to change the language instead of changing my system settings which is why the location did not change*
+
+![Screenshot is of the login form in French](/C195-Photos/c195-login-form-french.png)
+
 
 **Main Form**
 
