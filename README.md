@@ -18,6 +18,15 @@ WGU C195 Software 2 Project v2
 
 ---
 
+## Video Demenstration of the Appointment Scheduling Application
+
+---
+
+## Photos of the Appointment Scheduling Application GUI
+
+
+---
+
 ## Lessons Learnt
 
 ---
