@@ -30,8 +30,8 @@ The consulting organization provided a MySQL database that the application must 
 
 ## Project Requirements
 
-* Appointments can be added, updated, and deleted
-* Customer Records can be added, updated, and deleted
+* Appointments/Customer Records can be added, updated, and deleted
+* Appointments/Customer Records should prepopulate with input field data when updated
 * Application data is saved to the MySQL database
 * Data is pulled from the MySQL database and populated in appropirate UI screens
 * Javadoc comments for code
@@ -46,6 +46,8 @@ The consulting organization provided a MySQL database that the application must 
 **User Interface**
 * Login Form
 * Custom Report Form
+* Customer Records Form
+* Appointment Schedule Form
 
 **Login Form**
 * User has to enter a username and password to login
