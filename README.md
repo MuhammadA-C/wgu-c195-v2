@@ -87,6 +87,7 @@ The consulting organization provided a MySQL database that the application must 
 **Future Improvements**
 * Redesign the GUI
 * Dynamic UI- UI scalates based on device screen size
+* Reports print out
 
 ---
 ## Tools Used:
