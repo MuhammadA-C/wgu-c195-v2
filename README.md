@@ -107,7 +107,7 @@ The consulting organization provided a MySQL database that the application must 
 
 ---
 
-## One of the Figma concept designs for the Login Screen that I created
+## Below is one of the Figma concept designs for the Login Screen that I created
 
 ![Screenshot is of one of the Figma concept designs for the login screen that I created](/C195-Photos/c195-figma-login-design.png)
 
