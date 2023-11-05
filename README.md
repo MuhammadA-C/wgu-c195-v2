@@ -17,7 +17,15 @@ WGU C195 Software 2 Project v2
 ## Project Requirements
 
 ---
-## Tools:
+
+## Lessons Learnt
+
+---
+
+## Future Improvements
+
+---
+## Tools Used:
 
 * Programming Language: Java
 * IDE: IntelliJ IDEA
@@ -25,5 +33,11 @@ WGU C195 Software 2 Project v2
 * Database: JDBC, SQL, MySQL, MySQL Workbench
 * Version Control: Git & GitHub
 * Object-Oriented Programming (OOP)
-* MVC Pattern
-* DAO Pattern
+* Model-View-Controller (MVC) Pattern 
+* Data-Access-Object (DAO) Pattern 
+
+---
+
+## Software Packages
+
+*Note: Below are the versions of the software that were used*
