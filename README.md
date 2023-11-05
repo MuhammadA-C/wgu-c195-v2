@@ -15,6 +15,10 @@ WGU C195 Software 2 Project v2
 
 This project was created as a class assignment for WGU, C195. This CRUD application was meant to be created for a hypothetical company that needs to be able to have customers schedule appointments.
 
+**Note**
+* A database ERD diagram was provided
+* The database structure was provided
+
 ---
 
 ## Project Requirements
