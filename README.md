@@ -30,6 +30,18 @@ The consulting organization provided a MySQL database that the application must 
 
 ## Project Requirements
 
+* Javadoc comments for code
+* Record all user login attempts in a text file
+
+**User Interface**
+* Login Form
+
+**Login Form**
+* User has to enter a username and password to login
+* Displays the users location
+* Translates text to English or French based on the users system language
+
+
 ---
 
 ## Video Demenstration of the Appointment Scheduling Application
