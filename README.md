@@ -158,6 +158,13 @@ the user wants to delete said customer record and all of the appointments along 
 
 ![Screenshot of the confirmation message to delete a customer record and all of its associated appointments pt3](/C195-Photos/c195-delete-customer-record-message-pt3.png)
 
+**Note**
+
+Due to the order that I have the code for deleting the appointment & customer record and displaying the notification messages, the notification message will be displayed
+prior to the actual deletion code being run.
+
+*Note: This can easily be fixed by re-ordering the deletion code to be run before the notification message code*
+
 ---
 
 ## Lessons Learnt / Future Improvements
