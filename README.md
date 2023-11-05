@@ -86,6 +86,9 @@ The consulting organization provided a MySQL database that the application must 
 
 ![Screenshot is of the login form in French](/C195-Photos/c195-login-form-french.png)
 
+*Note: The text specifying the user location was not required to be translated based on the users system language. 
+Also, I used code for this screenshot to change the language instead of changing my system settings which is why the location did not change*
+
 **Main Form**
 
 ![Screenshot is of the main form](/C195-Photos/c195-main-form.png)
