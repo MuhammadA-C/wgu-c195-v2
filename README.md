@@ -39,7 +39,7 @@ The consulting organization provided a MySQL database that the application must 
 
 **Input Validation & Error Handling**
 * Customer cannot schedule an appointment outside of business hours
- * *Note: Business hours are 8:00 am to 10:00 pm EST*
+  * *Note: Business hours are 8:00 am to 10:00 pm EST*
 * Customer cannot schedule overlapping appointments
 * Notification for when an incorrect username and password are entered
 
