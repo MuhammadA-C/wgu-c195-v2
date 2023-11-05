@@ -36,12 +36,6 @@ The consulting organization provided a MySQL database that the application must 
 * Data is pulled from the MySQL database and populated in appropirate UI screens
 * Javadoc comments for code
 * Record all user login attempts in a text file with the date, timestamp, and whether the login was successful or not
-* Generate 3 reports:
-  * A report for the total number of customer appointments by type and month
-  * A report for each contact that includes appointments for said contact
-  * A custom report
-  * *Note: reports do not need to be saved, printed, or provided a screenshot*
-* Alert for when an appointment is within 15 minutes of when the user logs in; *and include the appointment information*
 
 **Input Validation & Error Handling**
 * Customer cannot schedule an appointment outside of business hours
@@ -51,11 +45,20 @@ The consulting organization provided a MySQL database that the application must 
 
 **User Interface**
 * Login Form
+* Custom Report Form
 
 **Login Form**
 * User has to enter a username and password to login
 * Displays the users location
 * Translates text to English or French based on the users system language
+
+**Custom Report Form**
+* Generate 3 reports:
+  * A report for the total number of customer appointments by type and month
+  * A report for each contact that includes appointments for said contact
+  * A custom report
+  * *Note: reports do not need to be saved, printed, or provided a screenshot*
+* Alert for when an appointment is within 15 minutes of when the user logs in; *and include the appointment information*
 
 
 ---
