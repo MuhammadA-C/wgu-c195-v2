@@ -72,6 +72,7 @@ The consulting organization provided a MySQL database that the application must 
 
 ## Video Demenstration of the Appointment Scheduling Application
 
+[NEED TO UPDATE]
 
 ---
 
@@ -97,14 +98,14 @@ The consulting organization provided a MySQL database that the application must 
 
 ![Screenshot is of the customer records form](/C195-Photos/c195-customer-records-form.png)
 
-**State combo box auto populating based on Country combo box selection Pt1 - Country: US selected**
+**State combo box auto populate based on Country combo box selection Pt1 - Country: US selected**
 
-![Screenshot is of the state combo box auto populating based on the Country combo box selection for when US is selected](/C195-Photos/c195-country-state-combo-box-pt1.png)
+![Screenshot is of the state combo box auto populate based on the Country combo box selection for when US is selected](/C195-Photos/c195-country-state-combo-box-pt1.png)
 
 
-**State combo box auto populating based on Country combo box selection Pt2 - Country: UK selected**
+**State combo box auto populate based on Country combo box selection Pt2 - Country: UK selected**
 
-![Screenshot is of the state combo box auto populating based on the Country combo box selection for when UK is selected](/C195-Photos/c195-country-state-combo-box-pt2.png)
+![Screenshot is of the state combo box auto populate based on the Country combo box selection for when UK is selected](/C195-Photos/c195-country-state-combo-box-pt2.png)
 
 ---
 
@@ -120,7 +121,7 @@ The consulting organization provided a MySQL database that the application must 
 
 ## Lessons Learnt / Future Improvements
 
-In this section I will be covering a few of the lessons that I learnt after completing this project, and what I would do differently/improve in the future if had to do this again.
+In this section I will be covering a few of the lessons that I learnt after completing this project, and what I would do differently/improve in the future if I had to do this again.
 
 ---
 
