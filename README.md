@@ -31,7 +31,12 @@ The consulting organization provided a MySQL database that the application must 
 ## Project Requirements
 
 * Javadoc comments for code
-* Record all user login attempts in a text file
+* Record all user login attempts in a text file with the date, timestamp, and whether the login was successful or not
+* Code to generate 3 reports:
+  * A report for the total number of customer appointments by type and month
+  * A report for each contact that includes appointments for said contact
+  * A custom report
+  * *Note: reports do not need to be saved, printed, or provided a screenshot*
 
 **User Interface**
 * Login Form
