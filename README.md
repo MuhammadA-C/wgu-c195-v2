@@ -84,6 +84,22 @@ The consulting organization provided a MySQL database that the application must 
 
 ![Screenshot is of the login form in French](/C195-Photos/c195-login-form-french.png)
 
+**Main Form**
+
+![Screenshot is of the main form](/C195-Photos/c195-main-form.png)
+
+**Add Appointment Form**
+
+![Screenshot is of the add appointment form](/C195-Photos/c195-add-appointment-form.png)
+
+**Customer Records Form**
+
+![Screenshot is of the customer records form](/C195-Photos/c195-customer-records-form.png)
+
+**State combo box auto populating based on Country combo box selection**
+
+![Screenshot is of the state combo box auto populating based on the Country combo box selection](/C195-Photos/c195-country-state-combo-box-pt1.png)
+
 ---
 
 ***Note: You can refer to the folder "C195-Photos" for more photos of the inventory management application***
