@@ -33,6 +33,7 @@ The consulting organization provided a MySQL database that the application must 
 * Appointments can be added, updated, and deleted
 * Customer Records can be added, updated, and deleted
 * Application data is saved to the MySQL database
+* Data is pulled from the MySQL database and populated in appropirate UI screens
 * Javadoc comments for code
 * Record all user login attempts in a text file with the date, timestamp, and whether the login was successful or not
 * Generate 3 reports:
