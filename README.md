@@ -13,26 +13,17 @@ WGU C195 Software 2 Project v2
 # Overview:
 
 ---
-### Tools:
 
-**Programming:**
+## Project Requirements
+
+---
+## Tools:
+
 * Programming Language: Java
 * IDE: IntelliJ IDEA
+* UI: JavaFX, FXML, Scene Builder, Figma
+* Database: JDBC, SQL, MySQL, MySQL Workbench
+* Version Control: Git & GitHub
+* Object-Oriented Programming (OOP)
 * MVC Pattern
 * DAO Pattern
-
-**Front End (GUI):**
-* JavaFX
-* FXML
-* Scene Builder
-* Figma
-
-**Database:**
-* JDBC
-* SQL
-* MySQL
-* MySQL Workbench
-
-**Version Control:**
-* Git
-* GitHub
