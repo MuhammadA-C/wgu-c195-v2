@@ -47,7 +47,7 @@ The consulting organization provided a MySQL database that the application must 
 * Login Form
 * Custom Report Form
 * Customer Records Form
-* Appointment Schedule Form
+* Appointment Scheduling Form
 
 **Login Form**
 * User has to enter a username and password to login
@@ -62,6 +62,8 @@ The consulting organization provided a MySQL database that the application must 
   * *Note: reports do not need to be saved, printed, or provided a screenshot*
 * Alert for when an appointment is within 15 minutes of when the user logs in; *and include the appointment information*
 
+**Appointment Scheduling Form**
+* Appointments can be filtered by day or month
 
 ---
 
