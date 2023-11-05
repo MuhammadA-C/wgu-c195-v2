@@ -76,6 +76,9 @@ The consulting organization provided a MySQL database that the application must 
 
 ## Photos of the Appointment Scheduling Application GUI
 
+---
+
+***Note: You can refer to the folder "C195-Photos" for more photos of the inventory management application***
 
 ---
 
