@@ -96,14 +96,14 @@ The consulting organization provided a MySQL database that the application must 
 
 ![Screenshot is of the customer records form](/C195-Photos/c195-customer-records-form.png)
 
-**State combo box auto populating based on Country combo box selection Pt1**
+**State combo box auto populating based on Country combo box selection Pt1 - Country: US selected**
 
 ![Screenshot is of the state combo box auto populating based on the Country combo box selection for when US is selected](/C195-Photos/c195-country-state-combo-box-pt1.png)
 
 
-**State combo box auto populating based on Country combo box selection Pt2**
+**State combo box auto populating based on Country combo box selection Pt2 - Country: UK selected**
 
-![Screenshot is of the state combo box auto populating based on the Country combo box selection for when Europe is selected](/C195-Photos/c195-country-state-combo-box-pt2.png)
+![Screenshot is of the state combo box auto populating based on the Country combo box selection for when UK is selected](/C195-Photos/c195-country-state-combo-box-pt2.png)
 
 ---
 
