@@ -132,6 +132,11 @@ to be able to create the UI as close to my concept designs.
 
 ---
 
+## Extra Features
+
+
+---
+
 ## Lessons Learnt / Future Improvements
 
 In this section I will be covering a few of the lessons that I learnt after completing this project, and what I would do differently/improve in the future if I had to do this again.
