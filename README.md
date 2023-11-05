@@ -31,9 +31,9 @@ The consulting organization provided a MySQL database that the application must 
 ## Project Requirements
 
 * Appointments/Customer Records can be added, updated, and deleted
-* Appointments/Customer Records should prepopulate with input field data when updated
+* Appointments/Customer Records should pre populate with input field data when updated
 * Application data is saved to the MySQL database
-* Data is pulled from the MySQL database and populated in appropirate UI screens
+* Data is pulled from the MySQL database and populate in the appropriate UI screens
 * Javadoc comments for code
 * Record all user login attempts in a text file with the date, timestamp, and whether the login was successful or not
 
