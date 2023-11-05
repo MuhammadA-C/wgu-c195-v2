@@ -36,6 +36,7 @@ The consulting organization provided a MySQL database that the application must 
 * Data is pulled from the MySQL database and populate in the appropriate UI screens
 * Javadoc comments for code
 * Record all user login attempts in a text file with the date, timestamp, and whether the login was successful or not
+* Use two different lambda expressions
 
 **Input Validation & Error Handling**
 * Customer cannot schedule an appointment outside of business hours
