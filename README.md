@@ -61,6 +61,8 @@ The consulting organization provided a MySQL database that the application must 
   * A custom report
   * *Note: reports do not need to be saved, printed, or provided a screenshot*
 * Alert for when an appointment is within 15 minutes of when the user logs in; *and include the appointment information*
+* Use separate combo boxes for the country and state selection
+  * State combo box dynamically populates based on the country combo box selection
 
 **Appointment Scheduling Form**
 * Appointments can be filtered by day or month
