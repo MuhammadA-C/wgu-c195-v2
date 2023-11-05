@@ -134,6 +134,29 @@ to be able to create the UI as close to my concept designs.
 
 ## Extra Features
 
+One of the extra features that I added for my project was for the requirement to stop the user from deleting a customer record that has appointments 
+associated with it, and to notify them that all appointments associated with the customer need to be deleted prior to deleting the customer record.
+
+I implemented the functionality to notify the user that the customer record has appointments associated with it if there are any, and to confirm whether 
+the user wants to delete said customer record and all of the appointments along with it.
+
+**Note**
+* If the user clicks yes
+* All associated appointments will be deleted first from the database, and the user will be notified for each of the deleted appointments
+* The customer record will be deleted afterwards, and the user will be notified of the deletion of the customer record
+
+
+**Confirmation message to delete the customer record and all of the associated appointments Pt1**
+
+![Screenshot of the confirmation message to delete a customer record and all of its associated appointments pt1](/C195-Photos/c195-delete-customer-record-message-pt1.png)
+
+**Confirmation message to delete the customer record and all of the associated appointments Pt2**
+
+![Screenshot of the confirmation message to delete a customer record and all of its associated appointments pt2](/C195-Photos/c195-delete-customer-record-message-pt2.png)
+
+**Confirmation message to delete the customer record and all of the associated appointments Pt3**
+
+![Screenshot of the confirmation message to delete a customer record and all of its associated appointments pt3](/C195-Photos/c195-delete-customer-record-message-pt3.png)
 
 ---
 
