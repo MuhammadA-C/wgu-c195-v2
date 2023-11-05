@@ -170,6 +170,8 @@ Due to the order that I have the code for deleting the appointment & customer re
 
 In this section I will be covering a few of the lessons that I learnt after completing this project, and what I would do differently/improve in the future if I had to do this again.
 
+[NEED TO UPDATE]
+
 ---
 
 **Future Improvements**
