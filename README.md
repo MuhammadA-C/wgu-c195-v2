@@ -107,14 +107,13 @@ The consulting organization provided a MySQL database that the application must 
 
 ---
 
-***Note: You can refer to the folder "C195-Photos" for more photos of the inventory management application***
-
----
-
 ## One of the Figma concept designs for the Login Screen that I created
 
 ![Screenshot is of one of the Figma concept designs for the login screen that I created](/C195-Photos/c195-figma-login-design.png)
 
+---
+
+***Note: You can refer to the folder "C195-Photos" for more photos of the inventory management application***
 
 ---
 
