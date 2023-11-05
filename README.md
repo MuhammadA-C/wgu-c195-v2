@@ -15,6 +15,11 @@ WGU C195 Software 2 Project v2
 
 This project was created as a class assignment for WGU, C195. This CRUD application was meant to be created for a hypothetical company that needs to be able to have customers schedule appointments.
 
+**Project Prompt:** You work at a software company that has been contracted to develop a GUI desktop scheduling application. The contract is with a global consulting organization that conducts
+business in multiple languages and main offices across the world. 
+
+The consulting organization provided a MySQL database that the application must pull data from. The database cannot be modified.
+
 *Note: This project prompt isn't based on a specific real company, but a realistic scenario*
 
 **Note**
