@@ -197,7 +197,7 @@ In this section I will be covering a few of the lessons that I learnt after comp
 
 * Programming Language: Java
 * IDE: IntelliJ IDEA
-* UI: JavaFX, FXML, Scene Builder, Figma
+* GUI/UI: JavaFX, FXML, Scene Builder, Figma
 * Database: JDBC, SQL, MySQL, MySQL Workbench
 * Version Control: Git & GitHub
 * Object-Oriented Programming (OOP)
