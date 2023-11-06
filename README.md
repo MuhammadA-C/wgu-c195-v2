@@ -188,7 +188,7 @@ In this section I will be covering a few of the lessons that I learnt after comp
 
 **Future Improvements**
 * Redesign the GUI
-* Dynamic UI- UI scalates based on device screen size
+* Dynamic UI- UI scales based on device screen size
 * Reports print out
 * User accounts can be created
 
