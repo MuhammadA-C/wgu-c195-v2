@@ -82,6 +82,8 @@ The databse information was also not provided due to the database used for this 
 
 [NEED TO UPDATE]
 
+Below are links to YouTube Videos demonstrating the application:
+
 * [Add Appointment Form Demonstration](https://youtu.be/NGsEcFL4RSk)
 
 ---
