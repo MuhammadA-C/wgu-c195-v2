@@ -82,6 +82,8 @@ The databse information was also not provided due to the database used for this 
 
 [NEED TO UPDATE]
 
+* [Add Appointment Form Demonstration](https://youtu.be/NGsEcFL4RSk)
+
 ---
 
 ## Photos of the Appointment Scheduling Application GUI
